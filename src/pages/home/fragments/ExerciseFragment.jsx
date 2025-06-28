@@ -51,6 +51,7 @@ const getExerciseTitle = (exerciseType) => {
 function ExerciseFragment({fragmentIndex, onExerciseComplete, phraseId}) {
 
     const [currentAnswer, setCurrentAnswer] = React.useState([]);
+    const [answerStatus, setAnswerStatus] = React.useState("neutral");
 
     const createExercise = () => {
         // CreateExercise is the unified interface for seamless transition between testing and real data.
@@ -62,6 +63,24 @@ function ExerciseFragment({fragmentIndex, onExerciseComplete, phraseId}) {
 
     }
 
+    const checkAsCorrect = () => {
+        resetAnswerResult()
+        document.getElementById("correct").style.transform = "translateY(0)";
+        setAnswerStatus("correct");
+    }
+
+    const checkAsIncorrect = () => {
+        resetAnswerResult()
+        document.getElementById("incorrect").style.transform = "translateY(0)";
+        setAnswerStatus("incorrect");
+    }
+
+    const resetAnswerResult = () => {
+        document.getElementById("correct").style.transform = "translateY(100%)";
+        document.getElementById("incorrect").style.transform = "translateY(100%)";
+        setAnswerStatus("neutral");
+    }
+
     return (
         <div>
             <h2 className={"exercise-title"}>{getExerciseTitle(createExercise().exerciseType)}</h2>
@@ -70,7 +89,8 @@ function ExerciseFragment({fragmentIndex, onExerciseComplete, phraseId}) {
             </div>
             <div className={"exercise-input-box"}>
                 {
-                    currentAnswer.map((variant, index) => (<button className={"answer-word"} key={variant} onClick={() => {
+                    currentAnswer.map((variant) => (<button className={"answer-word-" + answerStatus} key={variant} onClick={() => {
+                        if (answerStatus !== "neutral") return;
                         let newAnswer = [...currentAnswer];
                         newAnswer = newAnswer.filter((v) => v !== variant);
                         setCurrentAnswer(newAnswer);
@@ -81,7 +101,8 @@ function ExerciseFragment({fragmentIndex, onExerciseComplete, phraseId}) {
             </div>
             <div className={"exercise-answers-box"}>
                 {
-                    createExercise().variants.filter(v => !currentAnswer.includes(v)).map((variant, index) => (<button className={"answer-word"} key={variant} onClick={() => {
+                    createExercise().variants.filter(v => !currentAnswer.includes(v)).map((variant) => (<button className={"answer-word-neutral"} key={variant} onClick={() => {
+                        if (answerStatus !== "neutral") return;
                         let newAnswer = [...currentAnswer];
 
                         if (!newAnswer.includes(variant)) {
@@ -94,14 +115,31 @@ function ExerciseFragment({fragmentIndex, onExerciseComplete, phraseId}) {
                     </button>))
                 }
             </div>
-            <div>
-
+            <div style={{
+                transform: "translateY(100%)",
+            }} id={"correct"} className={"exercise-result-box"}>
+                <h3 className={"exercise-status text-answer-correct"}>Correct!</h3>
+                <br/>
+                <button className={"exercise-button exercise-button-correct"} onClick={checkAnswer}>Continue</button>
             </div>
-            <div>
-
+            <div style={{
+                transform: "translateY(100%)",
+            }} id={"incorrect"} className={"exercise-result-box"}>
+                <h3 className={"exercise-status text-answer-incorrect"}>Incorrect!</h3>
+                <br/>
+                <p className={"exercise-hint text-answer-incorrect"}>Correct answer:</p>
+                <b className={"exercise-hint text-answer-incorrect"}>{createExercise().translations[0]}</b>
+                <br/>
+                <button className={"exercise-button exercise-button-incorrect"} onClick={checkAnswer}>Continue</button>
             </div>
             <div className={"exercise-bottom-bar"}>
-                <button className={"exercise-button exercise-button-neutral"} onClick={checkAnswer}>Check</button>
+                <button disabled={currentAnswer.length === 0} className={"exercise-button exercise-button-neutral"} onClick={checkAnswer}>Check</button>
+            </div>
+
+            <div className={"debug-panel"}>
+                <button className={"debug-button-overlay"} onClick={checkAsIncorrect}>Debug mark as incorrect</button>
+                <button className={"debug-button-overlay"} onClick={checkAsCorrect}>Debug mark as correct</button>
+                <button className={"debug-button-overlay"} onClick={resetAnswerResult}>Reset result</button>
             </div>
         </div>
     );

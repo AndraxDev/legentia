@@ -11,6 +11,7 @@ function InteractiveWord({word, translations, learningIndex}) {
     const [translationIsOpened, setTranslationIsOpened] = React.useState(false);
     return (
         <MaterialTooltip
+            arrow
             leaveTouchDelay={2147483647}
             open={translationIsOpened}
             onClose={() => setTranslationIsOpened(false)}
