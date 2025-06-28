@@ -80,6 +80,7 @@ const exerciseDemo3 = {
 
 let fragmentIndex = 0;
 let mistakeIndex = 0;
+let streak = 0;
 const mistakeIndices = [];
 
 const exerciseSession = [exerciseDemo1, exerciseDemo2, exerciseDemo3];
@@ -99,6 +100,8 @@ function ExerciseActivity({onNewIntent}) {
             mistakeIndices.push(fragmentIndex);
         }
 
+        streak = isSuccessful ? streak + 1 : 0;
+
         if (isSuccessful && successfulCompletions >= exerciseSession.length - 1) {
             setProgress(100);
             console.log("Practice completed!");
@@ -107,7 +110,6 @@ function ExerciseActivity({onNewIntent}) {
             if (fragmentIndex > exerciseSession.length - 1) {
                 if (isSuccessful) {
                     mistakeIndex++;
-                    console.log("Mistake index incremented to: " + mistakeIndex);
                 }
                 if (mistakeIndex <= mistakeIndices.length - 1) {
                     setCurrentExercise(exerciseSession[mistakeIndices[mistakeIndex]]);
@@ -123,7 +125,6 @@ function ExerciseActivity({onNewIntent}) {
 
                 if (isSuccessful) {
                     mistakeIndex++;
-                    console.log("Mistake index incremented to: " + mistakeIndex);
                 }
             }
 
@@ -135,8 +136,7 @@ function ExerciseActivity({onNewIntent}) {
         }
 
         setFallbackEvent(fallbackEvent + 1);
-        console.log(mistakeIndices);
-        console.log(fragmentIndex, mistakeIndex, successfulCompletions, exerciseSession.length);
+        console.log("Current streak: " + streak);
     }
 
     const showSuccessScreen = () => {
@@ -157,7 +157,7 @@ function ExerciseActivity({onNewIntent}) {
                         </div>
                     </div>
                 </div>
-                <ExerciseFragment fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
+                <ExerciseFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
             </div>
         </AppScreenFade>
     );

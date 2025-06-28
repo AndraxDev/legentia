@@ -13,7 +13,7 @@ const getExerciseTitle = (exerciseType) => {
     }
 }
 
-function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComplete, phraseId, fallbackEvent}) {
+function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComplete, phraseId, fallbackEvent, isPreviousMistake}) {
 
     const [currentAnswer, setCurrentAnswer] = React.useState([]);
     const [answerStatus, setAnswerStatus] = React.useState("neutral");
@@ -24,6 +24,10 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
         // Adapt this function to create exercises based on the fragmentIndex or phraseId.
         return exercise;
     }
+
+    useEffect(() => {
+        console.log("Is previous mistake: " + isPreviousMistake);
+    }, [isPreviousMistake, fallbackEvent]);
 
     useEffect(() => {
         resetAnswerResult()
@@ -69,6 +73,9 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
     return (
         <div>
             <h2 className={"exercise-title"}>{getExerciseTitle(createExercise().exerciseType)}</h2>
+            {isPreviousMistake ? <div style={{
+                display: "flex",
+            }}><div className={"previous-mistake"}><span className={"material-symbols-outlined"}>close</span><span className={"previous-mistake-label"}>Previous mistake</span></div></div> : null}
             <div className={"exercise-phrase-box"}>
                 <InteractivePhrase phrase={createExercise().phrase} translation={createExercise().translationsMap} isHardMode={createExercise().isHard} />
             </div>
@@ -144,7 +151,8 @@ ExerciseFragment.propTypes = {
     mistakeIndex: PropTypes.number.isRequired,
     onExerciseComplete: PropTypes.func.isRequired,
     phraseId: PropTypes.string.isRequired,
-    fallbackEvent: PropTypes.number.isRequired
+    fallbackEvent: PropTypes.number.isRequired,
+    isPreviousMistake: PropTypes.bool
 }
 
 export default ExerciseFragment;

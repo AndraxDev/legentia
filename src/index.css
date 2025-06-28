@@ -566,3 +566,22 @@ br {
 button {
     user-select: none;
 }
+
+.previous-mistake {
+    color: #ff5d5d;
+    padding: 8px 12px;
+    margin: 0 24px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    font-size: 16px;
+    user-select: none;
+    border-radius: 24px;
+    background-color: rgba(255, 93, 93, 0.11);
+}
+
+.previous-mistake-label {
+    margin-left: 8px;
+    margin-right: 6px;
+    font-weight: 600;
+}
