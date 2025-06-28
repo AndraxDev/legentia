@@ -103,6 +103,7 @@ br {
 }
 
 .material-symbols-outlined {
+    user-select: none;
     font-variation-settings:
             'FILL' 0,
             'wght' 400,
@@ -327,7 +328,7 @@ br {
     padding: 16px;
     margin: 24px;
     border-radius: 20px;
-    background-color: #1e1e1e;
+    background-color: #191919;
     border: 2px solid #333;
 }
 
@@ -446,12 +447,19 @@ br {
 }
 
 .progress-foreground {
-    width: 40%;
     background-color: #ffb81e;
-    height: 12px;
+    height: 10px;
+    padding: 3px 6px;
     border-radius: 16px;
     transition: .3s;
-    border-top: 4px solid #ffd86f;
+}
+
+.progress-foreground2 {
+    width: 100%;
+    background-color: #ffd86f;
+    height: 6px;
+    border-radius: 16px;
+    transition: .3s;
 }
 
 .exercise-header {
@@ -497,6 +505,7 @@ br {
     background-color: #262626;
     padding: 24px 0;
     transition: .3s;
+    user-select: none;
 }
 
 .exercise-status {
@@ -531,4 +540,29 @@ br {
 
 .debug-button-overlay:hover {
     background-color: rgba(66, 66, 66, 0.5);
+}
+
+.debug-overlay-activator {
+    width: 48px;
+    height: 48px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 20;
+    border: none;
+    outline: none;
+    background: none;
+}
+
+.exercise-background {
+    background-color: #212121;
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+button {
+    user-select: none;
 }
