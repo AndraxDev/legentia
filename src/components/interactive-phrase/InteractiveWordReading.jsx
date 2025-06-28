@@ -9,13 +9,13 @@ import * as Vocabulary from "../../pages/Vocabulary";
 * Index is used to mark the words user know and show user part of the text he probably doesn't know.
 * Index equal to -1 disables the colored underline.
 * */
-function InteractiveWord({word, learningIndex}) {
+function InteractiveWord({word, learningIndex, contextSentence}) {
     const [translationIsOpened, setTranslationIsOpened] = React.useState(false);
 
     const [translation, setTranslation] = React.useState(null);
 
     const onWordClick = () => {
-        Vocabulary.translate(word)
+        Vocabulary.translate(word, contextSentence)
             .then((result) => {
                 setTranslation(result);
             })
@@ -44,7 +44,8 @@ function InteractiveWord({word, learningIndex}) {
 
 InteractiveWord.propTypes = {
     word: PropTypes.string.isRequired,
-    learningIndex: PropTypes.number
+    learningIndex: PropTypes.number,
+    contextSentence: PropTypes.string
 }
 
 export default InteractiveWord;
