@@ -44,6 +44,23 @@ export const addStory = (title, text, id) => {
     setString('stories', JSON.stringify(stories));
 }
 
+export const getWeakWords = () => {
+    const weakWords = localStorage.getItem('weakWords');
+    return weakWords ? JSON.parse(weakWords) : {};
+}
+
+export const addWeakWord = (word, translation) => {
+    const weakWords = getWeakWords();
+    weakWords[word] = translation;
+    setString('weakWords', JSON.stringify(weakWords));
+}
+
+export const deleteWeakWord = (word) => {
+    const weakWords = getWeakWords();
+    delete weakWords[word];
+    setString('weakWords', JSON.stringify(weakWords));
+}
+
 export const clearAppData = () => {
     localStorage.clear();
     window.location.replace('/');

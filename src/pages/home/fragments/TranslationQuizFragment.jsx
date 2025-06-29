@@ -8,6 +8,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
     const [exerciseWords, setExerciseWords] = useState(Object.keys(exercise).sort(() => Math.random() - 0.5))
     const [exerciseTranslations, setExerciseTranslations] = useState(Object.values(exercise).sort(() => Math.random() - 0.5))
     const [correctWords, setCorrectWords] = useState([]);
+    const [mistakes, setMistakes] = useState(0);
 
     const checkAsCorrect = () => {
         document.getElementById("correct").style.transform = "translateY(100%)";
@@ -16,7 +17,9 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
 
     useEffect(() => {
         if (correctWords.length >= exerciseWords.length + exerciseTranslations.length) {
-            checkAsCorrect()
+            setTimeout(() => {
+                checkAsCorrect()
+            }, 300)
         }
 
         if (selectedWord && selectedTranslation) {
@@ -26,11 +29,11 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                     document.getElementById("translation-" + selectedTranslation).style.borderColor = "#a6ff5d";
                     document.getElementById("word-" + selectedWord).style.color = "#a6ff5d";
                     document.getElementById("translation-" + selectedTranslation).style.color = "#a6ff5d";
+                    let newCorrectWords = [...correctWords];
+                    newCorrectWords.push(selectedTranslation);
+                    newCorrectWords.push(selectedWord);
+                    setCorrectWords(newCorrectWords);
                 }
-                let newCorrectWords = [...correctWords];
-                newCorrectWords.push(selectedTranslation);
-                newCorrectWords.push(selectedWord);
-                setCorrectWords(newCorrectWords);
 
                 setTimeout(() => {
                     if (document.getElementById("word-" + selectedWord)) {
@@ -46,6 +49,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                     document.getElementById("translation-" + selectedTranslation).style.borderColor = "#ff5d5d";
                     document.getElementById("word-" + selectedWord).style.color = "#ff5d5d";
                     document.getElementById("translation-" + selectedTranslation).style.color = "#ff5d5d";
+                    setMistakes(mistakes + 1);
                 }
 
                 setTimeout(() => {
@@ -71,10 +75,10 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
     const resetAnswerResult = () => {
         setExerciseWords(Object.keys(exercise).sort(() => Math.random() - 0.5))
         setExerciseTranslations(Object.values(exercise).sort(() => Math.random() - 0.5))
-        setCorrectWords([])
+        setCorrectWords([]);
         setSelectedWord(null);
         setSelectedTranslation(null);
-
+        setMistakes(0);
         document.getElementById("correct").style.transform = "translateY(100%)";
         document.getElementById("exercise-fragment-root").style.opacity = "0";
         setTimeout(() => {
@@ -93,7 +97,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
     }
 
     const goNext = () => {
-        onExerciseComplete(fragmentIndex, true, exercise);
+        onExerciseComplete(fragmentIndex, true, exercise, mistakes);
     }
 
     const getClassName = (word) => {
@@ -111,6 +115,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
             opacity: "0"
         }}>
             <h2 className={"exercise-title"}>Match the word with its correct translation</h2>
+            <div className={"quiz-gap"}></div>
             <div className={"quiz-content"}>
                 <div className={"quiz-column"}>
                     {

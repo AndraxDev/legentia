@@ -67,6 +67,7 @@ function TranslationQuiz({onNewIntent}) {
     const [fallbackEvent, setFallbackEvent] = React.useState(0);
     const [exitDialogOpened, setExitDialogOpened] = React.useState(false);
     const [practiceIsComplete, setPracticeIsComplete] = React.useState(false);
+    const [mistakesCount, setMistakesCount] = React.useState(0);
 
     const timer = () => {
         if (!practiceIsCompleteExternal) {
@@ -82,7 +83,8 @@ function TranslationQuiz({onNewIntent}) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const onExerciseComplete = (fi, isSuccessful, thisExercise) => {
+    const onExerciseComplete = (fi, isSuccessful, thisExercise, mistakes) => {
+        setMistakesCount(mistakesCount + mistakes);
         if (isSuccessful) {
             setSuccessfulCompletions(successfulCompletions + 1);
             setProgress(90 / exerciseSession.length * (successfulCompletions + 1));
@@ -184,7 +186,7 @@ function TranslationQuiz({onNewIntent}) {
                             </div>
                         </div>
                         <TranslationQuizFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
-                    </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakeIndices.length === 0} time={time} mistakesCount={mistakeIndices.length} />
+                    </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakeIndices.length === 0} time={time} mistakesCount={mistakesCount} />
                 }
             </div>
         </AppScreenFade>

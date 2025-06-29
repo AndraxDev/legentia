@@ -71,12 +71,12 @@ function ReadFragment({onNewIntent}) {
                                 flexGrow: 1,
                                 textAlign: "start",
                                 fontSize: "16px",
-                            }} className={"button-in-lit-item"} onClick={() => {
+                            }} className={"button-in-list-item"} onClick={() => {
                                 navigate("/read#" + storyId);
                             }} >{savedStories[storyId].title}</button>
                             <button style={{
                                 padding: "16px 8px",
-                            }} className={"button-in-lit-item"}><span className={"material-symbols-outlined"} onClick={() => {
+                            }} className={"button-in-list-item"}><span className={"material-symbols-outlined"} onClick={() => {
                                 navigate("/addstory#" + storyId);
                             }}>edit</span></button>
                             <button onClick={() => {
@@ -85,7 +85,7 @@ function ReadFragment({onNewIntent}) {
                             }} style={{
                                 paddingLeft: "8px",
                                 paddingRight: "16px",
-                            }} className={"button-in-lit-item"}><span className={"material-symbols-outlined"}>delete</span></button>
+                            }} className={"button-in-list-item"}><span className={"material-symbols-outlined"}>delete</span></button>
                         </div>))
                     }
                 </div> : null
