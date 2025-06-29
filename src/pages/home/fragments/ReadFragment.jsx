@@ -50,7 +50,7 @@ function ReadFragment({onNewIntent}) {
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
-            <h2 className={"activity-title"}>Read</h2>
+            <h2 className={"activity-title"}>Reading list</h2>
             <div style={{
                 width: "100%",
                 display: "flex",
