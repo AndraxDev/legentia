@@ -33,7 +33,7 @@ export const translate = (latinWord, context) => {
             const apiKey = localStorage.getItem("openai");
 
             if (!apiKey) {
-                reject(new Error("AI features are disabled. Please set an API key."));
+                reject(new Error("ai_unavailable"));
             } else {
                 runAI(latinWord, apiKey, context).then(r => {
                     if (r === "word_unknown") {

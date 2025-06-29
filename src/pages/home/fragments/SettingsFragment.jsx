@@ -6,15 +6,22 @@ import {
     MaterialButtonDialogFilled,
     MaterialButtonDialogOutlined
 } from "../../../components/MaterialButton";
+import * as Settings from "../../../Settings";
+import packageJson from './../../../../package.json';
 
 // onNewIntent is analog to android.content.Context.java in Android OS. It is passed hierarchically through all
 // components that need to access base application to handle activity launching.
 function SettingsFragment({onNewIntent}) {
     const [clearVocabularyConfirmationOpened, setClearVocabularyConfirmationOpened] = React.useState(false);
+    const [clearAppDataConfirmationOpened, setClearAppDataConfirmationOpened] = React.useState(false);
 
     const clearVocabulary = () => {
         localStorage.removeItem("vocabulary");
         window.location.reload();
+    }
+
+    const clearAppData = () => {
+        Settings.clearAppData();
     }
 
     return (
@@ -48,19 +55,54 @@ function SettingsFragment({onNewIntent}) {
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
+            <MaterialDialog
+                open={clearAppDataConfirmationOpened}
+                onClose={() => setClearAppDataConfirmationOpened(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Clear app data?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        <div style={{ color: "#fff" }}>
+                            Clearing app data will remove all local data, including lesson progresses, streak, local vocabulary, learned words, saved articles, etc.
+                        </div>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <MaterialButtonDialogOutlined onClick={() => {
+                        setClearAppDataConfirmationOpened(false);
+                    }}>Cancel</MaterialButtonDialogOutlined>
+                    <div/>
+                    <MaterialButtonDialogFilled onClick={() => {
+                        setClearAppDataConfirmationOpened(false);
+                        clearAppData();
+                    }} autoFocus>
+                        Clear
+                    </MaterialButtonDialogFilled>
+                </DialogActions>
+            </MaterialDialog>
             <h2 className={"activity-title"}>Settings</h2>
             <div style={{
                 width: "100%",
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                gap: "24px"
+                gap: "16px"
             }}>
-                <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("openai")} >Edit AI API Key</button>
+                <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("openai")} >Edit AI API Key (debug)</button>
                 <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                     setClearVocabularyConfirmationOpened(true)
                 }} >Clear local vocabulary</button>
+                <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
+                    setClearAppDataConfirmationOpened(true)
+                }} >Clear application data</button>
             </div>
+            <br/>
+            <p className={"app-info"}>Legentia version {packageJson.version}</p>
+            <p className={"app-info"}>Developer: <a className={"link"} href={"https://andrax.dev"}>AndraxDev</a></p>
         </div>
     );
 }

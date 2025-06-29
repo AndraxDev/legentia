@@ -4,7 +4,7 @@ import Home from "./pages/home/Home";
 import Setup from "./pages/setup/Setup";
 import {useEffect, useState} from "react";
 import ExerciseActivity from "./pages/home/activities/ExerciseActivity";
-import SetApiKeyFragment from "./pages/home/activities/SetApiKeyFragment";
+import SetApiKeyActivity from "./pages/home/activities/SetApiKeyActivity";
 import {useLocation, useNavigate} from "react-router-dom";
 import ArticleActivity from "./pages/home/activities/ArticleActivity";
 
@@ -47,7 +47,7 @@ function App() {
             case "exercise":
                 return <ExerciseActivity onNewIntent={addActivityToStack} />;
             case "openai":
-                return <SetApiKeyFragment onNewIntent={addActivityToStack} />;
+                return <SetApiKeyActivity onNewIntent={addActivityToStack} />;
             default:
                 return <Home onNewIntent={addActivityToStack} />;
         }

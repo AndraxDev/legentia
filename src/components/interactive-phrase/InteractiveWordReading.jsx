@@ -21,7 +21,11 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
             })
             .catch((error) => {
                 console.error("Error fetching translation:", error);
-                setTranslation("Translation not available");
+                if (error.message.toLowerCase().includes("ai_unavailable")) {
+                    setTranslation("AI features are disabled. Please set an API key first.");
+                } else {
+                    setTranslation("Translation not available right now.");
+                }
             });
 
         setTranslationIsOpened(true);
