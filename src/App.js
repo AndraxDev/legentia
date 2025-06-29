@@ -7,6 +7,7 @@ import ExerciseActivity from "./pages/home/activities/ExerciseActivity";
 import SetApiKeyActivity from "./pages/home/activities/SetApiKeyActivity";
 import {useLocation, useNavigate} from "react-router-dom";
 import ArticleActivity from "./pages/home/activities/ArticleActivity";
+import AddStoryActivity from "./pages/home/activities/AddStoryActivity";
 
 let contextInitialized = false;
 
@@ -44,6 +45,8 @@ function App() {
                 return <Home onNewIntent={addActivityToStack} />;
             case "read":
                 return <ArticleActivity onNewIntent={addActivityToStack} />;
+            case "addstory":
+                return <AddStoryActivity onNewIntent={addActivityToStack} />;
             case "exercise":
                 return <ExerciseActivity onNewIntent={addActivityToStack} />;
             case "openai":
