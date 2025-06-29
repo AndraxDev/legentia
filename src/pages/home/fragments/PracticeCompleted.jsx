@@ -35,7 +35,7 @@ function PracticeCompleted({onNewIntent, flawless, time, mistakesCount}) {
                 </div>
             </div>
             <button className={"exercise-button exercise-button-neutral"} onClick={() => {
-                onNewIntent("home");
+                onNewIntent("/home/1");
             }}>Continue</button>
         </div>
     );

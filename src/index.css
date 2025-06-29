@@ -205,6 +205,14 @@ br {
     user-select: none;
 }
 
+.article-title {
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    margin: 8px 0;
+    user-select: none;
+}
+
 .fragment {
     transition: .3s;
     height: calc(100vh - 80px);
@@ -660,4 +668,14 @@ button {
     background-color: rgba(255, 93, 93, 0.11);
     border-radius: 24px;
     color: #ffcbcb;
+}
+
+.activity-fullscreen {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    left: 0;
 }

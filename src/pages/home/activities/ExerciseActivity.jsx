@@ -167,7 +167,7 @@ function ExerciseActivity({onNewIntent}) {
     }
 
     const quitExercise = () => {
-        onNewIntent("home")
+        onNewIntent("/home/1")
     }
 
     return (

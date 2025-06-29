@@ -6,6 +6,7 @@ import {useEffect, useState} from "react";
 import ExerciseActivity from "./pages/home/activities/ExerciseActivity";
 import SetApiKeyFragment from "./pages/home/activities/SetApiKeyFragment";
 import {useLocation, useNavigate} from "react-router-dom";
+import ArticleActivity from "./pages/home/activities/ArticleActivity";
 
 let contextInitialized = false;
 
@@ -24,10 +25,15 @@ function App() {
         } else {
             contextInitialized = true;
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [location]);
 
     const addActivityToStack = (activity) => {
-        navigate("/" + activity);
+        if (activity.startsWith("/")) {
+            navigate(activity);
+        } else {
+            navigate("/" + activity);
+        }
     }
 
     // All activities must be registered here like in AndroidManifest.xml in Android OS
@@ -36,6 +42,8 @@ function App() {
         switch (currentActivity) {
             case "home":
                 return <Home onNewIntent={addActivityToStack} />;
+            case "read":
+                return <ArticleActivity onNewIntent={addActivityToStack} />;
             case "exercise":
                 return <ExerciseActivity onNewIntent={addActivityToStack} />;
             case "openai":
