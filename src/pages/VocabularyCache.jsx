@@ -19,10 +19,15 @@ export const getVocabulary = () => {
 export const translateLocal = (latinWord) => {
     const vocabulary = getVocabulary();
     const translation = vocabulary.find(item => item[latinWord]);
-    if (translation)
-        return translation[latinWord];
-    else
+    if (translation) {
+        if (translation[latinWord][0].includes("word_unknown")) {
+            return [latinWord.toLowerCase().replace("the word to translate is:", "").trim()];
+        } else {
+            return [translation[latinWord][0].toLowerCase().replace("the word to translate is:", "").trim()];
+        }
+    } else {
         return null
+    }
 }
 
 export const insertWord = (latinWord, englishWords) => {

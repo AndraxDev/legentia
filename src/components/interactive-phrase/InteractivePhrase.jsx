@@ -10,9 +10,9 @@ function InteractivePhrase({phrase, translation, isHardMode}) {
                 phrase.split(" ").map((word, index) => {
                     return (
                         !isHardMode ?
-                            <InteractiveWord word={word} translations={translation[index]} />
+                            <InteractiveWord key={word + index.toString()} word={word} translations={translation[index]} />
                         :
-                            <InteractiveWordHard word={word} />
+                            <InteractiveWordHard key={word + index.toString()} word={word} />
 
                     );
                 })

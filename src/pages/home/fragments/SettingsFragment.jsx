@@ -36,10 +36,8 @@ function SettingsFragment({onNewIntent}) {
                     {"Clear local vocabulary?"}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        <div style={{ color: "#fff" }}>
+                    <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
                             Clearing local vocabulary will removed all cached translations and will require Internet connection next time you tap the word to translate it. Additionally, uncached words will use AI models which may incur additional charges. Clear local vocabulary if you see incorrect or unusual translations.
-                        </div>
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -65,10 +63,8 @@ function SettingsFragment({onNewIntent}) {
                     {"Clear app data?"}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        <div style={{ color: "#fff" }}>
-                            Clearing app data will remove all local data, including lesson progresses, streak, local vocabulary, learned words, saved articles, etc.
-                        </div>
+                    <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
+                        Clearing app data will remove all local data, including lesson progresses, streak, local vocabulary, learned words, saved articles, etc.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

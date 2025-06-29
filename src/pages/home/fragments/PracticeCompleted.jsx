@@ -26,12 +26,20 @@ function PracticeCompleted({onNewIntent, flawless, time, mistakesCount}) {
             </div>
             <div className={"analytics-box"}>
                 <div className={"stats-box stats-box-mistakes"}>
-                    <p className={"stat-title"}>Mistakes</p>
-                    <p className={"stat-metrics"}>{mistakesCount}</p>
+                    <div className={"stats-title-container"}>
+                        <p className={"stat-title"}>Mistakes</p>
+                    </div>
+                    <div className={"stats-box-content"}>
+                        <p className={"stat-metrics"}>{mistakesCount}</p>
+                    </div>
                 </div>
                 <div className={"stats-box stats-box-time"}>
-                    <p className={"stat-title"}>Time</p>
-                    <p className={"stat-metrics"}>{timeSecondsToString(time)}</p>
+                    <div className={"stats-title-container"}>
+                        <p className={"stat-title"}>Time</p>
+                    </div>
+                    <div className={"stats-box-content"}>
+                        <p className={"stat-metrics"}>{timeSecondsToString(time)}</p>
+                    </div>
                 </div>
             </div>
             <button className={"exercise-button exercise-button-neutral"} onClick={() => {

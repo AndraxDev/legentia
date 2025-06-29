@@ -6,6 +6,7 @@ import PracticeCompleted from "../fragments/PracticeCompleted";
 import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
 import {MaterialDialog} from "../../../components/MaterialDialog";
+import TranslationQuizFragment from "../fragments/TranslationQuizFragment";
 
 // Exercise structure:
 // Translation exercise consists of a phrase and a set of translations.
@@ -16,70 +17,37 @@ import {MaterialDialog} from "../../../components/MaterialDialog";
 // so the translations can contain different word order, but the same words.
 // For technical reasons, the correct translation answers contains no delimiter or punctuation marks to make it easier to parse.
 // On the other hand, original phrase contains punctuation marks and delimiters, so the user can see the correct form of the phrase.
-const exerciseDemo1 = {
-    exerciseType: "en-lat-translation",
-    phrase: "I want to read quietly in the nearest library.",
-    isHard: false,
-    translationsMap: [
-        ["Ego"],
-        ["volo"],
-        ["to ... read", "legere"],
-        ["to ... read", "legere"],
-        ["tacite"],
-        ["in"],
-        ["the ... library", "bibliotheca"],
-        ["proxima"],
-        ["the ... library", "bibliotheca"]
-    ],
-    variants: [
-        "In", "bibliotheca", "proxima", "legere", "tacite", "volo",
-    ],
-    translations: [
-        "in bibliotheca proxima legere tacite volo",
-        "in proxima bibliotheca legere tacite volo",
-        "in bibliotheca proxima tacite legere volo",
-        "in proxima bibliotheca tacite legere volo",
-    ]
+const quizDemo1 = {
+    "uno": "one",
+    "duo": "two",
+    "tres": "three",
+    "bibliotheca": "library",
+    "proxima": "near",
 }
 
-const exerciseDemo2 = {
-    exerciseType: "en-lat-translation",
-    phrase: "I am half-asleep",
-    isHard: false,
-    translationsMap: [
-        ["Ego"],
-        ["sum"],
-        ["semisomna"]
-    ],
-    variants: [
-        "Ego", "semisomna", "vir", "sum", "tacite", "candidam",
-    ],
-    translations: [
-        "ego sum semisomna",
-        "sum semisomna",
-    ]
+
+const quizDemo2 = {
+    "salve": "hello",
+    "quis": "who",
+    "quid": "what",
+    "hoc": "this",
+    "vir": "man",
 }
 
-const exerciseDemo3 = {
-    exerciseType: "en-lat-translation",
-    phrase: "Old men hits the young men violently",
-    isHard: false,
-    translationsMap: [
-        ["Senex"],
-        ["senex", "vir"],
-        ["pulsat"],
-        ["iuvenem"],
-        ["iuvenem"],
-        ["iuvenem", "vir"],
-        ["vehementer"],
-    ],
-    variants: [
-        "senex", "iuvenem", "pulsat", "vehementer", "lectus", "sedere",
-    ],
-    translations: [
-        "senex iuvenem vehementer pulsat",
-        "senex iuvenem pulsat vehementer"
-    ]
+const quizDemo3 = {
+    "puer": "boy",
+    "puella": "girl",
+    "iuvenes": "young man",
+    "patella": "plate",
+    "ventus": "wind",
+}
+
+const quizDemo4 = {
+    "umbra": "shadow",
+    "imber": "rain",
+    "arbor": "tree",
+    "paena": "punishemnt",
+    "ius": "right",
 }
 
 let fragmentIndex = 0;
@@ -89,9 +57,9 @@ let time = 0;
 let practiceIsCompleteExternal = false;
 const mistakeIndices = [];
 
-const exerciseSession = [exerciseDemo1, exerciseDemo2, exerciseDemo3];
+const exerciseSession = [quizDemo1, quizDemo2, quizDemo3, quizDemo4];
 
-function ExerciseActivity({onNewIntent}) {
+function TranslationQuiz({onNewIntent}) {
 
     const [successfulCompletions, setSuccessfulCompletions] = React.useState(0);
     const [progress, setProgress] = React.useState(10);
@@ -215,7 +183,7 @@ function ExerciseActivity({onNewIntent}) {
                                 </div>
                             </div>
                         </div>
-                        <ExerciseFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
+                        <TranslationQuizFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
                     </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakeIndices.length === 0} time={time} mistakesCount={mistakeIndices.length} />
                 }
             </div>
@@ -223,8 +191,8 @@ function ExerciseActivity({onNewIntent}) {
     );
 }
 
-ExerciseActivity.propTypes = {
+TranslationQuiz.propTypes = {
     onNewIntent: PropTypes.func.isRequired
 }
 
-export default ExerciseActivity;
+export default TranslationQuiz;

@@ -31,10 +31,8 @@ function ReadFragment({onNewIntent}) {
                     {"Delete this story?"}
                 </DialogTitle>
                 <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        <div style={{ color: "#fff" }}>
-                            Once deleted, it cannot be recovered.
-                        </div>
+                    <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
+                        Once deleted, it cannot be recovered.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>

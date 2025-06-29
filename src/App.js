@@ -8,6 +8,7 @@ import SetApiKeyActivity from "./pages/home/activities/SetApiKeyActivity";
 import {useLocation, useNavigate} from "react-router-dom";
 import ArticleActivity from "./pages/home/activities/ArticleActivity";
 import AddStoryActivity from "./pages/home/activities/AddStoryActivity";
+import TranslationQuiz from "./pages/home/activities/TranslationQuiz";
 
 let contextInitialized = false;
 
@@ -49,6 +50,8 @@ function App() {
                 return <AddStoryActivity onNewIntent={addActivityToStack} />;
             case "exercise":
                 return <ExerciseActivity onNewIntent={addActivityToStack} />;
+            case "quiz":
+                return <TranslationQuiz onNewIntent={addActivityToStack} />;
             case "openai":
                 return <SetApiKeyActivity onNewIntent={addActivityToStack} />;
             default:

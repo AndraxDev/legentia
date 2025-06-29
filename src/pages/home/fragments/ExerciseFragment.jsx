@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from "prop-types";
 import InteractivePhrase from "../../../components/interactive-phrase/InteractivePhrase";
 
@@ -25,8 +25,12 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
         return exercise;
     }
 
+    const [answerVariants, setAnswerVariants] = useState(createExercise().variants.sort(() => Math.random() - 0.5));
+
     useEffect(() => {
         resetAnswerResult()
+        setAnswerVariants(createExercise().variants.sort(() => Math.random() - 0.5))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fallbackEvent]);
 
     const checkAnswer = () => {
@@ -102,7 +106,7 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
             </div>
             <div className={"exercise-answers-box"}>
                 {
-                    createExercise().variants.filter(v => !currentAnswer.includes(v)).map((variant) => (<button className={"answer-word-neutral"} key={variant} onClick={() => {
+                    answerVariants.filter(v => !currentAnswer.includes(v)).map((variant) => (<button className={"answer-word-neutral"} key={variant} onClick={() => {
                         if (answerStatus !== "neutral") return;
                         let newAnswer = [...currentAnswer];
 
