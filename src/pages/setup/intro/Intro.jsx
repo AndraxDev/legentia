@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import logo from './../../../logo.png'
 
 function Intro({onStepCompleted}) {
 
@@ -12,7 +13,7 @@ function Intro({onStepCompleted}) {
     return (
         <div className="app-screen-v2" id={"app-screen"}>
             <div className={"container-centered"}>
-                <img alt={"."} className={"app-icon-intro"}/>
+                <img alt={"."} src={logo} className={"app-icon-intro"}/>
                 <br/>
                 <br/>
                 <br/>
