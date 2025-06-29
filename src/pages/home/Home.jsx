@@ -32,27 +32,29 @@ function Home({onNewIntent}) {
     }, [location]);
 
     const bottomNavigationOnHomeClickedListener = () => {
-        changeFragment(0);
+        if (tabIndex !== 0) changeFragment(0);
     }
 
     const bottomNavigationOnLearnClickedListener = () => {
-        changeFragment(1);
+        if (tabIndex !== 1) changeFragment(1);
     }
 
     const bottomNavigationOnReadClickedListener = () => {
-        changeFragment(2);
+        if (tabIndex !== 2) changeFragment(2);
     }
 
     const bottomNavigationOnSettingsClickedListener = () => {
-        changeFragment(3);
+        if (tabIndex !== 3) changeFragment(3);
     }
 
     const changeFragment = (index) => {
         document.getElementById("fragment").style.opacity = "0";
         setTimeout(() => {
             navigate("/home/" + (index === 0 ? "" : index));
-            document.getElementById("fragment").style.opacity = "1";
-        }, 300);
+            setTimeout(() => {
+                document.getElementById("fragment").style.opacity = "1";
+            }, 200);
+        }, 200);
     }
 
     const getCurrentFragment = () => {

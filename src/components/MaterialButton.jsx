@@ -12,3 +12,30 @@ export const MaterialButton = styled(Button)(() => ({
     fontSize: '16px',
     fontWeight: '500',
 }));
+
+export const MaterialButtonDialogFilled = styled(Button)(() => ({
+    backgroundColor: '#cecece',
+    color: '#121212',
+    '&:hover': {
+        backgroundColor: '#fff',
+    },
+    padding: '6px 20px',
+    borderRadius: '24px',
+    textTransform: 'none',
+    fontSize: '16px',
+    fontWeight: '500',
+}));
+
+export const MaterialButtonDialogOutlined = styled(Button)(() => ({
+    backgroundColor: '#212121',
+    border: '1px solid #cecece',
+    color: '#fff',
+    '&:hover': {
+        backgroundColor: '#212121',
+    },
+    padding: '5px 18px',
+    borderRadius: '24px',
+    textTransform: 'none',
+    fontSize: '16px',
+    fontWeight: '500',
+}));

@@ -3,6 +3,9 @@ import PropTypes from "prop-types";
 import ExerciseFragment from "../fragments/ExerciseFragment";
 import AppScreenFade from "../../AppScreenFade";
 import PracticeCompleted from "../fragments/PracticeCompleted";
+import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
+import {MaterialDialog} from "../../../components/MaterialDialog";
 
 // Exercise structure:
 // Translation exercise consists of a phrase and a set of translations.
@@ -108,6 +111,7 @@ function ExerciseActivity({onNewIntent}) {
 
     useEffect(() => {
         timer();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const onExerciseComplete = (fi, isSuccessful, thisExercise) => {
@@ -162,14 +166,49 @@ function ExerciseActivity({onNewIntent}) {
         setPracticeIsComplete(true);
     }
 
+    const quitExercise = () => {
+        onNewIntent("home")
+    }
+
     return (
         <AppScreenFade>
+            <MaterialDialog
+                open={exitDialogOpened}
+                onClose={() => setExitDialogOpened(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Quit practice session?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description">
+                        <div style={{ color: "#fff" }}>
+                            All progress in this session will be lost.
+                        </div>
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <MaterialButtonDialogOutlined onClick={() => {
+                        setExitDialogOpened(false);
+                    }}>Cancel</MaterialButtonDialogOutlined>
+                    <div/>
+                    <MaterialButtonDialogFilled onClick={() => {
+                        setExitDialogOpened(false);
+                        quitExercise();
+                    }} autoFocus>
+                        Quit
+                    </MaterialButtonDialogFilled>
+                </DialogActions>
+            </MaterialDialog>
             <div className="exercise-background">
                 {/* TODO: Remove hardcoded ids */}
                 {
                     !practiceIsComplete ? <>
                         <div className={"exercise-header"}>
-                            <button className={"exercise-close"}><span className={"material-symbols-outlined"}>close</span></button>
+                            <button className={"exercise-close"} onClick={() => {
+                                setExitDialogOpened(true);
+                            }}><span className={"material-symbols-outlined"}>close</span></button>
                             <div className={"progress-background"}>
                                 <div style={{
                                     width: `calc(${progress}% - 12px)`
