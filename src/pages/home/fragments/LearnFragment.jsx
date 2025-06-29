@@ -5,6 +5,11 @@ function LearnFragment({onNewIntent}) {
     return (
         <div className={"fragment"}>
             <h2 className={"activity-title"}>Learn</h2>
+            <button onClick={() => {
+                onNewIntent("exercise");
+            }}>
+                Start demo practice session
+            </button>
         </div>
     );
 }

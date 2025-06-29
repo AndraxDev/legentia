@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
 import ExerciseFragment from "../fragments/ExerciseFragment";
 import AppScreenFade from "../../AppScreenFade";
+import PracticeCompleted from "../fragments/PracticeCompleted";
 
 // Exercise structure:
 // Translation exercise consists of a phrase and a set of translations.
@@ -81,6 +82,8 @@ const exerciseDemo3 = {
 let fragmentIndex = 0;
 let mistakeIndex = 0;
 let streak = 0;
+let time = 0;
+let practiceIsCompleteExternal = false;
 const mistakeIndices = [];
 
 const exerciseSession = [exerciseDemo1, exerciseDemo2, exerciseDemo3];
@@ -91,6 +94,21 @@ function ExerciseActivity({onNewIntent}) {
     const [progress, setProgress] = React.useState(10);
     const [currentExercise, setCurrentExercise] = React.useState(exerciseSession[0]);
     const [fallbackEvent, setFallbackEvent] = React.useState(0);
+    const [exitDialogOpened, setExitDialogOpened] = React.useState(false);
+    const [practiceIsComplete, setPracticeIsComplete] = React.useState(false);
+
+    const timer = () => {
+        if (!practiceIsCompleteExternal) {
+            setTimeout(() => {
+                time++;
+                timer()
+            }, 1000)
+        }
+    }
+
+    useEffect(() => {
+        timer();
+    }, [])
 
     const onExerciseComplete = (fi, isSuccessful, thisExercise) => {
         if (isSuccessful) {
@@ -140,24 +158,29 @@ function ExerciseActivity({onNewIntent}) {
     }
 
     const showSuccessScreen = () => {
-
+        practiceIsCompleteExternal = true;
+        setPracticeIsComplete(true);
     }
 
     return (
         <AppScreenFade>
             <div className="exercise-background">
                 {/* TODO: Remove hardcoded ids */}
-                <div className={"exercise-header"}>
-                    <button className={"exercise-close"}><span className={"material-symbols-outlined"}>close</span></button>
-                    <div className={"progress-background"}>
-                        <div style={{
-                            width: `calc(${progress}% - 12px)`
-                        }} className={"progress-foreground"}>
-                            <div className={"progress-foreground2"} />
+                {
+                    !practiceIsComplete ? <>
+                        <div className={"exercise-header"}>
+                            <button className={"exercise-close"}><span className={"material-symbols-outlined"}>close</span></button>
+                            <div className={"progress-background"}>
+                                <div style={{
+                                    width: `calc(${progress}% - 12px)`
+                                }} className={"progress-foreground"}>
+                                    <div className={"progress-foreground2"} />
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <ExerciseFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
+                        <ExerciseFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
+                    </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakeIndices.length === 0} time={time} mistakesCount={mistakeIndices.length} />
+                }
             </div>
         </AppScreenFade>
     );

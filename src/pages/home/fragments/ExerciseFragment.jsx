@@ -26,10 +26,6 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
     }
 
     useEffect(() => {
-        console.log("Is previous mistake: " + isPreviousMistake);
-    }, [isPreviousMistake, fallbackEvent]);
-
-    useEffect(() => {
         resetAnswerResult()
     }, [fallbackEvent]);
 
@@ -64,6 +60,17 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
         document.getElementById("incorrect").style.transform = "translateY(100%)";
         setAnswerStatus("neutral");
         setCurrentAnswer([]);
+
+        document.getElementById("exercise-fragment-root").style.opacity = "0";
+        setTimeout(() => {
+            document.getElementById("exercise-fragment-root").style.transition = "opacity 0.5s";
+            setTimeout(() => {
+                document.getElementById("exercise-fragment-root").style.opacity = "1";
+                setTimeout(() => {
+                    document.getElementById("exercise-fragment-root").style.transition = "none";
+                }, 300)
+            }, 50)
+        }, 50)
     }
 
     const onContinueClicked = () => {
@@ -71,7 +78,9 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
     }
 
     return (
-        <div>
+        <div id={"exercise-fragment-root"} style={{
+            opacity: "0"
+        }}>
             <h2 className={"exercise-title"}>{getExerciseTitle(createExercise().exerciseType)}</h2>
             {isPreviousMistake ? <div style={{
                 display: "flex",
@@ -135,12 +144,6 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
                     <button className={"debug-button-overlay"} onClick={resetAnswerResult}>Reset result</button>
                 </div> : null
             }
-
-            <button className={"debug-overlay-activator"} onClick={() => {
-                setDebugOverlayIsVisible(!debugOverlayIsVisible);
-            }}>
-
-            </button>
         </div>
     );
 }
