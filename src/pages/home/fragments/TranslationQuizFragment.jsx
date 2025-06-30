@@ -30,6 +30,8 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                     document.getElementById("translation-" + selectedTranslation).style.borderColor = "#a6ff5d";
                     document.getElementById("word-" + selectedWord).style.color = "#a6ff5d";
                     document.getElementById("translation-" + selectedTranslation).style.color = "#a6ff5d";
+                    document.getElementById("word-" + selectedWord).style.cursor = "pointer";
+                    document.getElementById("translation-" + selectedTranslation).style.cursor = "pointer";
                     let newCorrectWords = [...correctWords];
                     newCorrectWords.push(selectedTranslation);
                     newCorrectWords.push(selectedWord);
@@ -43,6 +45,8 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                         document.getElementById("translation-" + selectedTranslation).style.borderColor = "#444444";
                         document.getElementById("word-" + selectedWord).style.color = "#555555";
                         document.getElementById("translation-" + selectedTranslation).style.color = "#555555";
+                        document.getElementById("word-" + selectedWord).style.cursor = "default";
+                        document.getElementById("translation-" + selectedTranslation).style.cursor = "default";
                     }
                 }, 1000)
             } else {
@@ -51,6 +55,8 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                     document.getElementById("translation-" + selectedTranslation).style.borderColor = "#ff5d5d";
                     document.getElementById("word-" + selectedWord).style.color = "#ff5d5d";
                     document.getElementById("translation-" + selectedTranslation).style.color = "#ff5d5d";
+                    document.getElementById("word-" + selectedWord).style.cursor = "pointer";
+                    document.getElementById("translation-" + selectedTranslation).style.cursor = "pointer";
                     setMistakes(mistakes + 1);
                     setLocalStreak(0);
                 }
@@ -61,6 +67,8 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                         document.getElementById("translation-" + selectedTranslation).style.removeProperty("border-color");
                         document.getElementById("word-" + selectedWord).style.removeProperty("color");
                         document.getElementById("translation-" + selectedTranslation).style.removeProperty("color");
+                        document.getElementById("word-" + selectedWord).style.cursor = "pointer";
+                        document.getElementById("translation-" + selectedTranslation).style.cursor = "pointer";
                     }
                 }, 1000)
             }
@@ -124,7 +132,9 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
             <div className={"quiz-content"}>
                 <div className={"quiz-column"}>
                     {
-                        exerciseWords.map(word => (<button disabled={correctWords.includes(word)} id={"word-" + word} onClick={() => {
+                        exerciseWords.map(word => (<button style={{
+                            cursor: "pointer"
+                        }} disabled={correctWords.includes(word)} id={"word-" + word} onClick={() => {
                             if (selectedWord === word || correctWords.includes(word)) {
                                 setSelectedWord(null)
                             } else {
@@ -137,7 +147,9 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                 </div>
                 <div className={"quiz-column"}>
                     {
-                        exerciseTranslations.map(word => (<button disabled={correctWords.includes(word)} id={"translation-" + word} onClick={() => {
+                        exerciseTranslations.map(word => (<button style={{
+                            cursor: "pointer"
+                        }} disabled={correctWords.includes(word)} id={"translation-" + word} onClick={() => {
                             if (selectedTranslation === word || correctWords.includes(word)) {
                                 setSelectedTranslation(null)
                             } else {

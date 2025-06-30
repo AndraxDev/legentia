@@ -51,12 +51,12 @@ function WordsActivity({onNewIntent}) {
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
-                    }}>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
                         deleteWord();
-                    }} autoFocus>
+                    }}>
                         Delete
                     </MaterialButtonDialogFilled>
                 </DialogActions>
@@ -83,7 +83,7 @@ function WordsActivity({onNewIntent}) {
                     }}>
                         Add new word
                     </button>
-                    <button disabled={weakWords.length === 0} className={"exercise-button exercise-button-neutral"} onClick={() => {
+                    <button disabled={weakWords.length === 0} className={"exercise-button " + ((weakWords.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={() => {
                         onNewIntent("quiz");
                     }}>
                         Start word quiz
@@ -104,7 +104,9 @@ function WordsActivity({onNewIntent}) {
                                     <div className={"list-item word-grid"} key={word}>
                                         <span className={"translation-word"}>{word}</span>
                                         <span className={"translation-meaning"}>{weakWordMap[word]}</span>
-                                        <button onClick={() => {
+                                        <button style={{
+                                            cursor: "pointer"
+                                        }} onClick={() => {
                                             setMarkedWordForDeletion(word);
                                             setDeleteConfirmationDialogOpened(true);
                                         }} className={"delete-word-btn"}>

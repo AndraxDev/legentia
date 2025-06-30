@@ -157,12 +157,12 @@ function TranslationQuiz({onNewIntent}) {
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setExitDialogOpened(false);
-                    }}>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setExitDialogOpened(false);
                         quitExercise();
-                    }} autoFocus>
+                    }}>
                         Quit
                     </MaterialButtonDialogFilled>
                 </DialogActions>

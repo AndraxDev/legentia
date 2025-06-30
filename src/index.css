@@ -145,7 +145,20 @@ br {
     border: none;
     outline: none;
     background: none;
+    cursor: pointer;
     padding: 0;
+}
+
+.bottom-navigation-item-clickable:focus > div > .bottom-navigation-item-icon-container-inactive {
+    width: 60px;
+    height: 32px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #323232;
+    transition: .3s;
 }
 
 .bottom-navigation-item-icon-container-inactive {
@@ -161,6 +174,18 @@ br {
 }
 
 .bottom-navigation-item-icon-container-inactive:hover {
+    width: 60px;
+    height: 32px;
+    border-radius: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #323232;
+    transition: .3s;
+}
+
+.bottom-navigation-item-icon-container-inactive:focus {
     width: 60px;
     height: 32px;
     border-radius: 16px;
@@ -257,6 +282,12 @@ br {
     color: #ff5f5f;
 }
 
+.word-weak:focus {
+    border-bottom: 3px dashed #ff5f5f;
+    background-color: rgba(221, 138, 138, 0.13);
+    color: #ff5f5f;
+}
+
 .word-regular {
     border-bottom: 3px dashed #333;
     border-left: none;
@@ -279,6 +310,13 @@ br {
     border-bottom: 3px dashed #ffc65c;
     color: #ffc65c;
 }
+
+.word-regular:focus {
+    background-color: rgba(154, 137, 99, 0.13);
+    border-bottom: 3px dashed #ffc65c;
+    color: #ffc65c;
+}
+
 
 .word-hard {
     border: none;
@@ -351,10 +389,12 @@ br {
     border-right: none;
     border-top: none;
     transition: .3s;
+    cursor: pointer;
 }
 
 .add-weak-word-button:hover {
     background-color: rgba(255, 184, 30, 0.22);
+    cursor: pointer;
 }
 
 .add-weak-sentence-button {
@@ -400,6 +440,7 @@ br {
     border-radius: 16px;
     font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .answer-word-neutral:hover {
@@ -419,6 +460,7 @@ br {
     border-radius: 16px;
     font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .answer-word-incorrect {
@@ -432,6 +474,7 @@ br {
     border-radius: 16px;
     font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .exercise-phrase-box {
@@ -500,6 +543,7 @@ br {
     color: #212121;
     border-radius: 20px;
     font-weight: 800;
+    cursor: pointer;
 }
 
 .exercise-button-neutral {
@@ -525,7 +569,7 @@ br {
 }
 
 .exercise-button-disabled {
-    /*transform: translateY(2px);*/
+    cursor: not-allowed;
     height: 48px;
     margin-top: 4px;
     border: none;
@@ -545,6 +589,11 @@ br {
     margin-top: 4px;
 }
 
+.exercise-button:focus {
+    height: 48px;
+    margin-top: 4px;
+}
+
 .exercise-button-neutral:hover {
     border-bottom: none;
 }
@@ -554,6 +603,18 @@ br {
 }
 
 .exercise-button-correct:hover {
+    border-bottom: none;
+}
+
+.exercise-button-neutral:focus {
+    border-bottom: none;
+}
+
+.exercise-button-incorrect:focus {
+    border-bottom: none;
+}
+
+.exercise-button-correct:focus {
     border-bottom: none;
 }
 
@@ -596,6 +657,7 @@ br {
     color: #fff;
     background: none;
     font-size: 36px;
+    cursor: pointer;
 }
 
 .exercise-back {
@@ -606,6 +668,7 @@ br {
     color: #fff;
     background: none;
     font-size: 36px;
+    cursor: pointer;
 }
 
 .debug-panel {
@@ -727,6 +790,7 @@ button {
 .practice-completed-title {
     font-size: 28px;
     margin: 16px 0;
+    user-select: none;
 }
 
 .motivational-message {
@@ -739,6 +803,7 @@ button {
     background-color: rgba(166, 255, 93, 0.1);
     color: #a6ff5d;
     width: calc(100vw - 84px);
+    user-select: none;
 }
 
 .analytics-box {
@@ -749,6 +814,7 @@ button {
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
+    user-select: none;
 }
 
 .stats-box {

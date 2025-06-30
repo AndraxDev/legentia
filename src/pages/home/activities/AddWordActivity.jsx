@@ -43,7 +43,7 @@ function AddStoryActivity({onNewIntent}) {
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>
-                    <button disabled={word.trim() === "" || translation.trim() === ""} className={"exercise-button exercise-button-neutral"} onClick={save}>Save</button>
+                    <button disabled={word.trim() === "" || translation.trim() === ""} className={"exercise-button exercise-button-" + ((word.trim() === "" || translation.trim() === "") ? "disabled" : "neutral")} onClick={save}>Save</button>
                 </div>
             </div>
         </AppScreenFade>

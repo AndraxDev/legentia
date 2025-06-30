@@ -66,12 +66,12 @@ function DataControls({onNewIntent}) {
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setClearWeakWordsConfirmationOpened(false);
-                    }}>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setClearWeakWordsConfirmationOpened(false);
                         clearWeakWords();
-                    }} autoFocus>
+                    }}>
                         Clear
                     </MaterialButtonDialogFilled>
                 </DialogActions>
@@ -93,12 +93,12 @@ function DataControls({onNewIntent}) {
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setClearVocabularyConfirmationOpened(false);
-                    }}>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setClearVocabularyConfirmationOpened(false);
                         clearVocabulary();
-                    }} autoFocus>
+                    }}>
                         Clear
                     </MaterialButtonDialogFilled>
                 </DialogActions>
@@ -120,12 +120,12 @@ function DataControls({onNewIntent}) {
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setClearAppDataConfirmationOpened(false);
-                    }}>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setClearAppDataConfirmationOpened(false);
                         clearAppData();
-                    }} autoFocus>
+                    }}>
                         Clear
                     </MaterialButtonDialogFilled>
                 </DialogActions>

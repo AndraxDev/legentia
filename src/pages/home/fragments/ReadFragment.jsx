@@ -38,12 +38,12 @@ function ReadFragment({onNewIntent}) {
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeletionConfirmationOpened(false);
-                    }}>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeletionConfirmationOpened(false);
                         deleteStory();
-                    }} autoFocus>
+                    }}>
                         Delete
                     </MaterialButtonDialogFilled>
                 </DialogActions>
@@ -69,12 +69,14 @@ function ReadFragment({onNewIntent}) {
                         Object.keys(savedStories).map((storyId) => (<div className={"list-item"} key={storyId}>
                             <button style={{
                                 flexGrow: 1,
+                                cursor: "pointer",
                                 textAlign: "start",
                                 fontSize: "16px",
                             }} className={"button-in-list-item"} onClick={() => {
                                 navigate("/read#" + storyId);
                             }} >{savedStories[storyId].title}</button>
                             <button style={{
+                                cursor: "pointer",
                                 padding: "16px 8px",
                             }} className={"button-in-list-item"}><span className={"material-symbols-outlined"} onClick={() => {
                                 navigate("/addstory#" + storyId);
@@ -83,6 +85,7 @@ function ReadFragment({onNewIntent}) {
                                 setMarkedForDeletion(storyId);
                                 setDeletionConfirmationOpened(true);
                             }} style={{
+                                cursor: "pointer",
                                 paddingLeft: "8px",
                                 paddingRight: "16px",
                             }} className={"button-in-list-item"}><span className={"material-symbols-outlined"}>delete</span></button>
