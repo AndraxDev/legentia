@@ -9,7 +9,7 @@ function BottomNavigationBarItem({label, icon, onClick, isActive}) {
                     <div className={"bottom-navigation-item-icon-container-" + (isActive ? "active" : "inactive")}>
                         <span className={"material-symbols-outlined bottom-navigation-icon-" + (isActive ? "active" : "inactive")}>{icon}</span>
                     </div>
-                    <p className={"bottom-navigation-label"}>{label}</p>
+                    <p className={isActive ? "bottom-navigation-label-active" : "bottom-navigation-label"}>{label}</p>
                 </div>
             </button>
         </div>

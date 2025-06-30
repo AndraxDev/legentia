@@ -61,6 +61,10 @@ export const deleteWeakWord = (word) => {
     setString('weakWords', JSON.stringify(weakWords));
 }
 
+export const clearWeakWords = () => {
+    deleteString('weakWords');
+}
+
 export const clearAppData = () => {
     localStorage.clear();
     window.location.replace('/');

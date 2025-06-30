@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import AppScreenFade from "../../AppScreenFade";
 import PropTypes from "prop-types";
 import * as Settings from "../../../Settings";

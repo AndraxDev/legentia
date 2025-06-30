@@ -1,4 +1,4 @@
-import {styled, Tooltip, tooltipClasses} from "@mui/material";
+import {styled, Tooltip} from "@mui/material";
 
 export const MaterialTooltip = styled(Tooltip)(() => ({
     "& .MuiTooltip-tooltip": {

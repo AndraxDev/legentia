@@ -1,12 +1,5 @@
 import React from 'react';
 import PropTypes from "prop-types";
-import {MaterialDialog} from "../../../components/MaterialDialog";
-import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
-import {
-    MaterialButtonDialogFilled,
-    MaterialButtonDialogOutlined
-} from "../../../components/MaterialButton";
-import * as Settings from "../../../Settings";
 import packageJson from './../../../../package.json';
 
 // onNewIntent is analog to android.content.Context.java in Android OS. It is passed hierarchically through all
@@ -28,10 +21,8 @@ function SettingsFragment({onNewIntent}) {
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("privacy")} >Data Controls</button>
             </div>
             <div style={{
-                height: "16px",
-            }}>
-
-            </div>
+                height: "24px",
+            }} />
             <p className={"app-info"}>Legentia version {packageJson.version}</p>
             <p className={"app-info"}>Developer: <a className={"link"} href={"https://andrax.dev"}>AndraxDev</a></p>
         </div>

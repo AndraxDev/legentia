@@ -70,27 +70,34 @@ function WordsActivity({onNewIntent}) {
                         textAlign: "start"
                     }} className={"article-title"}>Practice words</h2>
                 </div>
+                <div style={{
+                    width: "100%",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    gap: "20px",
+                }}>
+                    <button className={"exercise-button exercise-button-neutral"} onClick={() => {
+                        onNewIntent("addword");
+                    }}>
+                        Add new word
+                    </button>
+                    <button disabled={weakWords.length === 0} className={"exercise-button exercise-button-neutral"} onClick={() => {
+                        onNewIntent("quiz");
+                    }}>
+                        Start word quiz
+                    </button>
+                    {
+                        weakWords.length > 0 ? <p style={{
+                            width: "calc(100% - 48px)",
+                            margin: "0",
+                            fontSize: "18px",
+                        }}>{weakWords.length} word{weakWords.length > 1 ? "s" : ""}</p> : null
+                    }
+                </div>
                 {
                     weakWords.length > 0 ? <div>
-                        <div style={{
-                            width: "100%",
-                            display: "flex",
-                            flexDirection: "column",
-                            justifyContent: "center",
-                            alignItems: "center",
-                            gap: "20px",
-                        }}>
-                            <button className={"exercise-button exercise-button-neutral"} onClick={() => {
-                                onNewIntent("quiz");
-                            }}>
-                                Start word quiz
-                            </button>
-                            <p style={{
-                                width: "calc(100% - 48px)",
-                                margin: "0",
-                                fontSize: "18px",
-                            }}>{weakWords.length} words</p>
-                        </div>
                         <div className={"list-container"}>
                             {
                                 weakWords.map(word => (

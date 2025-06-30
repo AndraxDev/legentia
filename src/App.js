@@ -11,6 +11,7 @@ import AddStoryActivity from "./pages/home/activities/AddStoryActivity";
 import TranslationQuiz from "./pages/home/activities/TranslationQuiz";
 import WordsActivity from "./pages/home/activities/WordsActivity";
 import DataControls from "./pages/home/activities/DataControls";
+import AddWordActivity from "./pages/home/activities/AddWordActivity";
 
 let contextInitialized = false;
 
@@ -50,6 +51,8 @@ function App() {
                 return <ArticleActivity onNewIntent={addActivityToStack} />;
             case "addstory":
                 return <AddStoryActivity onNewIntent={addActivityToStack} />;
+            case "addword":
+                return <AddWordActivity onNewIntent={addActivityToStack} />;
             case "exercise":
                 return <ExerciseActivity onNewIntent={addActivityToStack} />;
             case "quiz":

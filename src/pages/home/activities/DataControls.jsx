@@ -1,19 +1,28 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import AppScreenFade from "../../AppScreenFade";
 import PropTypes from "prop-types";
 import * as Settings from "../../../Settings";
 import {MaterialDialog} from "../../../components/MaterialDialog";
-import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import {Alert, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar} from "@mui/material";
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
 
 function DataControls({onNewIntent}) {
-
     const onBackPressed = () => {
         onNewIntent("/home/3");
     }
 
     const [clearVocabularyConfirmationOpened, setClearVocabularyConfirmationOpened] = React.useState(false);
     const [clearAppDataConfirmationOpened, setClearAppDataConfirmationOpened] = React.useState(false);
+    const [clearWeakWordsConfirmationOpened, setClearWeakWordsConfirmationOpened] = React.useState(false);
+    const [snackbarOpened, setSnackbarOpened] = React.useState(false);
+
+    useEffect(() => {
+        if (snackbarOpened) {
+            setTimeout(() => {
+                setSnackbarOpened(false);
+            }, 3000);
+        }
+    }, [snackbarOpened]);
 
     const clearVocabulary = () => {
         localStorage.removeItem("vocabulary");
@@ -22,10 +31,51 @@ function DataControls({onNewIntent}) {
 
     const clearAppData = () => {
         Settings.clearAppData();
+        setSnackbarOpened(true);
+    }
+
+    const clearWeakWords = () => {
+        Settings.clearWeakWords();
+        setSnackbarOpened(true);
     }
 
     return (
         <AppScreenFade>
+            <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarOpened} autoHideDuration={3000} onClick={() => setSnackbarOpened(false)}>
+                <Alert onClose={() => setSnackbarOpened(false)}
+                       severity="success"
+                       sx={{ width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                       variant="filled">
+                    Operation completed successfully.
+                </Alert>
+            </Snackbar>
+            <MaterialDialog
+                open={clearWeakWordsConfirmationOpened}
+                onClose={() => setClearWeakWordsConfirmationOpened(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Clear word practice list?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
+                        This action is irreversible and will remove all words from your practice list. You will need to add words again to practice them.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <MaterialButtonDialogOutlined onClick={() => {
+                        setClearWeakWordsConfirmationOpened(false);
+                    }}>Cancel</MaterialButtonDialogOutlined>
+                    <div/>
+                    <MaterialButtonDialogFilled onClick={() => {
+                        setClearWeakWordsConfirmationOpened(false);
+                        clearWeakWords();
+                    }} autoFocus>
+                        Clear
+                    </MaterialButtonDialogFilled>
+                </DialogActions>
+            </MaterialDialog>
             <MaterialDialog
                 open={clearVocabularyConfirmationOpened}
                 onClose={() => setClearVocabularyConfirmationOpened(false)}
@@ -99,6 +149,9 @@ function DataControls({onNewIntent}) {
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearVocabularyConfirmationOpened(true)
                     }} >Clear local vocabulary</button>
+                    <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
+                        setClearWeakWordsConfirmationOpened(true)
+                    }} >Clear word practice list</button>
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearAppDataConfirmationOpened(true)
                     }} >Clear application data</button>

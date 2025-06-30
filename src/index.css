@@ -180,7 +180,7 @@ br {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background-color: #424242;
+    background-color: rgba(154, 137, 99, 0.22);
     transition: .3s;
 }
 
@@ -189,13 +189,19 @@ br {
 }
 
 .bottom-navigation-icon-active {
-    color: #fff;
+    color: #ffb81e;
 }
 
 .bottom-navigation-label {
     padding: 0;
     margin: 6px 0;
     color: #cecece;
+}
+
+.bottom-navigation-label-active {
+    padding: 0;
+    margin: 6px 0;
+    color: #ffb81e;
 }
 
 .home-fragments {
@@ -821,10 +827,11 @@ button {
 
 .app-info {
     padding: 0;
-    margin: 2px;
-    width: 100%;
+    margin: 6px;
+    width: calc(100% - 12px);
     text-align: center;
     user-select: none;
+    font-size: 16px;
 }
 
 .link {
