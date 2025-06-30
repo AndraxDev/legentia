@@ -9,6 +9,9 @@ import * as Vocabulary from "../../pages/Vocabulary";
 * Index is used to mark the words user know and show user part of the text he probably doesn't know.
 * Index equal to -1 disables the colored underline.
 * */
+
+const untranslatableWords = ["\"", "'", ".", ",", "!", "?", ":", ";", "-", "(", ")", "[", "]", "{", "}", "-", "+", "_", "*", "/", "\\", "|", "=", "<", ">", "@", "#", "$", "%", "^", "&", "*", "`", "~", "–"];
+
 function InteractiveWord({word, learningIndex, contextSentence}) {
     const [translationIsOpened, setTranslationIsOpened] = React.useState(false);
 
@@ -55,11 +58,15 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
             title={<div>
                 {translation ? <><div className={"translation-item"}>
                     {translation}
-                </div><button onClick={() => {
-                    addToWeakWords(word, translation);
-                }} className={"translation-item add-weak-word-button"}>
-                    Add to weak words
-                </button></> : <div className={"translation-item"}><MaterialProgressBar thickness={4} size={24}/></div> }
+                </div>
+                {
+                    untranslatableWords.includes(translation) ? null : <button onClick={() => {
+                        addToWeakWords(word, translation);
+                    }} className={"translation-item add-weak-word-button"}>
+                        Add to weak words
+                    </button>
+                }
+                </> : <div className={"translation-item"}><MaterialProgressBar thickness={4} size={24}/></div> }
             </div>}>
             <button onClick={onWordClick} className={"word-regular"}>{word}</button>
         </MaterialTooltip>

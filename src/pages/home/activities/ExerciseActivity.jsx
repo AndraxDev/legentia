@@ -216,7 +216,7 @@ function ExerciseActivity({onNewIntent}) {
                             </div>
                         </div>
                         <ExerciseFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
-                    </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakeIndices.length === 0} time={time} mistakesCount={mistakeIndices.length} />
+                    </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakeIndices.length === 0} time={time} mistakesCount={mistakeIndices.length} streak={streak} />
                 }
             </div>
         </AppScreenFade>

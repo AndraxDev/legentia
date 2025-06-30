@@ -9,6 +9,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
     const [exerciseTranslations, setExerciseTranslations] = useState(Object.values(exercise).sort(() => Math.random() - 0.5))
     const [correctWords, setCorrectWords] = useState([]);
     const [mistakes, setMistakes] = useState(0);
+    const [localStreak, setLocalStreak] = useState(0);
 
     const checkAsCorrect = () => {
         document.getElementById("correct").style.transform = "translateY(100%)";
@@ -33,6 +34,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                     newCorrectWords.push(selectedTranslation);
                     newCorrectWords.push(selectedWord);
                     setCorrectWords(newCorrectWords);
+                    setLocalStreak(localStreak + 1);
                 }
 
                 setTimeout(() => {
@@ -50,6 +52,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                     document.getElementById("word-" + selectedWord).style.color = "#ff5d5d";
                     document.getElementById("translation-" + selectedTranslation).style.color = "#ff5d5d";
                     setMistakes(mistakes + 1);
+                    setLocalStreak(0);
                 }
 
                 setTimeout(() => {
@@ -79,6 +82,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
         setSelectedWord(null);
         setSelectedTranslation(null);
         setMistakes(0);
+        setLocalStreak(0);
         document.getElementById("correct").style.transform = "translateY(100%)";
         document.getElementById("exercise-fragment-root").style.opacity = "0";
         setTimeout(() => {
@@ -97,7 +101,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
     }
 
     const goNext = () => {
-        onExerciseComplete(fragmentIndex, true, exercise, mistakes);
+        onExerciseComplete(fragmentIndex, true, exercise, mistakes, localStreak);
     }
 
     const getClassName = (word) => {

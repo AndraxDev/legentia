@@ -55,6 +55,7 @@ let mistakeIndex = 0;
 let streak = 0;
 let time = 0;
 let practiceIsCompleteExternal = false;
+let maxCombo = 0;
 const mistakeIndices = [];
 
 const exerciseSession = [quizDemo1, quizDemo2, quizDemo3, quizDemo4];
@@ -83,7 +84,7 @@ function TranslationQuiz({onNewIntent}) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const onExerciseComplete = (fi, isSuccessful, thisExercise, mistakes) => {
+    const onExerciseComplete = (fi, isSuccessful, thisExercise, mistakes, localStreak) => {
         setMistakesCount(mistakesCount + mistakes);
         if (isSuccessful) {
             setSuccessfulCompletions(successfulCompletions + 1);
@@ -92,7 +93,15 @@ function TranslationQuiz({onNewIntent}) {
             mistakeIndices.push(fragmentIndex);
         }
 
-        streak = isSuccessful ? streak + 1 : 0;
+        if (mistakes > 0) {
+            streak = localStreak;
+        } else {
+            streak += localStreak;
+        }
+
+        if (streak > maxCombo) {
+            maxCombo = streak;
+        }
 
         if (isSuccessful && successfulCompletions >= exerciseSession.length - 1) {
             setProgress(100);
@@ -186,7 +195,7 @@ function TranslationQuiz({onNewIntent}) {
                             </div>
                         </div>
                         <TranslationQuizFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
-                    </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakeIndices.length === 0} time={time} mistakesCount={mistakesCount} />
+                    </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakesCount === 0} time={time} mistakesCount={mistakesCount} streak={maxCombo} />
                 }
             </div>
         </AppScreenFade>

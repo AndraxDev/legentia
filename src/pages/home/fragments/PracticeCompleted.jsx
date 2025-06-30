@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
 
-function PracticeCompleted({onNewIntent, flawless, time, mistakesCount}) {
+function PracticeCompleted({onNewIntent, flawless, time, mistakesCount, streak}) {
 
     const timeSecondsToString = (seconds) => {
         const minutes = Math.floor(seconds / 60);
@@ -25,6 +25,14 @@ function PracticeCompleted({onNewIntent, flawless, time, mistakesCount}) {
                 {flawless ? "You completed the practice flawlessly! Keep going!" : "You made some mistakes, but that's okay. Keep practicing!"}
             </div>
             <div className={"analytics-box"}>
+                <div className={"stats-box stats-box-streak"}>
+                    <div className={"stats-title-container"}>
+                        <p className={"stat-title"}>Max combo</p>
+                    </div>
+                    <div className={"stats-box-content"}>
+                        <p className={"stat-metrics"}>{streak ?? 0}</p>
+                    </div>
+                </div>
                 <div className={"stats-box stats-box-mistakes"}>
                     <div className={"stats-title-container"}>
                         <p className={"stat-title"}>Mistakes</p>
@@ -53,7 +61,8 @@ PracticeCompleted.propTypes = {
     onNewIntent: PropTypes.func.isRequired,
     flawless: PropTypes.bool.isRequired,
     time: PropTypes.number.isRequired,
-    mistakesCount: PropTypes.number.isRequired
+    mistakesCount: PropTypes.number.isRequired,
+    streak: PropTypes.number
 }
 
 export default PracticeCompleted;

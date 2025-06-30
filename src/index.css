@@ -621,11 +621,10 @@ button {
 
 .practice-completed {
     width: 100vw;
-    height: 100vh;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    padding-top: 24px
 }
 
 .practice-completed-title {
@@ -648,22 +647,28 @@ button {
 .analytics-box {
     margin-bottom: 24px;
     width: calc(100vw - 48px);
-    display: flex;
+    display: grid;
+    grid-template-columns: calc(33.33% - 12px) calc(33.33% - 12px) calc(33.33% - 12px);
     flex-direction: row;
     justify-content: space-between;
     align-items: stretch;
-    gap: 20px;
 }
 
 .stats-box {
-    width: 100%;
     padding: 8px;
     border-radius: 24px;
+    display: flex;
+    flex-direction: column;
 }
 
 .stats-box-mistakes {
     background-color: #ff8e5d;
     color: #ff8e5d;
+}
+
+.stats-box-streak {
+    background-color: #a374c3;
+    color: #a374c3;
 }
 
 .stats-box-time {
@@ -675,6 +680,11 @@ button {
     background-color: #212121;
     border-radius: 16px;
     padding: 12px;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
 .stats-title-container {
@@ -687,14 +697,14 @@ button {
     width: 100%;
     text-align: center;
     color: #212121;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 800;
 }
 
 .stat-metrics {
     padding: 0;
     margin: 0;
-    font-size: 32px;
+    font-size: 26px;
     width: 100%;
     text-align: center;
     font-weight: bold;
