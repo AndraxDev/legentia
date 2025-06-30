@@ -1,8 +1,10 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
 import {MaterialTooltip} from "../MaterialTooltip";
 import {MaterialProgressBar} from "../MaterialProgressBar";
 import * as Vocabulary from "../../pages/Vocabulary";
+import * as Settings from "../../Settings";
+import {Alert, Snackbar} from "@mui/material";
 
 /*
 * Learning index defines how well the user knows the word. More times user repeat the word, the highest index will be.
@@ -16,6 +18,16 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
     const [translationIsOpened, setTranslationIsOpened] = React.useState(false);
 
     const [translation, setTranslation] = React.useState(null);
+    const [weakWords, setWeakWords] = React.useState(Object.keys(Settings.getWeakWords()));
+    const [snackbarIsOpened, setSnackbarIsOpened] = React.useState(false);
+
+    useEffect(() => {
+        if (snackbarIsOpened) {
+            setWeakWords(Object.keys(Settings.getWeakWords()))
+
+            setTimeout(() => setSnackbarIsOpened(false), 3000);
+        }
+    }, [snackbarIsOpened]);
 
     const onWordClick = () => {
         Vocabulary.translate(word, contextSentence)
@@ -46,40 +58,58 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
             weakTranslation = translation[0];
         }
 
-        console.log(weakWord, weakTranslation);
+        Settings.addWeakWord(weakWord.toLowerCase().replace(",", "").replace(".", "").trim(), weakTranslation.toLowerCase().replace(",", "").replace(".", "").trim());
     }
 
-    const addToPhrasesList = () => {
-
-    }
+    // Planned upcoming feature:
+    // const addToPhrasesList = () => {
+    //
+    // }
 
     return (
-        <MaterialTooltip
-            arrow
-            leaveTouchDelay={2147483647}
-            open={translationIsOpened}
-            onClose={() => setTranslationIsOpened(false)}
-            title={<div>
-                {translation ? <><div className={"translation-item"}>
-                    {translation}
-                </div>
-                {
-                    untranslatableWords.includes(translation) ? null : <button onClick={() => {
-                        addToWeakWords(word, translation);
-                    }} className={"translation-item add-weak-sentence-button"}>
-                        Add to weak words
-                    </button>
-                }
-                    {/* Upcoming planned feature */}
-                    {/*<button onClick={() => {*/}
-                    {/*    addToPhrasesList(contextSentence);*/}
-                    {/*}} className={"translation-item add-weak-sentence-button"}>*/}
-                    {/*    Add sentence to learning phrases list*/}
-                    {/*</button>*/}
-                </> : <div className={"translation-item"}><MaterialProgressBar thickness={4} size={24}/></div> }
-            </div>}>
-            <button onClick={onWordClick} className={"word-regular"}>{word}</button>
-        </MaterialTooltip>
+        <>
+            <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarIsOpened} autoHideDuration={3000} onClick={() => setSnackbarIsOpened(false)}>
+                <Alert onClose={() => setSnackbarIsOpened(false)}
+                        severity="success"
+                        sx={{ width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                        variant="filled">
+                            Word saved for further practice.
+                </Alert>
+            </Snackbar>
+            <MaterialTooltip
+                arrow
+                leaveTouchDelay={2147483647}
+                open={translationIsOpened}
+                onClose={() => setTranslationIsOpened(false)}
+                title={<div>
+                    {translation ? <><div className={"translation-item"}>
+                        {translation}
+                    </div>
+                        {
+                            untranslatableWords.includes(translation) ? null : <>
+                                {
+                                    weakWords.includes(word) ? <div className={"translation-item-weak-word"}>
+                                        Weak word
+                                    </div> : <button onClick={() => {
+                                        addToWeakWords(word, translation);
+                                        setSnackbarIsOpened(true);
+                                    }} className={"translation-item add-weak-sentence-button"}>
+                                        Add to weak words
+                                    </button>
+                                }
+                            </>
+                        }
+                        {/* Upcoming planned feature */}
+                        {/*<button onClick={() => {*/}
+                        {/*    addToPhrasesList(contextSentence);*/}
+                        {/*}} className={"translation-item add-weak-sentence-button"}>*/}
+                        {/*    Add sentence to learning phrases list*/}
+                        {/*</button>*/}
+                    </> : <div className={"translation-item"}><MaterialProgressBar thickness={4} size={24}/></div> }
+                </div>}>
+                <button onClick={onWordClick} className={weakWords.includes(word) ? "word-weak" : "word-regular"}>{word}</button>
+            </MaterialTooltip>
+        </>
     );
 }
 

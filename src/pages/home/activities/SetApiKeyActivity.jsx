@@ -23,7 +23,7 @@ function SetApiKeyActivity({onNewIntent}) {
         <AppScreenFade>
             <div className={"activity-fullscreen"}>
                 <div className={"exercise-header"}>
-                    <button className={"exercise-close"} onClick={() => {
+                    <button className={"exercise-back"} onClick={() => {
                         onBackPressed()
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{

@@ -34,7 +34,7 @@ function AddStoryActivity({onNewIntent}) {
         <AppScreenFade>
             <div className={"activity-fullscreen"}>
                 <div className={"exercise-header"}>
-                    <button className={"exercise-close"} onClick={() => {
+                    <button className={"exercise-back"} onClick={() => {
                         onBackPressed()
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
@@ -54,7 +54,7 @@ function AddStoryActivity({onNewIntent}) {
                         <textarea value={text} onChange={(e) => {
                             setText(e.target.value);
                         }} style={{
-                            height: "100%"
+                            height: "calc(100% - 48px)"
                         }} placeholder={"Text"} className={"input"}></textarea>
                     </div>
                 </div>

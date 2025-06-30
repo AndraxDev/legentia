@@ -73,6 +73,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
 
     useEffect(() => {
         resetAnswerResult();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fallbackEvent]);
 
     const resetAnswerResult = () => {
@@ -130,7 +131,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                                 setSelectedWord(word)
                             }
                         }} className={getClassName(word)} key={word}>
-                            {word}
+                            {word.toLowerCase().replace(",", "").replace(".", "").trim()}
                         </button>))
                     }
                 </div>
@@ -143,7 +144,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                                 setSelectedTranslation(word)
                             }
                         }} className={getClassName(word)} key={word.toString()}>
-                            {word}
+                            {word.toLowerCase().replace(",", "").replace(".", "").trim()}
                         </button>))
                     }
                 </div>

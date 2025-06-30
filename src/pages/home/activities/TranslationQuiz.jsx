@@ -1,54 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import PropTypes from "prop-types";
-import ExerciseFragment from "../fragments/ExerciseFragment";
 import AppScreenFade from "../../AppScreenFade";
 import PracticeCompleted from "../fragments/PracticeCompleted";
 import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
 import {MaterialDialog} from "../../../components/MaterialDialog";
 import TranslationQuizFragment from "../fragments/TranslationQuizFragment";
-
-// Exercise structure:
-// Translation exercise consists of a phrase and a set of translations.
-// variants are the answer words variants that phrase can contain.
-// Usually, variants contain more words that the phrase, or the similar, but not correct form of the word to train
-// words recognition. In this demo, no extra words are used, but in real exercises, they can be used.
-// Translations variants are tha all possible correct translations of the phrase. Sometimes, word order can be different,
-// so the translations can contain different word order, but the same words.
-// For technical reasons, the correct translation answers contains no delimiter or punctuation marks to make it easier to parse.
-// On the other hand, original phrase contains punctuation marks and delimiters, so the user can see the correct form of the phrase.
-const quizDemo1 = {
-    "uno": "one",
-    "duo": "two",
-    "tres": "three",
-    "bibliotheca": "library",
-    "proxima": "near",
-}
-
-
-const quizDemo2 = {
-    "salve": "hello",
-    "quis": "who",
-    "quid": "what",
-    "hoc": "this",
-    "vir": "man",
-}
-
-const quizDemo3 = {
-    "puer": "boy",
-    "puella": "girl",
-    "iuvenes": "young man",
-    "patella": "plate",
-    "ventus": "wind",
-}
-
-const quizDemo4 = {
-    "umbra": "shadow",
-    "imber": "rain",
-    "arbor": "tree",
-    "paena": "punishemnt",
-    "ius": "right",
-}
+import * as Settings from "../../../Settings";
 
 let fragmentIndex = 0;
 let mistakeIndex = 0;
@@ -58,13 +16,44 @@ let practiceIsCompleteExternal = false;
 let maxCombo = 0;
 const mistakeIndices = [];
 
-const exerciseSession = [quizDemo1, quizDemo2, quizDemo3, quizDemo4];
-
 function TranslationQuiz({onNewIntent}) {
 
+    const initializeExercises = () => {
+        let weakWords = Settings.getWeakWords();
+        let pool = {};
+
+        if (Object.keys(weakWords).length < 15) {
+            pool = weakWords;
+        } else {
+            for (let i = 0; i < 15; i++) {
+                const randomIndex = Math.floor(Math.random() * Object.keys(weakWords).length);
+                let word = Object.keys(weakWords)[randomIndex];
+
+                while (pool[word]) {
+                    // Ensure unique words in the pool
+                    const newIndex = Math.floor(Math.random() * Object.keys(weakWords).length);
+                    word = Object.keys(weakWords)[newIndex];
+                }
+
+                pool[word] = weakWords[word];
+            }
+        }
+
+        const entries = Object.entries(pool);
+        const exercises = [];
+
+        for (let i = 0; i < entries.length; i += 5) {
+            const chunk = entries.slice(i, i + 5);
+            exercises.push(Object.fromEntries(chunk));
+        }
+
+        return exercises;
+    }
+
+    const [exercises, ] = useState(initializeExercises());
     const [successfulCompletions, setSuccessfulCompletions] = React.useState(0);
     const [progress, setProgress] = React.useState(10);
-    const [currentExercise, setCurrentExercise] = React.useState(exerciseSession[0]);
+    const [currentExercise, setCurrentExercise] = React.useState(exercises[0]);
     const [fallbackEvent, setFallbackEvent] = React.useState(0);
     const [exitDialogOpened, setExitDialogOpened] = React.useState(false);
     const [practiceIsComplete, setPracticeIsComplete] = React.useState(false);
@@ -88,8 +77,8 @@ function TranslationQuiz({onNewIntent}) {
         setMistakesCount(mistakesCount + mistakes);
         if (isSuccessful) {
             setSuccessfulCompletions(successfulCompletions + 1);
-            setProgress(90 / exerciseSession.length * (successfulCompletions + 1));
-        } else if (fragmentIndex < exerciseSession.length) {
+            setProgress(90 / exercises.length * (successfulCompletions + 1));
+        } else if (fragmentIndex < exercises.length) {
             mistakeIndices.push(fragmentIndex);
         }
 
@@ -103,23 +92,23 @@ function TranslationQuiz({onNewIntent}) {
             maxCombo = streak;
         }
 
-        if (isSuccessful && successfulCompletions >= exerciseSession.length - 1) {
+        if (isSuccessful && successfulCompletions >= exercises.length - 1) {
             setProgress(100);
             console.log("Practice completed!");
             showSuccessScreen()
-        } else if (fragmentIndex >= exerciseSession.length - 1) {
-            if (fragmentIndex > exerciseSession.length - 1) {
+        } else if (fragmentIndex >= exercises.length - 1) {
+            if (fragmentIndex > exercises.length - 1) {
                 if (isSuccessful) {
                     mistakeIndex++;
                 }
                 if (mistakeIndex <= mistakeIndices.length - 1) {
-                    setCurrentExercise(exerciseSession[mistakeIndices[mistakeIndex]]);
+                    setCurrentExercise(exercises[mistakeIndices[mistakeIndex]]);
                 } else {
                     setCurrentExercise(thisExercise);
                 }
             } else {
                 if (mistakeIndex <= mistakeIndices.length - 1) {
-                    setCurrentExercise(exerciseSession[mistakeIndices[mistakeIndex]]);
+                    setCurrentExercise(exercises[mistakeIndices[mistakeIndex]]);
                 } else {
                     setCurrentExercise(thisExercise);
                 }
@@ -133,7 +122,7 @@ function TranslationQuiz({onNewIntent}) {
             fragmentIndex = fragmentIndex + 1;
         } else {
             fragmentIndex = fragmentIndex + 1;
-            setCurrentExercise(exerciseSession[fragmentIndex]);
+            setCurrentExercise(exercises[fragmentIndex]);
         }
 
         setFallbackEvent(fallbackEvent + 1);
@@ -194,7 +183,7 @@ function TranslationQuiz({onNewIntent}) {
                                 </div>
                             </div>
                         </div>
-                        <TranslationQuizFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
+                        <TranslationQuizFragment isPreviousMistake={fragmentIndex > exercises.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
                     </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakesCount === 0} time={time} mistakesCount={mistakesCount} streak={maxCombo} />
                 }
             </div>

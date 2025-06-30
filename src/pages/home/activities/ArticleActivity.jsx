@@ -16,7 +16,7 @@ function ArticleActivity({onNewIntent}) {
         <AppScreenFade>
             <div className={"activity-fullscreen"}>
                 <div className={"exercise-header"}>
-                    <button className={"exercise-close"} onClick={() => {
+                    <button className={"exercise-back"} onClick={() => {
                         quitReading()
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                 </div>

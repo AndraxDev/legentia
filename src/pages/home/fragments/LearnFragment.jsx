@@ -27,13 +27,6 @@ function LearnFragment({onNewIntent}) {
                 }}>
                     Start demo practice session
                 </button>
-                <button style={{
-                    width: "calc(100% - 8px)",
-                }} className={"exercise-button exercise-button-neutral"} onClick={() => {
-                    onNewIntent("quiz");
-                }}>
-                    Start demo word quiz
-                </button>
             </div>
             <div style={{
                 width: "100%",
