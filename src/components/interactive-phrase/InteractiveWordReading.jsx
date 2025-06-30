@@ -10,7 +10,7 @@ import * as Vocabulary from "../../pages/Vocabulary";
 * Index equal to -1 disables the colored underline.
 * */
 
-const untranslatableWords = ["\"", "'", ".", ",", "!", "?", ":", ";", "-", "(", ")", "[", "]", "{", "}", "-", "+", "_", "*", "/", "\\", "|", "=", "<", ">", "@", "#", "$", "%", "^", "&", "*", "`", "~", "–"];
+const untranslatableWords = ["\"", "'", ".", ",", "!", "?", ":", ";", "-", "(", ")", "[", "]", "{", "}", "-", "+", "_", "*", "/", "\\", "|", "=", "<", ">", "@", "#", "$", "%", "^", "&", "*", "`", "~", "–", "”"];
 
 function InteractiveWord({word, learningIndex, contextSentence}) {
     const [translationIsOpened, setTranslationIsOpened] = React.useState(false);
@@ -49,6 +49,10 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
         console.log(weakWord, weakTranslation);
     }
 
+    const addToPhrasesList = () => {
+
+    }
+
     return (
         <MaterialTooltip
             arrow
@@ -62,10 +66,16 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
                 {
                     untranslatableWords.includes(translation) ? null : <button onClick={() => {
                         addToWeakWords(word, translation);
-                    }} className={"translation-item add-weak-word-button"}>
+                    }} className={"translation-item add-weak-sentence-button"}>
                         Add to weak words
                     </button>
                 }
+                    {/* Upcoming planned feature */}
+                    {/*<button onClick={() => {*/}
+                    {/*    addToPhrasesList(contextSentence);*/}
+                    {/*}} className={"translation-item add-weak-sentence-button"}>*/}
+                    {/*    Add sentence to learning phrases list*/}
+                    {/*</button>*/}
                 </> : <div className={"translation-item"}><MaterialProgressBar thickness={4} size={24}/></div> }
             </div>}>
             <button onClick={onWordClick} className={"word-regular"}>{word}</button>

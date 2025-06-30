@@ -156,7 +156,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                 <button className={"exercise-button exercise-button-correct"} onClick={goNext}>Continue</button>
             </div>
             <div className={"exercise-bottom-bar"}>
-                <button disabled={true} className={"exercise-button exercise-button-neutral"}>Continue</button>
+                <button disabled={true} className={"exercise-button exercise-button-disabled"}>Continue</button>
             </div>
         </div>
     );

@@ -15,7 +15,7 @@ function ReadingText({article}) {
                         sentencePurified.map((word, index) => {
                             const pu = punctuationMarks[ix] === undefined ? "" : punctuationMarks[ix];
                             return (
-                                <InteractiveWordReading word={index === sentencePurified.length - 1 ? word + pu : word} key={word + index.toString()} contextSentence={sentence} />
+                                <InteractiveWordReading word={index === sentencePurified.length - 1 ? word + pu : word} key={word + index.toString()} contextSentence={sentence + pu} />
                             );
                         })
                     )

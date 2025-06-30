@@ -138,7 +138,7 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
                 <button className={"exercise-button exercise-button-incorrect"} onClick={onContinueClicked}>Continue</button>
             </div>
             <div className={"exercise-bottom-bar"}>
-                <button disabled={currentAnswer.length === 0} className={"exercise-button exercise-button-neutral"} onClick={checkAnswer}>Check</button>
+                <button disabled={currentAnswer.length === 0} className={"exercise-button " + ((currentAnswer.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={checkAnswer}>Check</button>
             </div>
 
             {
