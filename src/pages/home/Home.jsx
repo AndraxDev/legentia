@@ -53,8 +53,8 @@ function Home({onNewIntent}) {
             navigate("/home/" + (index === 0 ? "" : index));
             setTimeout(() => {
                 document.getElementById("fragment").style.opacity = "1";
-            }, 200);
-        }, 200);
+            }, 50);
+        }, 150);
     }
 
     const getCurrentFragment = () => {

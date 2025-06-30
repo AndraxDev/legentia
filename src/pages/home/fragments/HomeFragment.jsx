@@ -5,8 +5,6 @@ function HomeFragment({onNewIntent}) {
     return (
         <div className={"fragment"}>
             <h2 className={"activity-title"}>Legentia</h2>
-
-            {/*<InteractivePhrase phrase={"In bibliotheca proxima legere tacite volo"} translation={[["In"], ["library", "the library"], ["nearest"], ["to read", "read"], ["quietly", "quiet"], ["I want"]]} isHardMode={false} />*/}
         </div>
     );
 }

@@ -202,7 +202,7 @@ br {
     width: 100vw;
     height: calc(100vh - 80px);
     position: fixed;
-    transition: .2s;
+    transition: .15s;
 }
 
 .activity-title {
