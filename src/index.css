@@ -1098,3 +1098,60 @@ button {
 .quiz-gap {
     height: 24px;
 }
+
+.teslasoft-id-container {
+    border-top: 3px solid #555;
+    border-bottom: 6px solid #555;
+    border-left: 3px solid #555;
+    border-right: 3px solid #555;
+    border-radius: 24px;
+    width: calc(100% - 48px);
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+
+.profile-photo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #424242;
+}
+
+.profile-info-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: calc(100% - 32px);
+    padding: 16px;
+    gap: 16px;
+}
+
+.profile-text {
+    flex-grow: 1;
+}
+
+.sync-error-text {
+    margin: 0;
+    padding-top: 6px;
+    text-align: start;
+    color: #ff5d5d;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.teslasoft-id-title {
+    margin: 0;
+    color: #fff;
+    font-size: 18px;
+    text-align: start;
+}
+
+.profile-name {
+    margin: 0;
+    padding-top: 6px;
+    color: #cecece;
+    text-align: start;
+    font-size: 16px;
+}

@@ -28,6 +28,8 @@ import TranslationQuiz from "./pages/home/activities/TranslationQuiz";
 import WordsActivity from "./pages/home/activities/WordsActivity";
 import DataControls from "./pages/home/activities/DataControls";
 import AddWordActivity from "./pages/home/activities/AddWordActivity";
+import TidRedirect from "./pages/home/activities/TidRedirect";
+import SyncActivity from "./pages/home/activities/SyncActivity";
 
 let contextInitialized = false;
 
@@ -79,6 +81,10 @@ function App() {
                 return <DataControls onNewIntent={addActivityToStack} />;
             case "openai":
                 return <SetApiKeyActivity onNewIntent={addActivityToStack} />;
+            case "tid":
+                return <TidRedirect onNewIntent={addActivityToStack} />;
+            case "sync":
+                return <SyncActivity onNewIntent={addActivityToStack} />;
             default:
                 return <Home onNewIntent={addActivityToStack} />;
         }

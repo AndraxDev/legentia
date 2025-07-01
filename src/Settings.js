@@ -85,3 +85,19 @@ export const clearAppData = () => {
     localStorage.clear();
     window.location.replace('/');
 }
+
+export const getUserId = () => {
+    let userDataKey = localStorage.getItem('userDataKey');
+
+    if (!userDataKey) {
+        return "";
+    }
+
+    let jwtParts = userDataKey ? userDataKey.split('.') : [];
+    let payload = jwtParts.length > 1 ? JSON.parse(atob(jwtParts[1])) : null;
+    return payload.uid || "";
+}
+
+export const hasUserDataKey = () => {
+    return localStorage.getItem('userDataKey') !== null;
+}

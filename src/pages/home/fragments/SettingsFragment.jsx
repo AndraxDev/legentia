@@ -14,14 +14,36 @@
  * limitations under the License.
  * *************************************************************************/
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
 import packageJson from './../../../../package.json';
+import * as Settings from "../../../Settings";
+import {MaterialProgressBar} from "../../../components/MaterialProgressBar";
 
 // onNewIntent is analog to android.content.Context.java in Android OS. It is passed hierarchically through all
 // components that need to access base application to handle activity launching.
 function SettingsFragment({onNewIntent}) {
 
+    const [userData, setUserData] = React.useState(null);
+    const [errorAccount, setErrorAccount] = React.useState(false);
+
+    useEffect(() => {
+        fetch("https://id.teslasoft.org/xauth/users/GetPublicAccountInfo?uid=" + Settings.getUserId())
+            .then(res => res.json())
+            .then(json => {
+                if (json.code) {
+                    console.log("Failed to fetch user data: " + json.message);
+                    setErrorAccount(true);
+                } else {
+                    setErrorAccount(false);
+                    setUserData(json);
+                }
+            })
+            .catch(err => {
+                setErrorAccount(true);
+                console.log(err)
+            });
+    }, []);
 
     return (
         <div className={"fragment"}>
@@ -33,8 +55,58 @@ function SettingsFragment({onNewIntent}) {
                 alignItems: "center",
                 gap: "20px"
             }}>
-                <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("openai")} >Edit AI API Key (debug)</button>
-                <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("privacy")} >Data Controls</button>
+                {
+                    Settings.hasUserDataKey() ? <button onClick={() => {
+                        window.location.assign("/tid");
+                    }} className={"teslasoft-id-container"}>
+                        {
+                            userData ? <div className={"profile-info-container"}>
+                                <div className={"profile-photo"}>
+                                    <img style={{
+                                        width: "48px",
+                                        height: "48px",
+                                        borderRadius: "50%",
+                                    }} alt={userData.user_name} src={userData.profile_photo}/>
+                                </div>
+                                <div className={"profile-text"}>
+                                    <p className={"teslasoft-id-title"}>Teslasoft ID</p>
+                                    <p className={"profile-name"}>Signed in as {userData.first_name} {userData.last_name}</p>
+                                </div>
+                            </div> : <>
+                            {
+                                errorAccount ? <div className={"profile-info-container"}>
+                                    <div className={"profile-photo"}></div>
+                                    <div className={"profile-text"}>
+                                        <p className={"teslasoft-id-title"}>Teslasoft ID</p>
+                                        <p className={"sync-error-text"}>Sync error</p>
+                                    </div>
+                                </div> : <div style={{
+                                    width: "100%",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    alignItems: "center",
+                                    padding: "22px 0"
+                                }}>
+                                    <MaterialProgressBar thickness={6} />
+                                </div>
+                            }
+                            </>
+                        }
+                    </button> : <button onClick={() => {
+                        window.location.assign("/tid");
+                    }} className={"teslasoft-id-container"}>
+                        <div className={"profile-info-container"}>
+                            <div className={"profile-photo"}></div>
+                            <div className={"profile-text"}>
+                                <p className={"teslasoft-id-title"}>Teslasoft ID</p>
+                                <p className={"profile-name"}>Tap to Sign In</p>
+                            </div>
+                        </div>
+                    </button>
+                }
+                {userData ? <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("sync")}>Sync settings between devices</button> : null}
+                <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("privacy")}>Data controls</button>
+                <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("openai")}>Edit AI API key (debug)</button>
             </div>
             <div style={{
                 height: "24px",
