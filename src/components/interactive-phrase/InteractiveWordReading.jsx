@@ -96,47 +96,61 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
 
     return (
         <>
-            <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarIsOpened} autoHideDuration={3000} onClick={() => setSnackbarIsOpened(false)}>
-                <Alert onClose={() => setSnackbarIsOpened(false)}
-                        severity="success"
-                        sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
-                        variant="filled">
+            {
+                word !== "{{}}" ? <>
+                    <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarIsOpened} autoHideDuration={3000} onClick={() => setSnackbarIsOpened(false)}>
+                        <Alert onClose={() => setSnackbarIsOpened(false)}
+                               severity="success"
+                               sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                               variant="filled">
                             Word saved for further practice.
-                </Alert>
-            </Snackbar>
-            <MaterialTooltip
-                arrow
-                leaveTouchDelay={2147483647}
-                open={translationIsOpened}
-                onClose={() => setTranslationIsOpened(false)}
-                title={<div>
-                    {translation ? <><div className={"translation-item"}>
-                        {translation}
-                    </div>
-                        {
-                            untranslatableWords.includes(translation) || !canBeTranslated ? null : <>
+                        </Alert>
+                    </Snackbar>
+                    <MaterialTooltip
+                        arrow
+                        leaveTouchDelay={2147483647}
+                        open={translationIsOpened}
+                        onClose={() => setTranslationIsOpened(false)}
+                        title={<div>
+                            {translation ? <><div className={"translation-item"}>
+                                {translation}
+                            </div>
                                 {
-                                    weakWords.includes(StringUtils.clearWord(word)) ? <div className={"translation-item-weak-word"}>
-                                        Weak word
-                                    </div> : <button onClick={() => {
-                                        addToWeakWords(word, translation);
-                                        setSnackbarIsOpened(true);
-                                    }} className={"translation-item add-weak-sentence-button"}>
-                                        Add to weak words
-                                    </button>
+                                    untranslatableWords.includes(translation) || !canBeTranslated ? null : <>
+                                        {
+                                            weakWords.includes(StringUtils.clearWord(word)) ? <div className={"translation-item-weak-word"}>
+                                                Weak word
+                                            </div> : <button onClick={() => {
+                                                addToWeakWords(word, translation);
+                                                setSnackbarIsOpened(true);
+                                            }} className={"translation-item add-weak-sentence-button"}>
+                                                Add to weak words
+                                            </button>
+                                        }
+                                    </>
                                 }
-                            </>
-                        }
-                        {/* Upcoming planned feature */}
-                        {/*<button onClick={() => {*/}
-                        {/*    addToPhrasesList(contextSentence);*/}
-                        {/*}} className={"translation-item add-weak-sentence-button"}>*/}
-                        {/*    Add sentence to learning phrases list*/}
-                        {/*</button>*/}
-                    </> : <div className={"translation-item"}><MaterialProgressBar thickness={4} size={24}/></div> }
-                </div>}>
-                <button onClick={onWordClick} className={weakWords.includes(StringUtils.clearWord(word)) ? "word-weak" : "word-regular"}>{word}</button>
-            </MaterialTooltip>
+                                {/* Upcoming planned feature */}
+                                {/*<button onClick={() => {*/}
+                                {/*    addToPhrasesList(contextSentence);*/}
+                                {/*}} className={"translation-item add-weak-sentence-button"}>*/}
+                                {/*    Add sentence to learning phrases list*/}
+                                {/*</button>*/}
+                            </> : <div className={"translation-item"}><MaterialProgressBar thickness={4} size={24}/></div> }
+                        </div>}>
+                        <button onClick={onWordClick} className={weakWords.includes(StringUtils.clearWord(word)) ? "word-weak" : "word-regular"}>{word}</button>
+                    </MaterialTooltip>
+                </> : <>
+                    <div style={{
+                        flexGrow: 1,
+                        width: "100%",
+                    }}></div>
+                    <div style={{
+                        flexGrow: 1,
+                        width: "100%",
+                        height: "24px"
+                    }}></div>
+                </>
+            }
         </>
     );
 }

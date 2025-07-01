@@ -33,3 +33,7 @@ export const clearWord = (word) => {
 
     // Apostrophes and dashes can be part of the word so they are permitted.
 }
+
+export const reduceNewLinesToOne = (text) => {
+    return text.replaceAll(/\n+/g, "\n").trim();
+}

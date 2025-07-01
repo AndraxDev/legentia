@@ -14,11 +14,12 @@
  * limitations under the License.
  * *************************************************************************/
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import AppScreenFade from "../../AppScreenFade";
 import PropTypes from "prop-types";
 import ReadingText from "../../../components/interactive-phrase/ReadingText";
 import * as Settings from "../../../Settings";
+import * as StringUtiles from "../../util/StringUtils";
 
 function ArticleActivity({onNewIntent}) {
 
@@ -40,7 +41,7 @@ function ArticleActivity({onNewIntent}) {
                 <div style={{
                     padding: "24px"
                 }}>
-                    <ReadingText article={story.text} />
+                    <ReadingText article={StringUtiles.reduceNewLinesToOne(story.text).replaceAll("\n", " {{}} ")} />
                 </div>
             </div>
         </AppScreenFade>
