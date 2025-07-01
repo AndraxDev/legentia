@@ -14,7 +14,7 @@
  * limitations under the License.
  * *************************************************************************/
 
-import React, {useEffect} from 'react';
+import React from 'react';
 import AppScreenFade from "../../AppScreenFade";
 import PropTypes from "prop-types";
 import ReadingText from "../../../components/interactive-phrase/ReadingText";

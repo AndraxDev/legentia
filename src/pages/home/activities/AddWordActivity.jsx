@@ -18,6 +18,7 @@ import React from 'react';
 import AppScreenFade from "../../AppScreenFade";
 import PropTypes from "prop-types";
 import * as Settings from "../../../Settings";
+import * as StringUtil from "../../util/StringUtils";
 
 function AddStoryActivity({onNewIntent}) {
     const [word, setWord] = React.useState("");
@@ -28,7 +29,7 @@ function AddStoryActivity({onNewIntent}) {
     }
 
     const save = () => {
-        Settings.addWeakWord(word, translation)
+        Settings.addWeakWord(StringUtil.clearWord(word), StringUtil.clearWord(translation))
         onNewIntent("/practicewords");
     }
 
@@ -59,7 +60,7 @@ function AddStoryActivity({onNewIntent}) {
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>
-                    <button disabled={word.trim() === "" || translation.trim() === ""} className={"exercise-button exercise-button-" + ((word.trim() === "" || translation.trim() === "") ? "disabled" : "neutral")} onClick={save}>Save</button>
+                    <button disabled={StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === ""} className={"exercise-button exercise-button-" + ((StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === "") ? "disabled" : "neutral")} onClick={save}>Save</button>
                 </div>
             </div>
         </AppScreenFade>

@@ -22,6 +22,7 @@ export const clearWord = (word) => {
         .replaceAll("!", "")
         .replaceAll(":", "")
         .replaceAll("\"", "")
+        .replaceAll("/", "")
         .replaceAll("(", "")
         .replaceAll(")", "")
         .replaceAll("[", "")
