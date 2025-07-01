@@ -32,20 +32,21 @@ import * as StringUtils from "../../pages/util/StringUtils";
 
 const untranslatableWords = ["\"", "'", ".", ",", "!", "?", ":", ";", "-", "(", ")", "[", "]", "{", "}", "+", "_", "*", "/", "\\", "|", "=", "<", ">", "@", "#", "$", "%", "^", "&", "*", "`", "~", "–", "”"];
 
-function InteractiveWord({word, learningIndex, contextSentence}) {
+function InteractiveWord({word, learningIndex, contextSentence, weakWords, propagateWordUpdate}) {
     const [translationIsOpened, setTranslationIsOpened] = React.useState(false);
 
     const [translation, setTranslation] = React.useState(null);
-    const [weakWords, setWeakWords] = React.useState(Object.keys(Settings.getWeakWords()));
+
     const [snackbarIsOpened, setSnackbarIsOpened] = React.useState(false);
     const [canBeTranslated, setCanBeTranslated] = React.useState(true);
 
     useEffect(() => {
         if (snackbarIsOpened) {
-            setWeakWords(Object.keys(Settings.getWeakWords()))
+            propagateWordUpdate()
 
             setTimeout(() => setSnackbarIsOpened(false), 3000);
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [snackbarIsOpened]);
 
     const onWordClick = () => {
@@ -87,6 +88,7 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
         }
 
         Settings.addWeakWord(StringUtils.clearWord(weakWord), StringUtils.clearWord(weakTranslation));
+        propagateWordUpdate?.();
     }
 
     // Planned upcoming feature:
@@ -158,7 +160,9 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
 InteractiveWord.propTypes = {
     word: PropTypes.string.isRequired,
     learningIndex: PropTypes.number,
-    contextSentence: PropTypes.string
+    contextSentence: PropTypes.string,
+    weakWords: PropTypes.any,
+    propagateWordUpdate: PropTypes.func
 }
 
 export default InteractiveWord;

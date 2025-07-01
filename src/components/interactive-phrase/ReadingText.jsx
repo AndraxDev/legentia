@@ -17,10 +17,16 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import InteractiveWordReading from "./InteractiveWordReading";
+import * as Settings from "../../Settings";
 
 function ReadingText({article}) {
     const punctuationMarks = article.match(/[.!?]/g) || [];
     const sentences = article.replace("!", ".").replace("?", ".").replace("\n", " ").split(".");
+    const [weakWords, setWeakWords] = React.useState(Object.keys(Settings.getWeakWords()));
+
+    const onWordAddedToWeak = () => {
+        setWeakWords(Object.keys(Settings.getWeakWords()))
+    }
 
     return (
         <div className={"phrase-interactive"}>
@@ -31,7 +37,7 @@ function ReadingText({article}) {
                         sentencePurified.map((word, index) => {
                             const pu = punctuationMarks[ix] === undefined ? "" : punctuationMarks[ix];
                             return (
-                                <InteractiveWordReading word={index === sentencePurified.length - 1 ? word + pu : word} key={word + index.toString()} contextSentence={sentence + pu} />
+                                <InteractiveWordReading propagateWordUpdate={onWordAddedToWeak} weakWords={weakWords} word={index === sentencePurified.length - 1 ? word + pu : word} key={word + index.toString()} contextSentence={sentence + pu} />
                             );
                         })
                     )
