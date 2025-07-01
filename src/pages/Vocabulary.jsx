@@ -39,7 +39,7 @@ export const translate = (latinWord, context) => {
                     if (r.includes("word_unknown")) {
                         reject(new Error(`word_unknown`));
                     } else {
-                        let parsed = latinWord.toLowerCase().replace("the word to translate is:", "").trim();
+                        let parsed = latinWord.toLowerCase().replaceAll("the word to translate is:", "").trim();
                         VocabularyCache.insertWord(parsed, [r]);
                         resolve(r);
                     }

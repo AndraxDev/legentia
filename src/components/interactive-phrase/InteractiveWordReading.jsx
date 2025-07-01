@@ -71,7 +71,7 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
             <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarIsOpened} autoHideDuration={3000} onClick={() => setSnackbarIsOpened(false)}>
                 <Alert onClose={() => setSnackbarIsOpened(false)}
                         severity="success"
-                        sx={{ width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                        sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
                         variant="filled">
                             Word saved for further practice.
                 </Alert>

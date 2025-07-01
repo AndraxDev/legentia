@@ -44,7 +44,7 @@ function DataControls({onNewIntent}) {
             <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarOpened} autoHideDuration={3000} onClick={() => setSnackbarOpened(false)}>
                 <Alert onClose={() => setSnackbarOpened(false)}
                        severity="success"
-                       sx={{ width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                       sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
                        variant="filled">
                     Operation completed successfully.
                 </Alert>

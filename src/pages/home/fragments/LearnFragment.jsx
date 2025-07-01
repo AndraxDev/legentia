@@ -19,6 +19,7 @@ function LearnFragment({onNewIntent}) {
             }}>
                 <h3 style={{
                     margin: "0",
+                    userSelect: "none",
                 }}>Demo content (debug)</h3>
                 <button style={{
                     width: "calc(100% - 8px)",

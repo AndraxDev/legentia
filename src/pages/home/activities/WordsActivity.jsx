@@ -5,6 +5,7 @@ import * as Settings from "../../../Settings";
 import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
 import {MaterialDialog} from "../../../components/MaterialDialog";
+import * as StringUtil from "../../util/StringUtils";
 
 WordsActivity.propTypes = {
     onNewIntent: PropTypes.func.isRequired
@@ -93,6 +94,7 @@ function WordsActivity({onNewIntent}) {
                             width: "calc(100% - 48px)",
                             margin: "0",
                             fontSize: "18px",
+                            userSelect: "none",
                         }}>{weakWords.length} word{weakWords.length > 1 ? "s" : ""}</p> : null
                     }
                 </div>
@@ -102,8 +104,8 @@ function WordsActivity({onNewIntent}) {
                             {
                                 weakWords.map(word => (
                                     <div className={"list-item word-grid"} key={word}>
-                                        <span className={"translation-word"}>{word}</span>
-                                        <span className={"translation-meaning"}>{weakWordMap[word]}</span>
+                                        <span className={"translation-word"}>{StringUtil.clearWord(word)}</span>
+                                        <span className={"translation-meaning"}>{StringUtil.clearWord(weakWordMap[word])}</span>
                                         <button style={{
                                             cursor: "pointer"
                                         }} onClick={() => {
@@ -116,7 +118,9 @@ function WordsActivity({onNewIntent}) {
                             }
                         </div>
                     </div> : <div className={"list-container"}>
-                        <div className={"list-item translation-item"}>
+                        <div className={"list-item translation-item"} style={{
+                            userSelect: "none",
+                        }}>
                             You have not added any words to practice list yet. You can add words to this list by tapping on them while reading articles or stories.
                         </div>
                     </div>

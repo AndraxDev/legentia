@@ -11,5 +11,6 @@ export const MaterialDialog = styled(Dialog) (() => ({
     [`& .${dialogClasses.container}`]: {
         fontSize: "16px",
         lineHeight: "1.5",
+        userSelect: "none",
     },
 }));

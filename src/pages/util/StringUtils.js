@@ -1,0 +1,15 @@
+export const clearWord = (word) => {
+    return word.toLowerCase()
+        .replaceAll(",", "")
+        .replaceAll(".", "")
+        .replaceAll("?", "")
+        .replaceAll("!", "")
+        .replaceAll(":", "")
+        .replaceAll("\"", "")
+        .replaceAll("'", "")
+        .replaceAll("(", "")
+        .replaceAll(")", "")
+        .replaceAll("[", "")
+        .replaceAll("]", "")
+        .trim()
+}

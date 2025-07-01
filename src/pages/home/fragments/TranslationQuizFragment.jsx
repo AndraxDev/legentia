@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from "prop-types";
+import * as StringUtil from "../../util/StringUtils";
 
 function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComplete, phraseId, fallbackEvent, isPreviousMistake}) {
 
@@ -141,7 +142,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                                 setSelectedWord(word)
                             }
                         }} className={getClassName(word)} key={word}>
-                            {word.toLowerCase().replace(",", "").replace(".", "").trim()}
+                            {StringUtil.clearWord(word)}
                         </button>))
                     }
                 </div>
@@ -156,7 +157,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                                 setSelectedTranslation(word)
                             }
                         }} className={getClassName(word)} key={word.toString()}>
-                            {word.toLowerCase().replace(",", "").replace(".", "").trim()}
+                            {StringUtil.clearWord(word)}
                         </button>))
                     }
                 </div>
