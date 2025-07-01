@@ -21,6 +21,8 @@ import {MaterialProgressBar} from "../MaterialProgressBar";
 import * as Vocabulary from "../../pages/Vocabulary";
 import * as Settings from "../../Settings";
 import {Alert, Snackbar} from "@mui/material";
+import * as VocabularyCache from "../../pages/VocabularyCache";
+import * as StringUtils from "../../pages/util/StringUtils";
 
 /*
 * Learning index defines how well the user knows the word. More times user repeat the word, the highest index will be.
@@ -28,7 +30,7 @@ import {Alert, Snackbar} from "@mui/material";
 * Index equal to -1 disables the colored underline.
 * */
 
-const untranslatableWords = ["\"", "'", ".", ",", "!", "?", ":", ";", "-", "(", ")", "[", "]", "{", "}", "-", "+", "_", "*", "/", "\\", "|", "=", "<", ">", "@", "#", "$", "%", "^", "&", "*", "`", "~", "–", "”"];
+const untranslatableWords = ["\"", "'", ".", ",", "!", "?", ":", ";", "-", "(", ")", "[", "]", "{", "}", "+", "_", "*", "/", "\\", "|", "=", "<", ">", "@", "#", "$", "%", "^", "&", "*", "`", "~", "–", "”"];
 
 function InteractiveWord({word, learningIndex, contextSentence}) {
     const [translationIsOpened, setTranslationIsOpened] = React.useState(false);
@@ -36,6 +38,7 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
     const [translation, setTranslation] = React.useState(null);
     const [weakWords, setWeakWords] = React.useState(Object.keys(Settings.getWeakWords()));
     const [snackbarIsOpened, setSnackbarIsOpened] = React.useState(false);
+    const [canBeTranslated, setCanBeTranslated] = React.useState(true);
 
     useEffect(() => {
         if (snackbarIsOpened) {
@@ -46,20 +49,29 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
     }, [snackbarIsOpened]);
 
     const onWordClick = () => {
-        Vocabulary.translate(word, contextSentence)
-            .then((result) => {
-                setTranslation(result);
-            })
-            .catch((error) => {
-                console.error("Error fetching translation:", error);
-                if (error.message.toLowerCase().includes("ai_unavailable")) {
-                    setTranslation("AI features are disabled. Please set an API key first.");
-                } if (error.message.toLowerCase().includes("word_unknown")) {
-                    setTranslation(word);
-                } else {
-                    setTranslation("Translation not available right now.");
-                }
-            });
+        if (untranslatableWords.includes(word)) {
+            setCanBeTranslated(false);
+            setTranslation(word);
+        } else {
+            Vocabulary.translate(StringUtils.clearWord(word), contextSentence)
+                .then((result) => {
+                    setTranslation(result);
+                    setCanBeTranslated(true);
+                })
+                .catch((error) => {
+                    setCanBeTranslated(false);
+                    console.error("Error fetching translation:", error);
+                    if (error.message.toLowerCase().includes("ai_unavailable")) {
+                        setTranslation("AI features are disabled. Please set an API key first.");
+                    }
+                    if (error.message.toLowerCase().includes("word_unknown")) {
+                        setTranslation(word);
+                        VocabularyCache.insertWord(word, word);
+                    } else {
+                        setTranslation("Translation not available right now.");
+                    }
+                });
+        }
 
         setTranslationIsOpened(true);
     }
@@ -74,7 +86,7 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
             weakTranslation = translation[0];
         }
 
-        Settings.addWeakWord(weakWord.toLowerCase().replace(",", "").replace(".", "").trim(), weakTranslation.toLowerCase().replace(",", "").replace(".", "").trim());
+        Settings.addWeakWord(StringUtils.clearWord(weakWord), StringUtils.clearWord(weakTranslation));
     }
 
     // Planned upcoming feature:
@@ -102,9 +114,9 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
                         {translation}
                     </div>
                         {
-                            untranslatableWords.includes(translation) ? null : <>
+                            untranslatableWords.includes(translation) || !canBeTranslated ? null : <>
                                 {
-                                    weakWords.includes(word) ? <div className={"translation-item-weak-word"}>
+                                    weakWords.includes(StringUtils.clearWord(word)) ? <div className={"translation-item-weak-word"}>
                                         Weak word
                                     </div> : <button onClick={() => {
                                         addToWeakWords(word, translation);
@@ -123,7 +135,7 @@ function InteractiveWord({word, learningIndex, contextSentence}) {
                         {/*</button>*/}
                     </> : <div className={"translation-item"}><MaterialProgressBar thickness={4} size={24}/></div> }
                 </div>}>
-                <button onClick={onWordClick} className={weakWords.includes(word) ? "word-weak" : "word-regular"}>{word}</button>
+                <button onClick={onWordClick} className={weakWords.includes(StringUtils.clearWord(word)) ? "word-weak" : "word-regular"}>{word}</button>
             </MaterialTooltip>
         </>
     );

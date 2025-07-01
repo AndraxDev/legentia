@@ -16,13 +16,14 @@
 
 import * as VocabularyCache from "./VocabularyCache";
 import OpenAI from 'openai';
+import * as StringUtils from "./util/StringUtils";
 
 const prompt = `
 Act a latin-to-english word translator. Use will input a single latin word, and you will output a single english word in a correct form according to the context sentence provided and considering the writing style used in the sentence provided (artistic, scientific, etc.) (all letters are lowercase) and nothing else. If user provides an unknown word, try to answer the nearest correct english word. If user enters absolutely random sequence of character, the answer "word_unknown" and nothing else. Try to use most appropriate word. If user input is empty or it contains only punctuation marks or quotes, answer "word_unknown" and nothing else. Context sentence is: 
 `
 
 const runAI = async (latinWord, apiKey, context) => {
-    const aiPrompt = prompt + context + "\n\nWord to translate is: " + latinWord;
+    const aiPrompt = prompt + context + "\n\nWord to translate is: " + StringUtils.clearWord(latinWord);
 
     const client = new OpenAI({
         apiKey: apiKey,
@@ -56,8 +57,8 @@ export const translate = (latinWord, context) => {
                         reject(new Error(`word_unknown`));
                     } else {
                         let parsed = latinWord.toLowerCase().replaceAll("the word to translate is:", "").trim();
-                        VocabularyCache.insertWord(parsed, [r]);
-                        resolve(r);
+                        VocabularyCache.insertWord(StringUtils.clearWord(parsed), [StringUtils.clearWord(r)]);
+                        resolve(StringUtils.clearWord(r));
                     }
                 }).catch(() => {
                     reject(new Error("ai_unavailable"));

@@ -33,7 +33,6 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
 
     const [currentAnswer, setCurrentAnswer] = React.useState([]);
     const [answerStatus, setAnswerStatus] = React.useState("neutral");
-    const [debugOverlayIsVisible, setDebugOverlayIsVisible] = React.useState(false);
 
     const createExercise = () => {
         // CreateExercise is the unified interface for seamless transition between testing and real data.
@@ -156,14 +155,6 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
             <div className={"exercise-bottom-bar"}>
                 <button disabled={currentAnswer.length === 0} className={"exercise-button " + ((currentAnswer.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={checkAnswer}>Check</button>
             </div>
-
-            {
-                debugOverlayIsVisible ? <div className={"debug-panel"}>
-                    <button className={"debug-button-overlay"} onClick={checkAsIncorrect}>Debug mark as incorrect</button>
-                    <button className={"debug-button-overlay"} onClick={checkAsCorrect}>Debug mark as correct</button>
-                    <button className={"debug-button-overlay"} onClick={resetAnswerResult}>Reset result</button>
-                </div> : null
-            }
         </div>
     );
 }
