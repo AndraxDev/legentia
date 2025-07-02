@@ -24,8 +24,6 @@ import {MaterialDialog} from "../../../components/MaterialDialog";
 import TranslationQuizFragment from "../fragments/TranslationQuizFragment";
 import * as Settings from "../../../Settings";
 
-let fragmentIndex = 0;
-let mistakeIndex = 0;
 let streak = 0;
 let time = 0;
 let practiceIsCompleteExternal = false;
@@ -39,6 +37,14 @@ function TranslationQuiz({onNewIntent}) {
         let weakWords = Settings.getWeakWords();
         let pool = {};
 
+        let weakWordsIndexes = Settings.getWeakWordsLearningIndexes()
+        let indexesArray = Object.values(weakWordsIndexes);
+        let maxIndex = Math.max(...indexesArray);
+        let minIndex = Object.keys(weakWords).length > indexesArray.length ? 0 : Math.min(...indexesArray);
+        let diff = maxIndex - minIndex;
+        let nonUniformSelectionIsEnabled = diff > 0;
+        let diffNormalized = nonUniformSelectionIsEnabled ? 0 : 0.9 / diff;
+
         if (Object.keys(weakWords).length < sessionSize) {
             pool = weakWords;
         } else {
@@ -46,10 +52,22 @@ function TranslationQuiz({onNewIntent}) {
                 const randomIndex = Math.floor(Math.random() * Object.keys(weakWords).length);
                 let word = Object.keys(weakWords)[randomIndex];
 
-                while (pool[word]) {
+                // Never access indexes directly, as them may not be set or can contain NaN value.
+                // Settings handles these cases safely and returns 0 in case of missing or invalid index.
+                let wordIndex = Settings.getWordIndex(word);
+                let wordIndexNormalized = (wordIndex - minIndex) * diffNormalized;
+                let probabilityOfOccurrence = (0.9 - wordIndexNormalized) + 0.1;
+                let randomValue = Math.random();
+
+                while (pool[word] || (randomValue > probabilityOfOccurrence && nonUniformSelectionIsEnabled)) {
                     // Ensure unique words in the pool
                     const newIndex = Math.floor(Math.random() * Object.keys(weakWords).length);
                     word = Object.keys(weakWords)[newIndex];
+
+                    wordIndex = Settings.getWordIndex(word);
+                    wordIndexNormalized = (wordIndex - minIndex) * diffNormalized;
+                    probabilityOfOccurrence = (0.9 - wordIndexNormalized) + 0.1;
+                    randomValue = Math.random();
                 }
 
                 pool[word] = weakWords[word];
@@ -70,11 +88,11 @@ function TranslationQuiz({onNewIntent}) {
     const [exercises, ] = useState(initializeExercises());
     const [successfulCompletions, setSuccessfulCompletions] = React.useState(0);
     const [progress, setProgress] = React.useState(10);
-    const [currentExercise, setCurrentExercise] = React.useState(exercises[0]);
     const [fallbackEvent, setFallbackEvent] = React.useState(0);
     const [exitDialogOpened, setExitDialogOpened] = React.useState(false);
     const [practiceIsComplete, setPracticeIsComplete] = React.useState(false);
     const [mistakesCount, setMistakesCount] = React.useState(0);
+    const [fragmentIndex, setFragmentIndex] = React.useState(0);
 
     const timer = () => {
         if (!practiceIsCompleteExternal) {
@@ -92,6 +110,7 @@ function TranslationQuiz({onNewIntent}) {
 
     const onExerciseComplete = (fi, isSuccessful, thisExercise, mistakes, localStreak) => {
         setMistakesCount(mistakesCount + mistakes);
+        setFragmentIndex(fragmentIndex >= exercises.length - 1 ? exercises.length - 1 : fragmentIndex + 1);
         if (isSuccessful) {
             setSuccessfulCompletions(successfulCompletions + 1);
             setProgress(90 / exercises.length * (successfulCompletions + 1));
@@ -113,33 +132,6 @@ function TranslationQuiz({onNewIntent}) {
             setProgress(100);
             console.log("Practice completed!");
             showSuccessScreen()
-        } else if (fragmentIndex >= exercises.length - 1) {
-            if (fragmentIndex > exercises.length - 1) {
-                if (isSuccessful) {
-                    mistakeIndex++;
-                }
-                if (mistakeIndex <= mistakeIndices.length - 1) {
-                    setCurrentExercise(exercises[mistakeIndices[mistakeIndex]]);
-                } else {
-                    setCurrentExercise(thisExercise);
-                }
-            } else {
-                if (mistakeIndex <= mistakeIndices.length - 1) {
-                    setCurrentExercise(exercises[mistakeIndices[mistakeIndex]]);
-                } else {
-                    setCurrentExercise(thisExercise);
-                }
-
-                if (isSuccessful) {
-                    mistakeIndex++;
-                }
-            }
-
-            // Change index to reset exercise state
-            fragmentIndex = fragmentIndex + 1;
-        } else {
-            fragmentIndex = fragmentIndex + 1;
-            setCurrentExercise(exercises[fragmentIndex]);
         }
 
         setFallbackEvent(fallbackEvent + 1);
@@ -200,7 +192,7 @@ function TranslationQuiz({onNewIntent}) {
                                 </div>
                             </div>
                         </div>
-                        <TranslationQuizFragment isPreviousMistake={fragmentIndex > exercises.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
+                        <TranslationQuizFragment isPreviousMistake={fragmentIndex > exercises.length - 1} fallbackEvent={fallbackEvent} exercise={exercises[fragmentIndex]} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
                     </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakesCount === 0} time={time} mistakesCount={mistakesCount} streak={maxCombo} />
                 }
             </div>

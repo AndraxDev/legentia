@@ -367,14 +367,20 @@ br {
 }
 
 .translation-word {
-    width: calc(50% - 24px - 32px);
+    width: calc(50% - 24px - 32px - 24px);
     padding: 16px;
     user-select: none;
 }
 
 .translation-meaning {
-    width: calc(50% - 24px - 32px);
+    width: calc(50% - 24px - 32px - 24px);
     padding: 16px;
+    user-select: none;
+}
+
+.translation-learning-index {
+    width: 24px;
+    padding: 16px 0;
     user-select: none;
 }
 

@@ -122,6 +122,7 @@ function WordsActivity({onNewIntent}) {
                                     <div className={"list-item word-grid"} key={word}>
                                         <span className={"translation-word"}>{StringUtil.clearWord(word)}</span>
                                         <span className={"translation-meaning"}>{StringUtil.clearWord(weakWordMap[word])}</span>
+                                        <span className={"translation-learning-index"}>{Settings.getWordIndex(StringUtil.clearWord(word))}</span>
                                         <button style={{
                                             cursor: "pointer"
                                         }} onClick={() => {

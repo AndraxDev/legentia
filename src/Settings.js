@@ -65,10 +65,34 @@ export const getWeakWords = () => {
     return weakWords ? JSON.parse(weakWords) : {};
 }
 
+// Word indexes is similar to weak word, but instead of translation it has the learn index which represents how many times the user has repeated the word.
+export const getWeakWordsLearningIndexes = () => {
+    const weakWords = localStorage.getItem('weakWordsIndexes');
+    return weakWords ? JSON.parse(weakWords) : {};
+}
+
+export const incrementWeakWordIndex = (word) => {
+    const weakWordsIndexes = getWeakWordsLearningIndexes();
+    if (weakWordsIndexes[word] !== undefined) {
+        weakWordsIndexes[word]++;
+    } else {
+        weakWordsIndexes[word] = 1;
+    }
+    setString('weakWordsIndexes', JSON.stringify(weakWordsIndexes));
+}
+
+export const getWordIndex = (word) => {
+    const weakWordsIndexes = getWeakWordsLearningIndexes();
+    return weakWordsIndexes[word] !== undefined ? weakWordsIndexes[word] : 0;
+}
+
 export const addWeakWord = (word, translation) => {
     const weakWords = getWeakWords();
+    const weakWordsIndexes = getWeakWordsLearningIndexes();
     weakWords[word] = translation;
+    weakWordsIndexes[word] = weakWordsIndexes[word] || 0;
     setString('weakWords', JSON.stringify(weakWords));
+    setString('weakWordsIndexes', JSON.stringify(weakWordsIndexes));
 }
 
 export const removeWeakWord = (word) => {
@@ -76,6 +100,13 @@ export const removeWeakWord = (word) => {
     if (weakWords[word]) {
         delete weakWords[word];
         setString('weakWords', JSON.stringify(weakWords));
+
+        const weakWordsIndexes = getWeakWordsLearningIndexes();
+
+        if (weakWordsIndexes[word]) {
+            delete weakWordsIndexes[word];
+            setString('weakWordsIndexes', JSON.stringify(weakWordsIndexes));
+        }
     }
 }
 

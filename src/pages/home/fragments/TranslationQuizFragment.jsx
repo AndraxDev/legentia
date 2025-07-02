@@ -17,8 +17,9 @@
 import React, {useEffect, useState} from 'react';
 import PropTypes from "prop-types";
 import * as StringUtil from "../../util/StringUtils";
+import * as Settings from "../../../Settings";
 
-function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComplete, phraseId, fallbackEvent, isPreviousMistake}) {
+function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, phraseId, fallbackEvent, isPreviousMistake}) {
 
     const [selectedWord, setSelectedWord] = React.useState(null);
     const [selectedTranslation, setSelectedTranslation] = React.useState(null);
@@ -32,6 +33,11 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
         document.getElementById("correct").style.transform = "translateY(100%)";
         document.getElementById("correct").style.transform = "translateY(0)";
     }
+
+    useEffect(() => {
+        console.log(exercise);
+        console.log(fragmentIndex);
+    }, [])
 
     useEffect(() => {
         if (correctWords.length >= exerciseWords.length + exerciseTranslations.length) {
@@ -54,6 +60,7 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
                     newCorrectWords.push(selectedWord);
                     setCorrectWords(newCorrectWords);
                     setLocalStreak(localStreak + 1);
+                    Settings.incrementWeakWordIndex(selectedWord);
                 }
 
                 setTimeout(() => {
@@ -194,7 +201,6 @@ function TranslationQuizFragment({exercise, mistakeIndex, fragmentIndex, onExerc
 
 TranslationQuizFragment.propTypes = {
     exercise: PropTypes.object.isRequired,
-    mistakeIndex: PropTypes.number.isRequired,
     fragmentIndex: PropTypes.number.isRequired,
     onExerciseComplete: PropTypes.func.isRequired,
     phraseId: PropTypes.string.isRequired,
