@@ -43,12 +43,21 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
 
     useEffect(() => {
         if (snackbarIsOpened) {
-            propagateWordUpdate()
+            propagateWordUpdate?.()
 
             setTimeout(() => setSnackbarIsOpened(false), 3000);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [snackbarIsOpened]);
+
+    useEffect(() => {
+        if (snackbarDeletionIsOpened) {
+            propagateWordUpdate?.()
+
+            setTimeout(() => setSnackbarDeletionIsOpened(false), 3000);
+        }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [snackbarDeletionIsOpened]);
 
     const onWordClick = () => {
         if (untranslatableWords.includes(word)) {
