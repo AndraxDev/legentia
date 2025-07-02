@@ -101,3 +101,11 @@ export const getUserId = () => {
 export const hasUserDataKey = () => {
     return localStorage.getItem('userDataKey') !== null;
 }
+
+export const setModel = (model) => {
+    setString('openaiModel', model);
+}
+
+export const getModel = () => {
+    return getString('openaiModel', 'tts-1-hd');
+}

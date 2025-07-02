@@ -27,11 +27,11 @@ function LearnFragment({onNewIntent}) {
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
-                gap: "20px",
+                gap: "16px",
                 border: "3px solid #424242",
-                borderRadius: "24px",
+                borderRadius: "32px",
                 margin: "24px",
-                padding: "16px",
+                padding: "20px 16px",
             }}>
                 <h3 style={{
                     margin: "0",

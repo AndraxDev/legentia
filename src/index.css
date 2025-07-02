@@ -96,6 +96,7 @@ br {
     padding: 16px;
     width: calc(100vw - 80px);
     user-select: none;
+    background-color: #121212;
 }
 
 .debug-text {
@@ -104,7 +105,7 @@ br {
 }
 
 .debug-field {
-    background-color: #1e1e1e;
+    background-color: #212121;
     border: 1px solid #333;
     padding: 8px;
     width: calc(100% - 18px);
@@ -114,7 +115,7 @@ br {
 }
 
 .debug-button {
-    background-color: #1e1e1e;
+    background-color: #232220;
     border: 1px solid #333;
     padding: 8px 16px;
     color: #ffffff;
@@ -125,7 +126,7 @@ br {
 }
 
 .debug-button:hover {
-    background-color: #333;
+    background-color: #373124;
 }
 
 .debug-space {
@@ -1100,10 +1101,10 @@ button {
 }
 
 .teslasoft-id-container {
-    border-top: 3px solid #555;
-    border-bottom: 6px solid #555;
-    border-left: 3px solid #555;
-    border-right: 3px solid #555;
+    border-top: 3px solid #393939;
+    border-bottom: 6px solid #393939;
+    border-left: 3px solid #393939;
+    border-right: 3px solid #393939;
     border-radius: 24px;
     width: calc(100% - 48px);
     background: none;

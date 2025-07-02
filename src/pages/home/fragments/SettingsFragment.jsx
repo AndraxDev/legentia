@@ -104,10 +104,44 @@ function SettingsFragment({onNewIntent}) {
                         </div>
                     </button>
                 }
-                {userData ? <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("sync")}>Sync settings between devices</button> : null}
-                <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("privacy")}>Data controls</button>
-                <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("openai")}>Edit AI API key (debug)</button>
-                <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("ttsdebug")}>TTS Debug (debug)</button>
+                <div className={"list-container"} style={{
+                    width: "calc(100% - 52px)",
+                    marginTop: "0",
+                    marginBottom: "0"
+                }}>
+                    <div style={userData ? {} : {
+                        cursor: "not-allowed",
+                        opacity: "0.5",
+                    }} className={"list-item"}>
+                        <button disabled={!userData} className={"button-in-list-item"} onClick={() => onNewIntent("sync")}>Sync settings between devices</button>
+                    </div>
+                    <div className={"list-item"}>
+                        <button className={"button-in-list-item"} onClick={() => onNewIntent("privacy")}>Data controls</button>
+                    </div>
+                </div>
+                <div className={"list-container"} style={{
+                    width: "calc(100% - 52px)",
+                    marginTop: "0",
+                    marginBottom: "0"
+                }}>
+                    <div className={"list-item"}>
+                        <h3 style={{
+                            margin: "0",
+                            userSelect: "none",
+                            padding: "16px",
+                        }}>Debug & Experiments</h3>
+                    </div>
+                    <div className={"list-item"}>
+                        <button style={{
+                            width: "calc(100% - 8px)",
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("openai")}>AI Settings (debug)</button>
+                    </div>
+                    <div className={"list-item"}>
+                        <button style={{
+                            width: "calc(100% - 8px)",
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("ttsdebug")}>TTS Debug (debug)</button>
+                    </div>
+                </div>
             </div>
             <div style={{
                 height: "24px",
