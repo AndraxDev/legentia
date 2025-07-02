@@ -31,6 +31,8 @@ function SettingsFragment({onNewIntent}) {
     const [errorAccount, setErrorAccount] = React.useState(false);
     const [telemetrySnackBarIsOpen, setTelemetrySnackBarIsOpen] = React.useState(false);
     const [confirmTelemetry, setConfirmTelemetry] = React.useState(false);
+    const [errorDialogOpen, setErrorDialogOpen] = React.useState(false);
+    const [error, setError] = React.useState("");
 
     useEffect(() => {
         if (telemetrySnackBarIsOpen) {
@@ -60,23 +62,36 @@ function SettingsFragment({onNewIntent}) {
 
     const sendTelemetry = () => {
         let vocabulary = localStorage.getItem("vocabulary");
-        let vbase64 = btoa(vocabulary || "");
-        console.log("Sending telemetry data: " + vbase64);
+        try {
+            let vbase64 = btoa(unescape(encodeURIComponent(vocabulary || "")));
+            console.log("Sending telemetry data: " + vbase64);
 
-        fetch("https://legentia.teslasoft.org/api/WordCache.php?payload=" + vbase64, {
-            method: "GET"
-        }).then(res => res.json())
-            .then(json => {
-                if (json.code === 200) {
-                    console.log("Telemetry data sent successfully");
-                    setTelemetrySnackBarIsOpen(true);
-                } else {
-                    console.error("Failed to send telemetry data: " + json.message);
-                }
-            })
-            .catch(err => {
-                console.error("Error sending telemetry data: ", err);
-            });
+            let formData = new FormData();
+            formData.append("payload", vbase64);
+
+            fetch("https://legentia.teslasoft.org/api/WordCache.php", {
+                method: "POST",
+                body: formData
+            }).then(res => res.json())
+                .then(json => {
+                    if (json.code === 200) {
+                        console.log("Telemetry data sent successfully");
+                        setTelemetrySnackBarIsOpen(true);
+                    } else {
+                        console.error("Failed to send telemetry data: " + json.message);
+                        setError("Failed to send telemetry data: " + json.message);
+                        setErrorDialogOpen(true);
+                    }
+                })
+                .catch(err => {
+                    console.error("Error sending telemetry data: ", err);
+                    setError("Failed to send telemetry data: " + err.message);
+                    setErrorDialogOpen(true);
+                });
+        } catch (error) {
+            setError(error);
+            setErrorDialogOpen(true);
+        }
     }
 
     return (
@@ -89,6 +104,30 @@ function SettingsFragment({onNewIntent}) {
                     Telemetry sent successfully!
                 </Alert>
             </Snackbar>
+            <MaterialDialog
+                open={errorDialogOpen}
+                onClose={() => setErrorDialogOpen(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Error"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText sx={{
+                        userSelect: "text"
+                    }} id="alert-dialog-description" style={{ color: "#fff" }}>
+                        {error}
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <MaterialButtonDialogFilled onClick={() => {
+                        setErrorDialogOpen(false);
+                    }} autoFocus>
+                        Ok
+                    </MaterialButtonDialogFilled>
+                </DialogActions>
+            </MaterialDialog>
             <MaterialDialog
                 open={confirmTelemetry}
                 onClose={() => setConfirmTelemetry(false)}
