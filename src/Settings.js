@@ -71,6 +71,14 @@ export const addWeakWord = (word, translation) => {
     setString('weakWords', JSON.stringify(weakWords));
 }
 
+export const removeWeakWord = (word) => {
+    const weakWords = getWeakWords();
+    if (weakWords[word]) {
+        delete weakWords[word];
+        setString('weakWords', JSON.stringify(weakWords));
+    }
+}
+
 export const deleteWeakWord = (word) => {
     const weakWords = getWeakWords();
     delete weakWords[word];

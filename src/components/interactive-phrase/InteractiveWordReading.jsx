@@ -38,6 +38,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
     const [translation, setTranslation] = React.useState(null);
 
     const [snackbarIsOpened, setSnackbarIsOpened] = React.useState(false);
+    const [snackbarDeletionIsOpened, setSnackbarDeletionIsOpened] = React.useState(false);
     const [canBeTranslated, setCanBeTranslated] = React.useState(true);
 
     useEffect(() => {
@@ -91,6 +92,12 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
         propagateWordUpdate?.();
     }
 
+    const removeFromWeakWords = (word) => {
+        Settings.removeWeakWord(StringUtils.clearWord(word));
+        propagateWordUpdate?.();
+        setSnackbarDeletionIsOpened(true);
+    }
+
     // Planned upcoming feature:
     // const addToPhrasesList = () => {
     //
@@ -108,6 +115,14 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                             Word saved for further practice.
                         </Alert>
                     </Snackbar>
+                    <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarDeletionIsOpened} autoHideDuration={3000} onClick={() => setSnackbarDeletionIsOpened(false)}>
+                        <Alert onClose={() => setSnackbarDeletionIsOpened(false)}
+                               severity="success"
+                               sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                               variant="filled">
+                            Word deleted from practice list.
+                        </Alert>
+                    </Snackbar>
                     <MaterialTooltip
                         arrow
                         leaveTouchDelay={2147483647}
@@ -120,9 +135,17 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                 {
                                     untranslatableWords.includes(translation) || !canBeTranslated ? null : <>
                                         {
-                                            weakWords.includes(StringUtils.clearWord(word)) ? <div className={"translation-item-weak-word"}>
-                                                Weak word
-                                            </div> : <button onClick={() => {
+                                            weakWords.includes(StringUtils.clearWord(word)) ? <>
+                                                <div className={"translation-item-weak-word"}>
+                                                    Weak word
+                                                </div>
+                                                <button onClick={() => {
+                                                    removeFromWeakWords(word);
+                                                    setSnackbarDeletionIsOpened(true);
+                                                }} className={"translation-item add-weak-sentence-button"}>
+                                                    Remove from weak words
+                                                </button>
+                                            </> : <button onClick={() => {
                                                 addToWeakWords(word, translation);
                                                 setSnackbarIsOpened(true);
                                             }} className={"translation-item add-weak-sentence-button"}>

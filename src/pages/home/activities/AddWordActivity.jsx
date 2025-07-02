@@ -44,6 +44,18 @@ function AddStoryActivity({onNewIntent}) {
                         textAlign: "start"
                     }} className={"article-title"}>Add new word to practice</h2>
                 </div>
+                <div className={"list-container"} style={{
+                    width: "calc(100% - 54px)",
+                    marginTop: "0",
+                    marginBottom: "0"
+                }}>
+                    <div style={{
+                        userSelect: "none"
+                    }} className={"list-item translation-item"}>
+                        Existing words will be overridden with new values.
+                    </div>
+                </div>
+                <br/>
                 <div className={"activity-content-container"}>
                     <div className={"field-container"}>
                         <input value={word} onChange={(e) => {

@@ -113,10 +113,14 @@ function SettingsFragment({onNewIntent}) {
                         cursor: "not-allowed",
                         opacity: "0.5",
                     }} className={"list-item"}>
-                        <button disabled={!userData} className={"button-in-list-item"} onClick={() => onNewIntent("sync")}>Sync settings between devices</button>
+                        <button style={{
+                            width: "100%",
+                        }} disabled={!userData} className={"button-in-list-item"} onClick={() => onNewIntent("sync")}>Sync settings between devices</button>
                     </div>
                     <div className={"list-item"}>
-                        <button className={"button-in-list-item"} onClick={() => onNewIntent("privacy")}>Data controls</button>
+                        <button style={{
+                            width: "100%",
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("privacy")}>Data controls</button>
                     </div>
                 </div>
                 <div className={"list-container"} style={{
@@ -133,12 +137,12 @@ function SettingsFragment({onNewIntent}) {
                     </div>
                     <div className={"list-item"}>
                         <button style={{
-                            width: "calc(100% - 8px)",
+                            width: "100%",
                         }} className={"button-in-list-item"} onClick={() => onNewIntent("openai")}>AI Settings (debug)</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
-                            width: "calc(100% - 8px)",
+                            width: "100%",
                         }} className={"button-in-list-item"} onClick={() => onNewIntent("ttsdebug")}>TTS Debug (debug)</button>
                     </div>
                 </div>

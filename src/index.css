@@ -402,6 +402,7 @@ br {
     font-size: 18px;
     background: none;
     color: #ffa9a9;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
 .add-weak-word-button {
@@ -969,7 +970,7 @@ button {
 .activity-content-container {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 150px);
+    height: calc(100vh - 160px);
 }
 
 .list-container {

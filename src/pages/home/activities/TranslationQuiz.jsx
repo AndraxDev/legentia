@@ -30,6 +30,7 @@ let streak = 0;
 let time = 0;
 let practiceIsCompleteExternal = false;
 let maxCombo = 0;
+let sessionSize = 25; // Number of words in the session
 const mistakeIndices = [];
 
 function TranslationQuiz({onNewIntent}) {
@@ -38,10 +39,10 @@ function TranslationQuiz({onNewIntent}) {
         let weakWords = Settings.getWeakWords();
         let pool = {};
 
-        if (Object.keys(weakWords).length < 15) {
+        if (Object.keys(weakWords).length < sessionSize) {
             pool = weakWords;
         } else {
-            for (let i = 0; i < 15; i++) {
+            for (let i = 0; i < sessionSize; i++) {
                 const randomIndex = Math.floor(Math.random() * Object.keys(weakWords).length);
                 let word = Object.keys(weakWords)[randomIndex];
 
