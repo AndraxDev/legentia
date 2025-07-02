@@ -38,7 +38,7 @@ function SyncActivity({onNewIntent}) {
                     <div className={"list-item translation-item"} style={{
                         userSelect: "none",
                     }}>
-                        // To be implemented...
+                        {"// To be implemented..."}
                     </div>
                 </div>
             </div>

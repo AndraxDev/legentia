@@ -30,6 +30,7 @@ import DataControls from "./pages/home/activities/DataControls";
 import AddWordActivity from "./pages/home/activities/AddWordActivity";
 import TidRedirect from "./pages/home/activities/TidRedirect";
 import SyncActivity from "./pages/home/activities/SyncActivity";
+import TTSSandbox from "./pages/home/activities/TTSSandbox";
 
 let contextInitialized = false;
 
@@ -85,6 +86,8 @@ function App() {
                 return <TidRedirect onNewIntent={addActivityToStack} />;
             case "sync":
                 return <SyncActivity onNewIntent={addActivityToStack} />;
+            case "ttsdebug":
+                return <TTSSandbox onNewIntent={addActivityToStack} />;
             default:
                 return <Home onNewIntent={addActivityToStack} />;
         }

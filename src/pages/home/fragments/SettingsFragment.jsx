@@ -107,6 +107,7 @@ function SettingsFragment({onNewIntent}) {
                 {userData ? <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("sync")}>Sync settings between devices</button> : null}
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("privacy")}>Data controls</button>
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("openai")}>Edit AI API key (debug)</button>
+                <button className={"exercise-button exercise-button-neutral"} onClick={() => onNewIntent("ttsdebug")}>TTS Debug (debug)</button>
             </div>
             <div style={{
                 height: "24px",
