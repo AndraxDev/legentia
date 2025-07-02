@@ -35,11 +35,6 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
     }
 
     useEffect(() => {
-        console.log(exercise);
-        console.log(fragmentIndex);
-    }, [])
-
-    useEffect(() => {
         if (correctWords.length >= exerciseWords.length + exerciseTranslations.length) {
             setTimeout(() => {
                 checkAsCorrect()

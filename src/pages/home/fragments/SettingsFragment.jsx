@@ -19,6 +19,9 @@ import PropTypes from "prop-types";
 import packageJson from './../../../../package.json';
 import * as Settings from "../../../Settings";
 import {MaterialProgressBar} from "../../../components/MaterialProgressBar";
+import {Alert, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar} from "@mui/material";
+import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
+import {MaterialDialog} from "../../../components/MaterialDialog";
 
 // onNewIntent is analog to android.content.Context.java in Android OS. It is passed hierarchically through all
 // components that need to access base application to handle activity launching.
@@ -26,6 +29,16 @@ function SettingsFragment({onNewIntent}) {
 
     const [userData, setUserData] = React.useState(null);
     const [errorAccount, setErrorAccount] = React.useState(false);
+    const [telemetrySnackBarIsOpen, setTelemetrySnackBarIsOpen] = React.useState(false);
+    const [confirmTelemetry, setConfirmTelemetry] = React.useState(false);
+
+    useEffect(() => {
+        if (telemetrySnackBarIsOpen) {
+            setTimeout(() => {
+                setTelemetrySnackBarIsOpen(false);
+            }, 3000)
+        }
+    }, [telemetrySnackBarIsOpen]);
 
     useEffect(() => {
         fetch("https://id.teslasoft.org/xauth/users/GetPublicAccountInfo?uid=" + Settings.getUserId())
@@ -45,8 +58,64 @@ function SettingsFragment({onNewIntent}) {
             });
     }, []);
 
+    const sendTelemetry = () => {
+        let vocabulary = localStorage.getItem("vocabulary");
+        let vbase64 = btoa(vocabulary || "");
+        console.log("Sending telemetry data: " + vbase64);
+
+        fetch("https://legentia.teslasoft.org/api/WordCache.php?payload=" + vbase64, {
+            method: "GET"
+        }).then(res => res.json())
+            .then(json => {
+                if (json.code === 200) {
+                    console.log("Telemetry data sent successfully");
+                    setTelemetrySnackBarIsOpen(true);
+                } else {
+                    console.error("Failed to send telemetry data: " + json.message);
+                }
+            })
+            .catch(err => {
+                console.error("Error sending telemetry data: ", err);
+            });
+    }
+
     return (
         <div className={"fragment"}>
+            <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={telemetrySnackBarIsOpen} autoHideDuration={3000} onClick={() => setTelemetrySnackBarIsOpen(false)}>
+                <Alert onClose={() => setTelemetrySnackBarIsOpen(false)}
+                       severity="success"
+                       sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                       variant="filled">
+                    Telemetry sent successfully!
+                </Alert>
+            </Snackbar>
+            <MaterialDialog
+                open={confirmTelemetry}
+                onClose={() => setConfirmTelemetry(false)}
+                aria-labelledby="alert-dialog-title"
+                aria-describedby="alert-dialog-description"
+            >
+                <DialogTitle id="alert-dialog-title">
+                    {"Would you like to send telemetry data?"}
+                </DialogTitle>
+                <DialogContent>
+                    <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
+                        Telemetry data includes your vocabulary cache, application version, and other non-personal information. By sending telemetry data, you will help to build global cache to increase translation speed and accuracy and reduce costs related to the usage of AI.
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                    <MaterialButtonDialogOutlined onClick={() => {
+                        setConfirmTelemetry(false);
+                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
+                    <div/>
+                    <MaterialButtonDialogFilled onClick={() => {
+                        setConfirmTelemetry(false);
+                        sendTelemetry();
+                    }}>
+                        Send
+                    </MaterialButtonDialogFilled>
+                </DialogActions>
+            </MaterialDialog>
             <h2 className={"activity-title"}>Settings</h2>
             <div style={{
                 width: "100%",
@@ -138,12 +207,17 @@ function SettingsFragment({onNewIntent}) {
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("openai")}>AI Settings (debug)</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("openai")}>AI Settings</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("ttsdebug")}>TTS Debug (debug)</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("ttsdebug")}>TTS Debug</button>
+                    </div>
+                    <div className={"list-item"}>
+                        <button style={{
+                            width: "100%",
+                        }} className={"button-in-list-item"} onClick={() => setConfirmTelemetry(true)}>Send Telemetry</button>
                     </div>
                 </div>
             </div>

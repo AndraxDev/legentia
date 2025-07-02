@@ -35,7 +35,7 @@ export const MaterialButtonDialogFilled = styled(Button)(() => ({
     '&:hover': {
         backgroundColor: '#fff',
     },
-    padding: '6px 20px',
+    padding: '8px 20px 6px 20px',
     borderRadius: '24px',
     textTransform: 'none',
     fontSize: '16px',
@@ -49,7 +49,7 @@ export const MaterialButtonDialogOutlined = styled(Button)(() => ({
     '&:hover': {
         backgroundColor: '#212121',
     },
-    padding: '5px 18px',
+    padding: '7px 18px 5px 18px',
     borderRadius: '24px',
     textTransform: 'none',
     fontSize: '16px',
