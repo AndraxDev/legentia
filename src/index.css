@@ -1020,7 +1020,7 @@ button {
     font-weight: 600;
     width: 100%;
     height: 72px;
-    transition: .3s;
+    transition: .15s;
 }
 
 .quiz-button {
@@ -1036,7 +1036,7 @@ button {
     font-weight: 600;
     width: 100%;
     height: 72px;
-    transition: .3s;
+    transition: .15s;
 }
 
 .quiz-button-disabled {
@@ -1052,7 +1052,7 @@ button {
     font-weight: 600;
     width: 100%;
     height: 72px;
-    transition: .3s;
+    transition: .15s;
 }
 
 .quiz-button-correct {
@@ -1068,7 +1068,7 @@ button {
     font-weight: 600;
     width: 100%;
     height: 72px;
-    transition: .3s;
+    transition: .15s;
 }
 
 .quiz-button-incorrect {
@@ -1084,7 +1084,7 @@ button {
     font-weight: 600;
     width: 100%;
     height: 72px;
-    transition: .3s;
+    transition: .15s;
 }
 
 .quiz-content {

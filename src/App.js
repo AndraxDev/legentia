@@ -31,6 +31,7 @@ import AddWordActivity from "./pages/home/activities/AddWordActivity";
 import TidRedirect from "./pages/home/activities/TidRedirect";
 import SyncActivity from "./pages/home/activities/SyncActivity";
 import TTSSandbox from "./pages/home/activities/TTSSandbox";
+import AlphaProbabilitySettingsActivity from "./pages/home/activities/AlphaProbabilitySettingsActivity";
 
 let contextInitialized = false;
 
@@ -88,6 +89,8 @@ function App() {
                 return <SyncActivity onNewIntent={addActivityToStack} />;
             case "ttsdebug":
                 return <TTSSandbox onNewIntent={addActivityToStack} />;
+            case "setalpha":
+                return <AlphaProbabilitySettingsActivity onNewIntent={addActivityToStack} />;
             default:
                 return <Home onNewIntent={addActivityToStack} />;
         }

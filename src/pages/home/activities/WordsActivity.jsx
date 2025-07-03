@@ -109,14 +109,29 @@ function WordsActivity({onNewIntent}) {
                         weakWords.length > 0 ? <p style={{
                             width: "calc(100% - 48px)",
                             margin: "0",
-                            fontSize: "18px",
+                            fontSize: "20px",
                             userSelect: "none",
+                            paddingTop: "6px"
                         }}>{weakWords.length} word{weakWords.length > 1 ? "s" : ""}</p> : null
                     }
                 </div>
                 {
                     weakWords.length > 0 ? <div>
                         <div className={"list-container"}>
+                            <div className={"list-item word-grid"} style={{
+                                backgroundColor: "rgba(255, 255, 255, 0.05)",
+                                borderTopLeftRadius: "21px",
+                                borderTopRightRadius: "21px",
+                            }} key={-1}>
+                                <span className={"translation-word"}>Latin word</span>
+                                <span className={"translation-meaning"}>Translation</span>
+                                <span className={"translation-learning-index"}>Learning index</span>
+                                <button style={{
+                                    cursor: "pointer"
+                                }} className={"delete-word-btn"}>
+                                    <span className={"material-symbols-outlined"}></span>
+                                </button>
+                            </div>
                             {
                                 weakWords.map(word => (
                                     <div className={"list-item word-grid"} key={word}>

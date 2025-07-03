@@ -118,6 +118,7 @@ export const deleteWeakWord = (word) => {
 
 export const clearWeakWords = () => {
     deleteString('weakWords');
+    deleteString('weakWordsIndexes');
 }
 
 export const clearAppData = () => {
@@ -147,4 +148,12 @@ export const setModel = (model) => {
 
 export const getModel = () => {
     return getString('openaiModel', 'tts-1-hd');
+}
+
+export const setAlpha = (alpha) => {
+    setString('alphaProbability', alpha.toString());
+}
+
+export const getAlpha = () => {
+    return parseFloat(getString('alphaProbability', '0.1'));
 }

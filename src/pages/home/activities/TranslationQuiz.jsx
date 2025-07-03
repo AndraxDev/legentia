@@ -31,61 +31,104 @@ let maxCombo = 0;
 let sessionSize = 25; // Number of words in the session
 const mistakeIndices = [];
 
-function TranslationQuiz({onNewIntent}) {
+const initializeExercises = () => {
+    let weakWords = Settings.getWeakWords();
+    let pool = {};
 
-    const initializeExercises = () => {
-        let weakWords = Settings.getWeakWords();
-        let pool = {};
+    let weakWordsIndexes = Settings.getWeakWordsLearningIndexes()
+    let indexesArray = Object.values(weakWordsIndexes);
+    let maxIndex = Math.max(...indexesArray);
+    let countNonMaxIndex = indexesArray.filter(index => index < maxIndex).length;
+    let minIndex = Object.keys(weakWords).length > indexesArray.length ? 0 : Math.min(...indexesArray);
+    let diff = maxIndex - minIndex;
+    let nonUniformSelectionIsEnabled = diff > 0;
+    let diffNormalized = nonUniformSelectionIsEnabled ? (1 - Settings.getAlpha()) / diff : 0;
+    let needToSelect = sessionSize - countNonMaxIndex;
 
-        let weakWordsIndexes = Settings.getWeakWordsLearningIndexes()
-        let indexesArray = Object.values(weakWordsIndexes);
-        let maxIndex = Math.max(...indexesArray);
-        let minIndex = Object.keys(weakWords).length > indexesArray.length ? 0 : Math.min(...indexesArray);
-        let diff = maxIndex - minIndex;
-        let nonUniformSelectionIsEnabled = diff > 0;
-        let diffNormalized = nonUniformSelectionIsEnabled ? 0 : 0.9 / diff;
+    console.log("Probability alpha: " + Settings.getAlpha());
+    console.log("Need to select: " + needToSelect);
+    console.log("Count max index: " + countNonMaxIndex);
 
-        if (Object.keys(weakWords).length < sessionSize) {
-            pool = weakWords;
-        } else {
-            for (let i = 0; i < sessionSize; i++) {
+    // Unstuck algorithm in case if successful word selection is impossible
+    if (needToSelect > 0 && nonUniformSelectionIsEnabled && Settings.getAlpha() === 0) {
+        const wordsWidthNotMaxIndex = Object.keys(weakWords).filter(word => Settings.getWordIndex(word) < maxIndex);
+
+        // Prioritizing words with lower indexes
+        for (let i = 0; i < needToSelect; i++) {
+            pool[wordsWidthNotMaxIndex[i]] = weakWords[wordsWidthNotMaxIndex[i]];
+        }
+
+        const remainingWordsCount = sessionSize - needToSelect;
+
+        // Then fill the exercise pool with remaining words
+        if (remainingWordsCount > 0) {
+            for (let i = 0; i < remainingWordsCount; i++) {
                 const randomIndex = Math.floor(Math.random() * Object.keys(weakWords).length);
                 let word = Object.keys(weakWords)[randomIndex];
 
-                // Never access indexes directly, as them may not be set or can contain NaN value.
-                // Settings handles these cases safely and returns 0 in case of missing or invalid index.
-                let wordIndex = Settings.getWordIndex(word);
-                let wordIndexNormalized = (wordIndex - minIndex) * diffNormalized;
-                let probabilityOfOccurrence = (0.9 - wordIndexNormalized) + 0.1;
-                let randomValue = Math.random();
-
-                while (pool[word] || (randomValue > probabilityOfOccurrence && nonUniformSelectionIsEnabled)) {
+                while (pool[word]) {
                     // Ensure unique words in the pool
                     const newIndex = Math.floor(Math.random() * Object.keys(weakWords).length);
                     word = Object.keys(weakWords)[newIndex];
-
-                    wordIndex = Settings.getWordIndex(word);
-                    wordIndexNormalized = (wordIndex - minIndex) * diffNormalized;
-                    probabilityOfOccurrence = (0.9 - wordIndexNormalized) + 0.1;
-                    randomValue = Math.random();
                 }
 
                 pool[word] = weakWords[word];
             }
         }
+    } else if (Object.keys(weakWords).length < sessionSize) {
+        pool = weakWords;
+    } else {
+        for (let i = 0; i < sessionSize; i++) {
+            const randomIndex = Math.floor(Math.random() * Object.keys(weakWords).length);
+            let word = Object.keys(weakWords)[randomIndex];
 
-        const entries = Object.entries(pool);
-        const exercises = [];
+            // Never access indexes directly, as them may not be set or can contain NaN value.
+            // Settings handles these cases safely and returns 0 in case of missing or invalid index.
+            let wordIndex = Settings.getWordIndex(word);
+            let wordIndexNormalized = (wordIndex - minIndex) * diffNormalized;
+            let probabilityOfOccurrence = ((1 - Settings.getAlpha()) - wordIndexNormalized) + Settings.getAlpha();
 
-        for (let i = 0; i < entries.length; i += 5) {
-            const chunk = entries.slice(i, i + 5);
-            exercises.push(Object.fromEntries(chunk));
+            // console.log("Probability of occurrence for word '" + word + "': " + probabilityOfOccurrence, " Index: " + wordIndex + ", Normalized index: " + wordIndexNormalized);
+
+            let randomValue = Math.random();
+
+            let unsuccessfulIterations = 0;
+
+            while (pool[word] || (randomValue > probabilityOfOccurrence && nonUniformSelectionIsEnabled)) {
+                if (unsuccessfulIterations >= Object.keys(weakWords).length) {
+                    // Unstuck algorithm in case if successful word selection is impossible
+                    nonUniformSelectionIsEnabled = true;
+                }
+
+                // Ensure unique words in the pool
+                const newIndex = Math.floor(Math.random() * Object.keys(weakWords).length);
+                word = Object.keys(weakWords)[newIndex];
+
+                wordIndex = Settings.getWordIndex(word);
+                wordIndexNormalized = (wordIndex - minIndex) * diffNormalized;
+                probabilityOfOccurrence = ((1 - Settings.getAlpha()) - wordIndexNormalized) + Settings.getAlpha();
+                randomValue = Math.random();
+                unsuccessfulIterations++;
+            }
+
+            pool[word] = weakWords[word];
         }
-
-        return exercises;
     }
 
-    const [exercises, ] = useState(initializeExercises());
+    const entries = Object.entries(pool);
+    const exercises = [];
+
+    for (let i = 0; i < entries.length; i += 5) {
+        const chunk = entries.slice(i, i + 5);
+        exercises.push(Object.fromEntries(chunk));
+    }
+
+    return exercises;
+}
+
+function TranslationQuiz({onNewIntent}) {
+
+    const [exercises, setExercises] = useState([]);
     const [successfulCompletions, setSuccessfulCompletions] = React.useState(0);
     const [progress, setProgress] = React.useState(10);
     const [fallbackEvent, setFallbackEvent] = React.useState(0);
@@ -93,6 +136,10 @@ function TranslationQuiz({onNewIntent}) {
     const [practiceIsComplete, setPracticeIsComplete] = React.useState(false);
     const [mistakesCount, setMistakesCount] = React.useState(0);
     const [fragmentIndex, setFragmentIndex] = React.useState(0);
+
+    useEffect(() => {
+        setExercises(initializeExercises())
+    }, []);
 
     const timer = () => {
         if (!practiceIsCompleteExternal) {
@@ -192,7 +239,7 @@ function TranslationQuiz({onNewIntent}) {
                                 </div>
                             </div>
                         </div>
-                        <TranslationQuizFragment isPreviousMistake={fragmentIndex > exercises.length - 1} fallbackEvent={fallbackEvent} exercise={exercises[fragmentIndex]} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
+                        {exercises.length > 0 ? <TranslationQuizFragment isPreviousMistake={fragmentIndex > exercises.length - 1} fallbackEvent={fallbackEvent} exercise={exercises[fragmentIndex]} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} /> : null}
                     </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakesCount === 0} time={time} mistakesCount={mistakesCount} streak={maxCombo} />
                 }
             </div>

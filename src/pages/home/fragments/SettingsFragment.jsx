@@ -258,6 +258,11 @@ function SettingsFragment({onNewIntent}) {
                             width: "100%",
                         }} className={"button-in-list-item"} onClick={() => setConfirmTelemetry(true)}>Send Telemetry</button>
                     </div>
+                    <div className={"list-item"}>
+                        <button style={{
+                            width: "100%",
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("setalpha")}>Set alpha probability</button>
+                    </div>
                 </div>
             </div>
             <div style={{
