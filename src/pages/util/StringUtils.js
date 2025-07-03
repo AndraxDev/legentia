@@ -31,6 +31,12 @@ export const clearWord = (word) => {
         .replaceAll("–", "")
         .replaceAll("”", "")
         .replaceAll("“", "")
+        .replaceAll(";", "")
+        .replaceAll("*", "")
+        .replaceAll("%", "")
+        .replaceAll("@", "")
+        .replaceAll("#", "")
+        .replaceAll("^", "")
         .trim()
 
     // Apostrophes and dashes can be part of the word so they are permitted.

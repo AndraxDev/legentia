@@ -113,7 +113,12 @@ export const removeWeakWord = (word) => {
 export const deleteWeakWord = (word) => {
     const weakWords = getWeakWords();
     delete weakWords[word];
+    const weakWordsIndexes = getWeakWordsLearningIndexes();
+    if (weakWordsIndexes[word]) {
+        delete weakWordsIndexes[word];
+    }
     setString('weakWords', JSON.stringify(weakWords));
+    setString('weakWordsIndexes', JSON.stringify(weakWordsIndexes));
 }
 
 export const clearWeakWords = () => {
