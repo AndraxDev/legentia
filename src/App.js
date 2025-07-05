@@ -32,6 +32,9 @@ import TidRedirect from "./pages/home/activities/TidRedirect";
 import SyncActivity from "./pages/home/activities/SyncActivity";
 import TTSSandbox from "./pages/home/activities/TTSSandbox";
 import AlphaProbabilitySettingsActivity from "./pages/home/activities/AlphaProbabilitySettingsActivity";
+import VocabularyActivity from "./pages/home/activities/VocabularyActivity";
+import * as VocabularyCache from "./pages/VocabularyCache";
+import AddWordToVocabularyActivity from "./pages/home/activities/AddWordToVocabularyActivity";
 
 let contextInitialized = false;
 
@@ -40,6 +43,10 @@ function App() {
     const location = useLocation();
     const [currentActivity, setCurrentActivity] = useState(location.pathname.split("/")[1] || "home");
     const navigate = useNavigate();
+
+    useEffect(() => {
+        VocabularyCache.convertVocabulary();
+    }, []);
 
     useEffect(() => {
         const locationActivity = location.pathname.split("/")[1];
@@ -73,12 +80,16 @@ function App() {
                 return <AddStoryActivity onNewIntent={addActivityToStack} />;
             case "addword":
                 return <AddWordActivity onNewIntent={addActivityToStack} />;
+            case "vocabularyadd":
+                return <AddWordToVocabularyActivity onNewIntent={addActivityToStack} />;
             case "exercise":
                 return <ExerciseActivity onNewIntent={addActivityToStack} />;
             case "quiz":
                 return <TranslationQuiz onNewIntent={addActivityToStack} />;
             case "practicewords":
                 return <WordsActivity onNewIntent={addActivityToStack} />;
+            case "vocabulary":
+                return <VocabularyActivity onNewIntent={addActivityToStack} />;
             case "privacy":
                 return <DataControls onNewIntent={addActivityToStack} />;
             case "openai":

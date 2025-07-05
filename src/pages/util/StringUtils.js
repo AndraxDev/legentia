@@ -15,7 +15,7 @@
  * *************************************************************************/
 
 export const clearWord = (word) => {
-    return word.toLowerCase()
+    return (word || "").toString().toLowerCase()
         .replaceAll(",", "")
         .replaceAll(".", "")
         .replaceAll("?", "")

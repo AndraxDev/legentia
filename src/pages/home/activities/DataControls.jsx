@@ -21,6 +21,7 @@ import * as Settings from "../../../Settings";
 import {MaterialDialog} from "../../../components/MaterialDialog";
 import {Alert, DialogActions, DialogContent, DialogContentText, DialogTitle, Snackbar} from "@mui/material";
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
+import * as VocabularyCache from "../../VocabularyCache";
 
 function DataControls({onNewIntent}) {
     const onBackPressed = () => {
@@ -171,6 +172,18 @@ function DataControls({onNewIntent}) {
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearAppDataConfirmationOpened(true)
                     }} >Clear application data</button>
+                    <button className={"exercise-button exercise-button-neutral"} onClick={() => {
+                        VocabularyCache.convertVocabulary(true)
+                    }} >Migrate vocabulary</button>
+                    <div className={"list-container"} style={{
+                        marginTop: "0"
+                    }}>
+                        <div className={"list-item translation-item"} style={{
+                            userSelect: "none",
+                        }}>
+                            If app is not working as expected after the last update or translations are slow, you can try to migrate your vocabulary to the new format. It is more optimized and uses less storage.
+                        </div>
+                    </div>
                 </div>
             </div>
         </AppScreenFade>

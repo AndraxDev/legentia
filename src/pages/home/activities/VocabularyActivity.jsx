@@ -1,51 +1,38 @@
-/***************************************************************************
- * Copyright (c) 2025 Dmytro Ostapenko. All rights reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *   http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- * *************************************************************************/
-
-import React, {useEffect} from 'react';
-import PropTypes from 'prop-types';
-import AppScreenFade from "../../AppScreenFade";
-import * as Settings from "../../../Settings";
+import React from 'react';
+import PropTypes from "prop-types";
+import WordsActivity from "./WordsActivity";
+import * as Vocabulary from "../../VocabularyCache";
+import {MaterialDialog} from "../../../components/MaterialDialog";
 import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
-import {MaterialDialog} from "../../../components/MaterialDialog";
+import AppScreenFade from "../../AppScreenFade";
 import * as StringUtil from "../../util/StringUtils";
+import * as Settings from "../../../Settings";
 
 WordsActivity.propTypes = {
     onNewIntent: PropTypes.func.isRequired
 };
 
-function WordsActivity({onNewIntent}) {
+function VocabularyActivity({onNewIntent}) {
     const onBackPressed = () => {
         onNewIntent("/home/1")
     }
 
-    const [weakWords, setWeakWords] = React.useState(Object.keys(Settings.getWeakWords()));
-    const [weakWordMap, setWeakWordMap] = React.useState(Settings.getWeakWords());
+    const [vocabularyWords, setVocabularyWords] = React.useState(Object.keys(Vocabulary.getVocabulary()));
+    const [vocabularyWordMap, setVocabularyWordMap] = React.useState(Vocabulary.getVocabulary());
     const [markedWordForDeletion, setMarkedWordForDeletion] = React.useState("");
     const [deleteConfirmationDialogOpened, setDeleteConfirmationDialogOpened] = React.useState(false);
+    const [searchTerm, setSearchTerm] = React.useState("");
 
-    useEffect(() => {
-        setWeakWordMap(Settings.getWeakWords());
-    }, [weakWords]);
+    React.useEffect(() => {
+        setVocabularyWordMap(Vocabulary.getVocabulary());
+    }, [vocabularyWords]);
 
     const deleteWord = () => {
         if (markedWordForDeletion) {
-            Settings.deleteWeakWord(markedWordForDeletion);
+            Vocabulary.deleteWord(markedWordForDeletion);
             setMarkedWordForDeletion("");
-            setWeakWords(Object.keys(Settings.getWeakWords()))
+            setVocabularyWords(Object.keys(Vocabulary.getVocabulary()));
         }
     }
 
@@ -58,7 +45,7 @@ function WordsActivity({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Delete word from the practice list?"}
+                    {"Delete word from the vocabulary?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
@@ -85,8 +72,9 @@ function WordsActivity({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Practice words</h2>
+                    }} className={"article-title"}>My vocabulary</h2>
                 </div>
+
                 <div style={{
                     width: "100%",
                     display: "flex",
@@ -96,27 +84,23 @@ function WordsActivity({onNewIntent}) {
                     gap: "20px",
                 }}>
                     <button className={"exercise-button exercise-button-neutral"} onClick={() => {
-                        onNewIntent("addword");
+                        onNewIntent("vocabularyadd");
                     }}>
                         Add new word
                     </button>
-                    <button disabled={weakWords.length === 0} className={"exercise-button " + ((weakWords.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={() => {
-                        onNewIntent("quiz");
-                    }}>
-                        Start word quiz
-                    </button>
+                    <input className={"input"} placeholder={"Search"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
                     {
-                        weakWords.length > 0 ? <p style={{
+                        vocabularyWords.length > 0 ? <p style={{
                             width: "calc(100% - 48px)",
                             margin: "0",
                             fontSize: "20px",
                             userSelect: "none",
                             paddingTop: "6px"
-                        }}>{weakWords.length} weak word{weakWords.length > 1 ? "s" : ""}</p> : null
+                        }}>{vocabularyWords.length} word{vocabularyWords.length > 1 ? "s" : ""}</p> : null
                     }
                 </div>
                 {
-                    weakWords.length > 0 ? <div>
+                    vocabularyWords.length > 0 ? <div>
                         <div className={"list-container"}>
                             <div className={"list-item word-grid"} style={{
                                 backgroundColor: "rgba(255, 255, 255, 0.05)",
@@ -133,11 +117,11 @@ function WordsActivity({onNewIntent}) {
                                 </button>
                             </div>
                             {
-                                weakWords.map(word => (
+                                vocabularyWords.filter(word => searchTerm.includes(word) || word.includes(searchTerm)).map(word => (
                                     <div className={"list-item word-grid"} key={word}>
-                                        <span className={"translation-word"}>{StringUtil.clearWord(word)}</span>
-                                        <span className={"translation-meaning"}>{StringUtil.clearWord(weakWordMap[word])}</span>
-                                        <span className={"translation-learning-index"}>{Settings.getWordIndex(StringUtil.clearWord(word))}</span>
+                                        <span className={"translation-word"}>{StringUtil.clearWord(word || "")}</span>
+                                        <span className={"translation-meaning"}>{StringUtil.clearWord(vocabularyWordMap[word] || "")}</span>
+                                        <span className={"translation-learning-index"}>{Settings.getWordIndex(StringUtil.clearWord(word || ""))}</span>
                                         <button style={{
                                             cursor: "pointer"
                                         }} onClick={() => {
@@ -153,7 +137,7 @@ function WordsActivity({onNewIntent}) {
                         <div className={"list-item translation-item"} style={{
                             userSelect: "none",
                         }}>
-                            You have not added any words to practice list yet. You can add words to this list by tapping on them while reading articles or stories.
+                            Your vocabulary is empty or no words match the search term.
                         </div>
                     </div>
                 }
@@ -162,4 +146,4 @@ function WordsActivity({onNewIntent}) {
     );
 }
 
-export default WordsActivity;
+export default VocabularyActivity;

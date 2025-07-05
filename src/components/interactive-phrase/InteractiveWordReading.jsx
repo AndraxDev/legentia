@@ -77,7 +77,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                     }
                     if (error.message.toLowerCase().includes("word_unknown")) {
                         setTranslation(word);
-                        VocabularyCache.insertWord(word, word);
+                        VocabularyCache.insertWord(word, [word]);
                     } else {
                         setTranslation("Translation not available right now.");
                     }

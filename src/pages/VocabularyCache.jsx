@@ -16,34 +16,67 @@
 
 export const getVocabulary = () => {
     const localVocabulary = localStorage.getItem('vocabulary');
-    return JSON.parse(localVocabulary) || [];
+    return JSON.parse(localVocabulary) || {};
 }
 
 export const translateLocal = (latinWord) => {
     const vocabulary = getVocabulary();
-    const translation = vocabulary.find(item => item[latinWord]);
-    if (translation) {
-        if (translation[latinWord][0].includes("word_unknown")) {
+    const translation = vocabulary[latinWord];
+    if (translation && translation.length > 0) {
+        if (translation[0].includes("word_unknown")) {
             return [latinWord.toLowerCase().replace("the word to translate is:", "").trim()];
         } else {
-            return [translation[latinWord][0].toLowerCase().replace("the word to translate is:", "").trim()];
+            return [translation[0].toLowerCase().replace("the word to translate is:", "").trim()];
         }
     } else {
         return null
     }
 }
 
+export const convertVocabulary = (verbose) => {
+    const vocabulary = getVocabulary();
+
+    // Check if vocabulary is an array or an object
+    // New format is an object
+    if (Array.isArray(vocabulary)) {
+        let newVocabulary = {};
+
+        vocabulary.forEach((item) => {
+            let word = Object.keys(item)[0];
+            let translation;
+
+            if (word) {
+                translation = item[word];
+            }
+
+            if (translation && translation.length > 0) {
+                newVocabulary[word] = translation;
+            }
+        })
+
+        localStorage.setItem("vocabulary", JSON.stringify(newVocabulary));
+
+        if (verbose) {
+            console.log(newVocabulary);
+            console.log("Vocabulary has been converted to the new format.");
+        }
+    } else {
+        if (verbose) {
+            console.log("You have already new vocabulary format. No conversion is needed.")
+        }
+    }
+}
+
 export const insertWord = (latinWord, englishWords) => {
     const vocabulary = getVocabulary();
 
-    vocabulary.filter((item) => {
-        const existingWords = Object.keys(item)[0];
-        return existingWords !== latinWord;
-    })
+    vocabulary[latinWord] = englishWords
 
-    vocabulary.push({
-        [latinWord]: englishWords
-    });
+    localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
+}
 
+export const deleteWord = (latinWord) => {
+    const vocabulary = getVocabulary();
+    delete vocabulary[latinWord];
     localStorage.setItem('vocabulary', JSON.stringify(vocabulary));
 }

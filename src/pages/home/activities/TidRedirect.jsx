@@ -48,7 +48,9 @@ function TidRedirect({onNewIntent}) {
                         textAlign: "start"
                     }} className={"article-title"}>Sign In with Teslasoft ID</h2>
                 </div>
-                <div className={"list-container"}>
+                <div className={"list-container"} style={{
+                    marginTop: "0",
+                }}>
                     <div className={"list-item translation-item"} style={{
                         userSelect: "none",
                     }}>

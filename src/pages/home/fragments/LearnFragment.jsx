@@ -58,6 +58,11 @@ function LearnFragment({onNewIntent}) {
                 }}>
                     Practice words
                 </button>
+                <button className={"exercise-button exercise-button-neutral"} onClick={() => {
+                    onNewIntent("vocabulary");
+                }}>
+                    My vocabulary
+                </button>
             </div>
         </div>
     );
