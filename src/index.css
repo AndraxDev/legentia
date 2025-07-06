@@ -1007,19 +1007,25 @@ button {
     padding: 16px
 }
 
+.quiz-button-wrapper {
+    height: 72px;
+}
+
+
 .quiz-button-selected {
     background-color: transparent;
     color: #6393e8;
     border-top: 2px solid #6393e8;
-    border-bottom: 5px solid #6393e8;
+    border-bottom: 2px solid #6393e8;
     border-left: 2px solid #6393e8;
     border-right: 2px solid #6393e8;
     padding: 16px;
-    border-radius: 20px;
+    border-radius: 16px;
     font-size: 18px;
     font-weight: 600;
     width: 100%;
-    height: 72px;
+    height: 69px;
+    margin-top: 3px;
     transition: .15s;
 }
 
@@ -1031,7 +1037,7 @@ button {
     border-left: 2px solid #777777;
     border-right: 2px solid #777777;
     padding: 16px;
-    border-radius: 20px;
+    border-radius: 16px;
     font-size: 18px;
     font-weight: 600;
     width: 100%;
@@ -1047,11 +1053,12 @@ button {
     border-left: 2px solid #444444;
     border-right: 2px solid #444444;
     padding: 16px;
-    border-radius: 20px;
+    border-radius: 16px;
     font-size: 18px;
     font-weight: 600;
     width: 100%;
-    height: 72px;
+    height: 70px;
+    margin-top: 2px;
     transition: .15s;
 }
 
@@ -1063,7 +1070,7 @@ button {
     border-left: 2px solid #a6ff5d;
     border-right: 2px solid #a6ff5d;
     padding: 16px;
-    border-radius: 20px;
+    border-radius: 16px;
     font-size: 18px;
     font-weight: 600;
     width: 100%;
@@ -1079,7 +1086,7 @@ button {
     border-left: 2px solid #ff5d5d;
     border-right: 2px solid #ff5d5d;
     padding: 16px;
-    border-radius: 20px;
+    border-radius: 16px;
     font-size: 18px;
     font-weight: 600;
     width: 100%;
@@ -1092,7 +1099,7 @@ button {
     flex-direction: row;
     width: calc(100vw - 48px);
     justify-content: space-between;
-    gap: 24px;
+    gap: 20px;
     margin: 24px;
 }
 

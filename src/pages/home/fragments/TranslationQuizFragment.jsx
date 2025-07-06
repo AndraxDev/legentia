@@ -66,8 +66,14 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
                         document.getElementById("translation-" + selectedTranslation).style.color = "#555555";
                         document.getElementById("word-" + selectedWord).style.cursor = "default";
                         document.getElementById("translation-" + selectedTranslation).style.cursor = "default";
+                        document.getElementById("word-" + selectedWord).style.height = "69px";
+                        document.getElementById("translation-" + selectedTranslation).style.height = "69px";
+                        document.getElementById("word-" + selectedWord).style.borderBottomWidth = "2px";
+                        document.getElementById("word-" + selectedWord).style.marginTop = "3px";
+                        document.getElementById("translation-" + selectedTranslation).style.marginTop = "3px";
+                        document.getElementById("translation-" + selectedTranslation).style.borderBottomWidth = "2px";
                     }
-                }, 1000)
+                }, 500)
             } else {
                 if (document.getElementById("word-" + selectedWord)) {
                     document.getElementById("word-" + selectedWord).style.borderColor = "#ff5d5d";
@@ -89,7 +95,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
                         document.getElementById("word-" + selectedWord).style.cursor = "pointer";
                         document.getElementById("translation-" + selectedTranslation).style.cursor = "pointer";
                     }
-                }, 1000)
+                }, 500)
             }
 
             setSelectedWord(null);
@@ -151,7 +157,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
             <div className={"quiz-content"}>
                 <div className={"quiz-column"}>
                     {
-                        exerciseWords.map(word => (<button style={{
+                        exerciseWords.map(word => (<div className={"quiz-button-wrapper"}><button style={{
                             cursor: "pointer"
                         }} disabled={correctWords.includes(word)} id={"word-" + word} onClick={() => {
                             if (selectedWord === word || correctWords.includes(word)) {
@@ -161,22 +167,24 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
                             }
                         }} className={getClassName(word)} key={word}>
                             {StringUtil.clearWord(word)}
-                        </button>))
+                        </button></div>))
                     }
                 </div>
                 <div className={"quiz-column"}>
                     {
-                        exerciseTranslations.map(word => (<button style={{
-                            cursor: "pointer"
-                        }} disabled={correctWords.includes(word)} id={"translation-" + word} onClick={() => {
-                            if (selectedTranslation === word || correctWords.includes(word)) {
-                                setSelectedTranslation(null)
-                            } else {
-                                setSelectedTranslation(word)
-                            }
-                        }} className={getClassName(word)} key={word.toString()}>
-                            {StringUtil.clearWord(word || "")}
-                        </button>))
+                        exerciseTranslations.map(word => (<div className={"quiz-button-wrapper"}>
+                            <button style={{
+                                cursor: "pointer"
+                            }} disabled={correctWords.includes(word)} id={"translation-" + word} onClick={() => {
+                                if (selectedTranslation === word || correctWords.includes(word)) {
+                                    setSelectedTranslation(null)
+                                } else {
+                                    setSelectedTranslation(word)
+                                }
+                            }} className={getClassName(word)} key={word.toString()}>
+                                {StringUtil.clearWord(word || "")}
+                            </button>
+                        </div>))
                     }
                 </div>
             </div>
