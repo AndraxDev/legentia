@@ -32,7 +32,7 @@ import * as StringUtils from "../../pages/util/StringUtils";
 
 const untranslatableWords = ["\"", "'", ".", ",", "!", "?", ":", ";", "-", "(", ")", "[", "]", "{", "}", "+", "_", "*", "/", "\\", "|", "=", "<", ">", "@", "#", "$", "%", "^", "&", "*", "`", "~", "–", "”"];
 
-function InteractiveWord({word, learningIndex, contextSentence, weakWords, propagateWordUpdate}) {
+function InteractiveWord({word, learningIndex, contextSentence, weakWords, propagateWordUpdate, previousWord}) {
     const [translationIsOpened, setTranslationIsOpened] = React.useState(false);
 
     const [translation, setTranslation] = React.useState(null);
@@ -174,15 +174,17 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                         <button onClick={onWordClick} className={weakWords.includes(StringUtils.clearWord(word)) ? "word-weak" : "word-regular"}>{word}</button>
                     </MaterialTooltip>
                 </> : <>
-                    <div style={{
+                    {previousWord === "{{}}" ?
+                        <span style={{
+                            flexGrow: 1,
+                            width: "100%",
+                            fontSize: "20px",
+                            userSelect: "none",
+                        }}>&nbsp;</span>
+                     : <div style={{
                         flexGrow: 1,
                         width: "100%",
-                    }}></div>
-                    <div style={{
-                        flexGrow: 1,
-                        width: "100%",
-                        height: "24px"
-                    }}></div>
+                    }}></div>}
                 </>
             }
         </>
@@ -194,7 +196,8 @@ InteractiveWord.propTypes = {
     learningIndex: PropTypes.number,
     contextSentence: PropTypes.string,
     weakWords: PropTypes.any,
-    propagateWordUpdate: PropTypes.func
+    propagateWordUpdate: PropTypes.func,
+    previousWord: PropTypes.string
 }
 
 export default InteractiveWord;

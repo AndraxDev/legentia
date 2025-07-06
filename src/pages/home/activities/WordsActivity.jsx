@@ -153,7 +153,7 @@ function WordsActivity({onNewIntent}) {
                         <div className={"list-item translation-item"} style={{
                             userSelect: "none",
                         }}>
-                            You have not added any words to practice list yet. You can add words to this list by tapping on them while reading articles or stories.
+                            You have not added any words to the practice list yet. You can add words to this list by tapping on them while reading articles or stories.
                         </div>
                     </div>
                 }

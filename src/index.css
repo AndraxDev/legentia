@@ -454,7 +454,7 @@ br {
 .MuiTooltip-tooltip {
     border-radius: 24px !important;
     padding: 0 !important;
-    transform: translateY(-16px) !important;
+    transform: translateY(-8px) !important;
     border: 2px solid rgba(255, 255, 255, 0.2) !important;
     background-color: rgba(20, 20, 20, 0.2) !important;
     user-select: none !important;

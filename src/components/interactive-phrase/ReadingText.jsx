@@ -37,7 +37,12 @@ function ReadingText({article}) {
                         sentencePurified.map((word, index) => {
                             const pu = punctuationMarks[ix] === undefined ? "" : punctuationMarks[ix];
                             return (
-                                <InteractiveWordReading propagateWordUpdate={onWordAddedToWeak} weakWords={weakWords} word={index === sentencePurified.length - 1 ? word + pu : word} key={word + index.toString()} contextSentence={sentence + pu} />
+                                <InteractiveWordReading
+                                    propagateWordUpdate={onWordAddedToWeak}
+                                    weakWords={weakWords}
+                                    word={index === sentencePurified.length - 1 ? word + pu : word} key={word + index.toString()}
+                                    contextSentence={sentence + pu}
+                                    previousWord={index > 0 ? sentencePurified[index - 1] : ""}/>
                             );
                         })
                     )

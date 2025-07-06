@@ -35,11 +35,19 @@ const initializeExercises = () => {
     let weakWords = Settings.getWeakWords();
     let pool = {};
 
+    // Reset exercise
+    streak = 0;
+    time = 0;
+    maxCombo = 0;
+
+    console.log("Streak reset to: " + streak);
+
     let weakWordsIndexes = Settings.getWeakWordsLearningIndexes()
     let indexesArray = Object.values(weakWordsIndexes);
     let maxIndex = Math.max(...indexesArray);
-    let countNonMaxIndex = indexesArray.filter(index => index < maxIndex).length;
     let minIndex = Object.keys(weakWords).length > indexesArray.length ? 0 : Math.min(...indexesArray);
+    let wordsWidthNotMaxIndex = Object.keys(weakWords).filter(word => Settings.getWordIndex(word) < maxIndex);
+    let countNonMaxIndex = wordsWidthNotMaxIndex.length;
     let diff = maxIndex - minIndex;
     let nonUniformSelectionIsEnabled = diff > 0;
     let diffNormalized = nonUniformSelectionIsEnabled ? (1 - Settings.getAlpha()) / diff : 0;
@@ -51,30 +59,37 @@ const initializeExercises = () => {
 
     // Unstuck algorithm in case if successful word selection is impossible
     if (needToSelect > 0 && nonUniformSelectionIsEnabled && Settings.getAlpha() === 0) {
-        const wordsWidthNotMaxIndex = Object.keys(weakWords).filter(word => Settings.getWordIndex(word) < maxIndex);
+        console.log("Enabling uniform selection for words with minimal indexes and non-uniform selection for the remaining words.")
+
+        // console.log(pool);
+        // console.log(wordsWidthNotMaxIndex);
 
         // Prioritizing words with lower indexes
-        for (let i = 0; i < needToSelect; i++) {
-            pool[wordsWidthNotMaxIndex[i]] = weakWords[wordsWidthNotMaxIndex[i]];
+        for (let i = 0; i < countNonMaxIndex; i++) {
+            if (wordsWidthNotMaxIndex[i] !== undefined && wordsWidthNotMaxIndex[i] !== "undefined") {
+                pool[wordsWidthNotMaxIndex[i]] = weakWords[wordsWidthNotMaxIndex[i]];
+            }
         }
 
-        const remainingWordsCount = sessionSize - needToSelect;
+        // console.log(pool);
 
         // Then fill the exercise pool with remaining words
-        if (remainingWordsCount > 0) {
-            for (let i = 0; i < remainingWordsCount; i++) {
+        if (needToSelect > 0) {
+            for (let i = 0; i < needToSelect; i++) {
                 const randomIndex = Math.floor(Math.random() * Object.keys(weakWords).length);
                 let word = Object.keys(weakWords)[randomIndex];
 
-                while (pool[word]) {
+                while (word === undefined || word === "undefined" || pool[word]) {
                     // Ensure unique words in the pool
                     const newIndex = Math.floor(Math.random() * Object.keys(weakWords).length);
                     word = Object.keys(weakWords)[newIndex];
                 }
 
-                pool[word] = weakWords[word];
+                if (word !== undefined && word !== "undefined") pool[word] = weakWords[word];
             }
         }
+
+        console.log(pool)
     } else if (Object.keys(weakWords).length < sessionSize) {
         pool = weakWords;
     } else {

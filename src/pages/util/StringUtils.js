@@ -15,6 +15,7 @@
  * *************************************************************************/
 
 export const clearWord = (word) => {
+    if (word === undefined) return ""
     return (word || "").toString().toLowerCase()
         .replaceAll(",", "")
         .replaceAll(".", "")
@@ -43,5 +44,6 @@ export const clearWord = (word) => {
 }
 
 export const reduceNewLinesToOne = (text) => {
-    return text.replaceAll(/\n+/g, "\n").trim();
+    // return text.replaceAll(/\n+/g, "\n").trim();
+    return text.trim();
 }

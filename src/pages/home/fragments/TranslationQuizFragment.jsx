@@ -175,7 +175,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
                                 setSelectedTranslation(word)
                             }
                         }} className={getClassName(word)} key={word.toString()}>
-                            {StringUtil.clearWord(word)}
+                            {StringUtil.clearWord(word || "")}
                         </button>))
                     }
                 </div>
