@@ -231,7 +231,7 @@ function ExerciseActivity({onNewIntent}) {
                                 </div>
                             </div>
                         </div>
-                        <ExerciseFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} mistakeIndex={mistakeIndex} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} />
+                        <ExerciseFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} />
                     </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakeIndices.length === 0} time={time} mistakesCount={mistakeIndices.length} streak={streak} />
                 }
             </div>

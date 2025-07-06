@@ -29,7 +29,7 @@ const getExerciseTitle = (exerciseType) => {
     }
 }
 
-function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComplete, phraseId, fallbackEvent, isPreviousMistake}) {
+function ExerciseFragment({exercise, fragmentIndex, onExerciseComplete, fallbackEvent, isPreviousMistake}) {
 
     const [currentAnswer, setCurrentAnswer] = React.useState([]);
     const [answerStatus, setAnswerStatus] = React.useState("neutral");
@@ -40,11 +40,15 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
         return exercise;
     }
 
-    const [answerVariants, setAnswerVariants] = useState(createExercise().variants.sort(() => Math.random() - 0.5));
+    const [answerVariants, setAnswerVariants] = useState(createExercise().variants);
+
+    useEffect(() => {
+        setAnswerVariants(createExercise().variants.sort(() => Math.random() - 0.5));
+    }, [exercise]);
 
     useEffect(() => {
         resetAnswerResult()
-        setAnswerVariants(createExercise().variants.sort(() => Math.random() - 0.5))
+        // setAnswerVariants(createExercise().variants.sort(() => Math.random() - 0.5))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fallbackEvent]);
 
@@ -121,7 +125,7 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
             </div>
             <div className={"exercise-answers-box"}>
                 {
-                    answerVariants.filter(v => !currentAnswer.includes(v)).map((variant) => (<button className={"answer-word-neutral"} key={variant} onClick={() => {
+                    answerVariants.map((variant) => (<button className={currentAnswer.includes(variant) ? "answer-word-neutral-used" : "answer-word-neutral"} key={variant} onClick={() => {
                         if (answerStatus !== "neutral") return;
                         let newAnswer = [...currentAnswer];
 
@@ -162,9 +166,7 @@ function ExerciseFragment({exercise, mistakeIndex, fragmentIndex, onExerciseComp
 ExerciseFragment.propTypes = {
     exercise: PropTypes.object.isRequired,
     fragmentIndex: PropTypes.number.isRequired,
-    mistakeIndex: PropTypes.number.isRequired,
     onExerciseComplete: PropTypes.func.isRequired,
-    phraseId: PropTypes.string.isRequired,
     fallbackEvent: PropTypes.number.isRequired,
     isPreviousMistake: PropTypes.bool
 }
