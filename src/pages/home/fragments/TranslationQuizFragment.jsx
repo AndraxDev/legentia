@@ -19,6 +19,10 @@ import PropTypes from "prop-types";
 import * as StringUtil from "../../util/StringUtils";
 import * as Settings from "../../../Settings";
 
+const answerStatusAnimationDuration = 500;
+const answerCssTransitionDuration = 300;
+const cssSafeDelay = 50;
+
 function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, phraseId, fallbackEvent, isPreviousMistake}) {
 
     const [selectedWord, setSelectedWord] = React.useState(null);
@@ -28,6 +32,8 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
     const [correctWords, setCorrectWords] = useState([]);
     const [mistakes, setMistakes] = useState(0);
     const [localStreak, setLocalStreak] = useState(0);
+    const [selectedWordIndex, setSelectedWordIndex] = useState(null);
+    const [selectedTranslationIndex, setSelectedTranslationIndex] = useState(null);
 
     const checkAsCorrect = () => {
         document.getElementById("correct").style.transform = "translateY(100%)";
@@ -41,73 +47,100 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
             }, 300)
         }
 
-        if (selectedWord && selectedTranslation) {
+        if (selectedWord && selectedTranslation && selectedWordIndex != null && selectedTranslationIndex != null) {
+
+            let selectedWordButton = getWordElementId(selectedWord, selectedWordIndex);
+            let selectedTranslationButton = getTranslationElementId(selectedTranslation, selectedTranslationIndex);
+
             if (isAnswerCorrect(selectedWord, selectedTranslation)) {
-                if (document.getElementById("word-" + selectedWord)) {
-                    document.getElementById("word-" + selectedWord).style.borderColor = "#a6ff5d";
-                    document.getElementById("translation-" + selectedTranslation).style.borderColor = "#a6ff5d";
-                    document.getElementById("word-" + selectedWord).style.color = "#a6ff5d";
-                    document.getElementById("translation-" + selectedTranslation).style.color = "#a6ff5d";
-                    document.getElementById("word-" + selectedWord).style.cursor = "pointer";
-                    document.getElementById("translation-" + selectedTranslation).style.cursor = "pointer";
-                    let newCorrectWords = [...correctWords];
-                    newCorrectWords.push(selectedTranslation);
-                    newCorrectWords.push(selectedWord);
-                    setCorrectWords(newCorrectWords);
-                    setLocalStreak(localStreak + 1);
-                    Settings.incrementWeakWordIndex(selectedWord);
-                }
+                let newCorrectWords = [...correctWords];
+                newCorrectWords.push(selectedTranslation);
+                newCorrectWords.push(selectedWord);
+                setCorrectWords(newCorrectWords);
+                setLocalStreak(localStreak + 1);
+                Settings.incrementWeakWordIndex(selectedWord);
 
-                setTimeout(() => {
-                    if (document.getElementById("word-" + selectedWord)) {
-                        document.getElementById("word-" + selectedWord).style.borderColor = "#444444";
-                        document.getElementById("translation-" + selectedTranslation).style.borderColor = "#444444";
-                        document.getElementById("word-" + selectedWord).style.color = "#555555";
-                        document.getElementById("translation-" + selectedTranslation).style.color = "#555555";
-                        document.getElementById("word-" + selectedWord).style.cursor = "default";
-                        document.getElementById("translation-" + selectedTranslation).style.cursor = "default";
-                        document.getElementById("word-" + selectedWord).style.height = "69px";
-                        document.getElementById("translation-" + selectedTranslation).style.height = "69px";
-                        document.getElementById("word-" + selectedWord).style.borderBottomWidth = "2px";
-                        document.getElementById("word-" + selectedWord).style.marginTop = "3px";
-                        document.getElementById("translation-" + selectedTranslation).style.marginTop = "3px";
-                        document.getElementById("translation-" + selectedTranslation).style.borderBottomWidth = "2px";
-                    }
-                }, 500)
+                markCurrentWordPairAsCorrect(selectedWordButton, selectedTranslationButton);
             } else {
-                if (document.getElementById("word-" + selectedWord)) {
-                    document.getElementById("word-" + selectedWord).style.borderColor = "#ff5d5d";
-                    document.getElementById("translation-" + selectedTranslation).style.borderColor = "#ff5d5d";
-                    document.getElementById("word-" + selectedWord).style.color = "#ff5d5d";
-                    document.getElementById("translation-" + selectedTranslation).style.color = "#ff5d5d";
-                    document.getElementById("word-" + selectedWord).style.cursor = "pointer";
-                    document.getElementById("translation-" + selectedTranslation).style.cursor = "pointer";
-                    setMistakes(mistakes + 1);
-                    setLocalStreak(0);
-                }
+                setMistakes(mistakes + 1);
+                setLocalStreak(0);
 
-                setTimeout(() => {
-                    if (document.getElementById("word-" + selectedWord)) {
-                        document.getElementById("word-" + selectedWord).style.removeProperty("border-color");
-                        document.getElementById("translation-" + selectedTranslation).style.removeProperty("border-color");
-                        document.getElementById("word-" + selectedWord).style.removeProperty("color");
-                        document.getElementById("translation-" + selectedTranslation).style.removeProperty("color");
-                        document.getElementById("word-" + selectedWord).style.cursor = "pointer";
-                        document.getElementById("translation-" + selectedTranslation).style.cursor = "pointer";
-                    }
-                }, 500)
+                markCurrentWordPairAsIncorrect(selectedWordButton, selectedTranslationButton);
             }
 
             setSelectedWord(null);
             setSelectedTranslation(null);
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedWord, selectedTranslation]);
+    }, [selectedWord, selectedTranslation, selectedWordIndex, selectedTranslationIndex]);
 
     useEffect(() => {
         resetAnswerResult();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [fallbackEvent]);
+
+    // f1 - function to mark as correct or incorrect
+    // f2 - function to reset or disable
+    // b1 - first button to change state (usually word button)
+    // b2 - second button to change state (usually translation button)
+    const changeButtonState = (f1, f2, b1, b2) => {
+        if (b1 && b2) {
+            f1(b1);
+            f1(b2);
+
+            setTimeout(() => {
+                if (b1 && b2) {
+                    f2(b1);
+                    f2(b2);
+                }
+            }, answerStatusAnimationDuration)
+        }
+    }
+
+    const markCurrentWordPairAsCorrect = (wordButton, translationButton) => {
+        changeButtonState(markButtonAsCorrect, disableButton, wordButton, translationButton);
+    }
+
+    const markCurrentWordPairAsIncorrect = (wordButton, translationButton) => {
+        changeButtonState(markButtonAsIncorrect, resetButton, wordButton, translationButton);
+    }
+
+    const resetButton = (button) => {
+        if (button) {
+            button.style.removeProperty("border-color");
+            button.style.removeProperty("color");
+            button.style.cursor = "pointer";
+            button.className = "quiz-button";
+        }
+    }
+
+    const disableButton = (button) => {
+        if (button) {
+            button.style.borderColor = "#444444";
+            button.style.color = "#555555";
+            button.style.cursor = "default";
+            button.style.height = "69px";
+            button.style.borderBottomWidth = "2px";
+            button.style.marginTop = "3px";
+            button.setAttribute("disabled", "true");
+        }
+    }
+
+    const markButtonAsCorrect = (button) => {
+        if (button) {
+            button.style.borderColor = "#a6ff5d";
+            button.style.color = "#a6ff5d";
+            button.style.cursor = "pointer";
+        }
+    }
+
+    const markButtonAsIncorrect = (button) => {
+        if (button) {
+            button.style.borderColor = "#ff5d5d";
+            button.style.color = "#ff5d5d";
+            button.style.cursor = "pointer";
+        }
+    }
 
     const resetAnswerResult = () => {
         setExerciseWords(Object.keys(exercise).sort(() => Math.random() - 0.5))
@@ -117,6 +150,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
         setSelectedTranslation(null);
         setMistakes(0);
         setLocalStreak(0);
+
         document.getElementById("correct").style.transform = "translateY(100%)";
         document.getElementById("exercise-fragment-root").style.opacity = "0";
         setTimeout(() => {
@@ -125,9 +159,17 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
                 document.getElementById("exercise-fragment-root").style.opacity = "1";
                 setTimeout(() => {
                     document.getElementById("exercise-fragment-root").style.transition = "none";
-                }, 300)
-            }, 50)
-        }, 50)
+                }, answerCssTransitionDuration)
+            }, cssSafeDelay);
+        }, cssSafeDelay)
+    }
+
+    const getWordElementId = (word, index) => {
+        return document.getElementById("word-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString());
+    }
+
+    const getTranslationElementId = (translation, index) => {
+        return document.getElementById("translation-" + translation.toString()?.replaceAll(" ", "-") + "-" + index.toString());
     }
 
     const isAnswerCorrect = (word, translation) => {
@@ -138,13 +180,15 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
         onExerciseComplete(fragmentIndex, true, exercise, mistakes, localStreak);
     }
 
-    const getClassName = (word) => {
-        if (correctWords.includes(word)) {
-            return "quiz-button-disabled"
-        } else if (word === selectedWord || word === selectedTranslation) {
-            return "quiz-button-selected"
-        } else {
-            return "quiz-button"
+    const clearAllSelectionsWords = () => {
+        for (let i = 0; i < exerciseWords.length; i++) {
+            document.getElementById("word-" + exerciseWords[i]?.replaceAll(" ", "-") + "-" + i.toString()).className = "quiz-button";
+        }
+    }
+
+    const clearAllSelectionsTranslations = () => {
+        for (let i = 0; i < exerciseTranslations.length; i++) {
+            document.getElementById("translation-" + exerciseTranslations[i].toString()?.replaceAll(" ", "-") + "-" + i.toString()).className = "quiz-button";
         }
     }
 
@@ -157,34 +201,81 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
             <div className={"quiz-content"}>
                 <div className={"quiz-column"}>
                     {
-                        exerciseWords.map(word => (<div className={"quiz-button-wrapper"}><button style={{
-                            cursor: "pointer"
-                        }} disabled={correctWords.includes(word)} id={"word-" + word} onClick={() => {
-                            if (selectedWord === word || correctWords.includes(word)) {
-                                setSelectedWord(null)
-                            } else {
-                                setSelectedWord(word)
-                            }
-                        }} className={getClassName(word)} key={word}>
-                            {StringUtil.clearWord(word)}
-                        </button></div>))
+                        exerciseWords.map((word, index) => (
+                            <div className={"quiz-button-wrapper"} key={"translation-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()}>
+                                <button
+                                    style={{
+                                        cursor: "pointer"
+                                    }}
+                                    disabled={correctWords.filter(v => v === word) >= exerciseWords.filter(v => v === word).length}
+                                    id={"word-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()}
+                                    onClick={() => {
+                                        if (selectedWord === word && selectedWordIndex === index) {
+                                            setSelectedWord(null)
+                                            setSelectedWordIndex(null)
+
+                                            clearAllSelectionsWords()
+                                            if (correctWords.filter(v => v === word) >= exerciseWords.filter(v => v === word).length) {
+                                                document.getElementById("word-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()).className = "quiz-button-disabled";
+                                            } else {
+                                                document.getElementById("word-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()).className = "quiz-button";
+                                            }
+                                        } else {
+                                            setSelectedWord(word)
+                                            setSelectedWordIndex(index);
+
+                                            clearAllSelectionsWords()
+                                            if (correctWords.filter(v => v === word) >= exerciseWords.filter(v => v === word).length) {
+                                                document.getElementById("word-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()).className = "quiz-button-disabled";
+                                            } else {
+                                                document.getElementById("word-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()).className = "quiz-button-selected";
+                                            }
+                                        }
+                                    }} className={"quiz-button"} key={word}>
+                                        {StringUtil.clearWord(word)}
+                                </button>
+                            </div>)
+                        )
                     }
                 </div>
                 <div className={"quiz-column"}>
                     {
-                        exerciseTranslations.map(word => (<div className={"quiz-button-wrapper"}>
-                            <button style={{
-                                cursor: "pointer"
-                            }} disabled={correctWords.includes(word)} id={"translation-" + word} onClick={() => {
-                                if (selectedTranslation === word || correctWords.includes(word)) {
-                                    setSelectedTranslation(null)
-                                } else {
-                                    setSelectedTranslation(word)
-                                }
-                            }} className={getClassName(word)} key={word.toString()}>
-                                {StringUtil.clearWord(word || "")}
-                            </button>
-                        </div>))
+                        exerciseTranslations.map((word, index) => (
+                            <div className={"quiz-button-wrapper"} key={"translation-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()}>
+                                <button
+                                    style={{
+                                        cursor: "pointer"
+                                    }}
+                                    disabled={correctWords.filter(v => v === word) >= exerciseTranslations.filter(v => v === word).length}
+                                    id={"translation-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()} onClick={() => {
+                                        if (selectedTranslation === word && selectedTranslationIndex === index) {
+                                            setSelectedTranslation(null);
+                                            setSelectedTranslationIndex(null);
+
+                                            clearAllSelectionsTranslations()
+                                            if (correctWords.filter(v => v === word) >= exerciseTranslations.filter(v => v === word).length) {
+                                                document.getElementById("translation-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()).className = "quiz-button-disabled";
+                                            } else {
+                                                document.getElementById("translation-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()).className = "quiz-button";
+                                            }
+                                        } else {
+                                            setSelectedTranslation(word);
+                                            setSelectedTranslationIndex(index);
+
+                                            clearAllSelectionsTranslations()
+                                            if (correctWords.filter(v => v === word) >= exerciseTranslations.filter(v => v === word).length) {
+                                                document.getElementById("translation-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()).className = "quiz-button-disabled";
+                                            } else {
+                                                document.getElementById("translation-" + word.toString()?.replaceAll(" ", "-") + "-" + index.toString()).className = "quiz-button-selected";
+                                            }
+                                        }
+                                    }}
+                                    className={"quiz-button"}
+                                    key={word.toString()}>
+                                        {StringUtil.clearWord(word || "")}
+                                </button>
+                            </div>)
+                        )
                     }
                 </div>
             </div>
