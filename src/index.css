@@ -125,7 +125,7 @@ br {
     transition: .3s;
 }
 
-.debug-button:hover {
+.debug-button:active {
     background-color: #373124;
 }
 
@@ -181,7 +181,7 @@ br {
     align-items: center;
     justify-content: center;
     background-color: #323232;
-    transition: .3s;
+    transition: .2s;
 }
 
 .bottom-navigation-item-icon-container-inactive {
@@ -193,10 +193,10 @@ br {
     align-items: center;
     justify-content: center;
     background-color: transparent;
-    transition: .3s;
+    transition: .2s;
 }
 
-.bottom-navigation-item-icon-container-inactive:hover {
+.bottom-navigation-item-icon-container-inactive:active {
     width: 60px;
     height: 32px;
     border-radius: 16px;
@@ -205,7 +205,7 @@ br {
     align-items: center;
     justify-content: center;
     background-color: #323232;
-    transition: .3s;
+    transition: .2s;
 }
 
 .bottom-navigation-item-icon-container-inactive:focus {
@@ -217,7 +217,7 @@ br {
     align-items: center;
     justify-content: center;
     background-color: #323232;
-    transition: .3s;
+    transition: .2s;
 }
 
 .bottom-navigation-item-icon-container-active {
@@ -229,7 +229,7 @@ br {
     align-items: center;
     justify-content: center;
     background-color: rgba(154, 137, 99, 0.22);
-    transition: .3s;
+    transition: .2s;
 }
 
 .bottom-navigation-icon-inactive {
@@ -268,7 +268,7 @@ br {
 }
 
 .article-title {
-    width: 100%;
+    width: calc(100% - 48px - 8px);
     text-align: center;
     padding: 0;
     margin: 16px 4px;
@@ -296,19 +296,22 @@ br {
     user-select: none;
     border-radius: 8px 8px 2px 2px;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+    transition: .2s;
+        -webkit-tap-highlight-color: transparent;
 }
 
-.word-weak:hover {
-    border-bottom: 3px dashed #ff5f5f;
-    background-color: rgba(221, 138, 138, 0.13);
-    color: #ff5f5f;
+.word-weak:active {
+    border-bottom: 3px dashed #ff7f7f;
+    background-color: rgba(221, 138, 138, 0.1);
+    color: #ff7f7f;
+    transition: .2s;
 }
 
 .word-weak:focus {
-    border-bottom: 3px dashed #ff5f5f;
-    background-color: rgba(221, 138, 138, 0.13);
-    color: #ff5f5f;
+    border-bottom: 3px dashed #ff7f7f;
+    background-color: rgba(221, 138, 138, 0.1);
+    color: #ff7f7f;
+    transition: .2s;
 }
 
 .word-regular {
@@ -325,19 +328,22 @@ br {
     user-select: none;
     border-radius: 8px 8px 2px 2px;
     cursor: pointer;
+    transition: .2s;
         -webkit-tap-highlight-color: transparent;
 }
 
-.word-regular:hover {
+.word-regular:active {
     background-color: rgba(154, 137, 99, 0.13);
     border-bottom: 3px dashed #ffc65c;
     color: #ffc65c;
+    transition: .2s;
 }
 
 .word-regular:focus {
     background-color: rgba(154, 137, 99, 0.13);
     border-bottom: 3px dashed #ffc65c;
     color: #ffc65c;
+    transition: .2s;
 }
 
 
@@ -393,7 +399,17 @@ br {
     align-items: center;
     justify-content: center;
     background: none;
-    color: #fff
+    color: #fff;
+    transition: .1s;
+}
+
+.list-item:last-child > .delete-word-btn {
+    border-bottom-right-radius: 21px;
+}
+
+.delete-word-btn:active {
+    background-color: rgba(255, 93, 93, 0.2);
+    transition: .1s;
 }
 
 .translation-item {
@@ -406,8 +422,8 @@ br {
 .translation-item-weak-word {
     padding: 16px;
     font-size: 18px;
-    background: none;
-    color: #ffa9a9;
+    color: #ffd3d3;
+    background-color: rgba(255, 96, 96, 0.11);
     border-bottom: 2px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -424,8 +440,8 @@ br {
     cursor: pointer;
 }
 
-.add-weak-word-button:hover {
-    background-color: rgba(255, 184, 30, 0.22);
+.add-weak-word-button:active {
+    background-color: rgba(255, 205, 94, 0.22);
     cursor: pointer;
 }
 
@@ -443,8 +459,8 @@ br {
     transition: .3s;
 }
 
-.add-weak-sentence-button:hover {
-    background-color: rgba(255, 184, 30, 0.22);
+.add-weak-sentence-button:active {
+    background-color: rgba(255, 205, 94, 0.22);
 }
 
 .translation-item:last-child {
@@ -489,7 +505,7 @@ br {
     cursor: pointer;
 }
 
-.answer-word-neutral:hover {
+.answer-word-neutral:active {
     border-bottom: 2px solid #999999;
     /*transform: translateY(2px);*/
     margin-top: 2px;
@@ -631,39 +647,39 @@ br {
     background-color: #555555;
 }
 
-.exercise-button:hover {
+.exercise-button:active {
     height: 48px;
     margin-top: 4px;
 }
 
-.exercise-button:focus {
-    height: 48px;
-    margin-top: 4px;
-}
-
-.exercise-button-neutral:hover {
+.exercise-button-neutral:active {
     border-bottom: none;
 }
 
-.exercise-button-incorrect:hover {
+.exercise-button-incorrect:active {
     border-bottom: none;
 }
 
-.exercise-button-correct:hover {
+.exercise-button-correct:active {
     border-bottom: none;
 }
 
-.exercise-button-neutral:focus {
-    border-bottom: none;
-}
+/*.exercise-button:focus {*/
+/*    height: 48px;*/
+/*    margin-top: 4px;*/
+/*}*/
 
-.exercise-button-incorrect:focus {
-    border-bottom: none;
-}
+/*.exercise-button-neutral:focus {*/
+/*    border-bottom: none;*/
+/*}*/
 
-.exercise-button-correct:focus {
-    border-bottom: none;
-}
+/*.exercise-button-incorrect:focus {*/
+/*    border-bottom: none;*/
+/*}*/
+
+/*.exercise-button-correct:focus {*/
+/*    border-bottom: none;*/
+/*}*/
 
 .progress-background {
     width: calc(100vw - 84px);
@@ -698,24 +714,38 @@ br {
 
 .exercise-close {
     width: 48px;
-    height: 56px;
+    height: 48px;
     padding: 0;
     border: none;
     color: #fff;
     background: none;
     font-size: 36px;
     cursor: pointer;
+    border-radius: 50%;
+    transition: .2s;
+}
+
+.exercise-close:active {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: .2s;
 }
 
 .exercise-back {
-    width: 60px;
-    height: 56px;
+    width: 48px;
+    height: 48px;
     padding: 0;
     border: none;
     color: #fff;
     background: none;
     font-size: 36px;
     cursor: pointer;
+    border-radius: 50%;
+    transition: .2s;
+}
+
+.exercise-back:active {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: .2s;
 }
 
 .debug-panel {
@@ -782,7 +812,7 @@ br {
     user-select: none;
 }
 
-.debug-button-overlay:hover {
+.debug-button-overlay:active {
     background-color: rgba(66, 66, 66, 0.5);
 }
 
@@ -956,11 +986,13 @@ button {
     text-decoration: none;
     font-weight: bold;
     transition: .2s;
+    border-radius: 8px;
 }
 
-.link:hover {
+.link:active {
     color: #ffd86f;
     transition: .2s;
+    background-color: rgba(255, 216, 111, 0.1);
 }
 
 .input {
@@ -1018,7 +1050,23 @@ button {
     display: flex;
     flex-direction: row;
     align-items: center;
-    padding: 16px
+    padding: 16px;
+    transition: .1s;
+}
+
+.button-in-list-item:active {
+    background-color: rgba(255, 209, 107, 0.05);
+    transition: .1s;
+}
+
+.list-item:first-child > .button-in-list-item {
+    border-top-left-radius: 21px;
+    border-top-right-radius: 21px;
+}
+
+.list-item:last-child > .button-in-list-item {
+    border-bottom-right-radius: 21px;
+    border-bottom-left-radius: 21px;
 }
 
 .quiz-button-wrapper {
@@ -1030,7 +1078,8 @@ button {
     background-color: transparent;
     color: #6393e8;
     border-top: 2px solid #6393e8;
-    border-bottom: 2px solid #6393e8;
+    border-bottom: 5px solid #6393e8;
+    /*border-bottom: 2px solid #6393e8;*/
     border-left: 2px solid #6393e8;
     border-right: 2px solid #6393e8;
     padding: 16px;
@@ -1038,9 +1087,19 @@ button {
     font-size: 18px;
     font-weight: 600;
     width: 100%;
+    height: 72px;
+    /*height: 69px;*/
+    /*margin-top: 3px;*/
+    transition: .1s;
+}
+
+.quiz-button-selected:active {
     height: 69px;
+    border-top: 2px solid #6393e8;
+    border-bottom: 2px solid #6393e8;
+    border-left: 2px solid #6393e8;
+    border-right: 2px solid #6393e8;
     margin-top: 3px;
-    transition: .15s;
 }
 
 .quiz-button {
@@ -1056,7 +1115,16 @@ button {
     font-weight: 600;
     width: 100%;
     height: 72px;
-    transition: .15s;
+    transition: .1s;
+}
+
+.quiz-button:active {
+    height: 69px;
+    border-top: 2px solid #777777;
+    border-bottom: 2px solid #777777;
+    border-left: 2px solid #777777;
+    border-right: 2px solid #777777;
+    margin-top: 3px;
 }
 
 .quiz-button-disabled {
@@ -1072,8 +1140,8 @@ button {
     font-weight: 600;
     width: 100%;
     height: 70px;
-    margin-top: 2px;
-    transition: .15s;
+    margin-top: 3px;
+    transition: .1s;
 }
 
 .quiz-button-correct {
@@ -1089,7 +1157,7 @@ button {
     font-weight: 600;
     width: 100%;
     height: 72px;
-    transition: .15s;
+    transition: .1s;
 }
 
 .quiz-button-incorrect {
@@ -1105,7 +1173,7 @@ button {
     font-weight: 600;
     width: 100%;
     height: 72px;
-    transition: .15s;
+    transition: .1s;
 }
 
 .quiz-content {
@@ -1138,6 +1206,14 @@ button {
     background: none;
     padding: 0;
     margin: 0;
+}
+
+.teslasoft-id-container:active {
+    border-top: 3px solid #393939;
+    border-bottom: 3px solid #393939;
+    border-left: 3px solid #393939;
+    border-right: 3px solid #393939;
+    margin-top: 3px;
 }
 
 .profile-photo {

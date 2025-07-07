@@ -19,7 +19,7 @@ import AppScreenFade from "../../AppScreenFade";
 import PropTypes from "prop-types";
 import ReadingText from "../../../components/interactive-phrase/ReadingText";
 import * as Settings from "../../../Settings";
-import * as StringUtiles from "../../util/StringUtils";
+import * as StringUtils from "../../util/StringUtils";
 
 function ArticleActivity({onNewIntent}) {
 
@@ -37,11 +37,13 @@ function ArticleActivity({onNewIntent}) {
                         quitReading()
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                 </div>
-                <h2 className={"article-title"}>{story.title}</h2>
+                <h2 style={{
+                    width: "calc(100% - 8px)",
+                }} className={"article-title"}>{story.title}</h2>
                 <div style={{
                     padding: "24px"
                 }}>
-                    <ReadingText article={StringUtiles.reduceNewLinesToOne(story.text).replaceAll("\n", " {{}} ")} />
+                    <ReadingText article={StringUtils.reduceNewLinesToOne(story.text).replaceAll("\n", " {{}} ")} />
                 </div>
             </div>
         </AppScreenFade>
