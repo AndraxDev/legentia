@@ -97,7 +97,7 @@ function PracticeCompleted({onNewIntent, flawless, time, mistakesCount, streak})
                 if (document.getElementById("box-motivational")) {
                     document.getElementById("box-motivational").style.opacity = "1";
                 }
-            }, 2000)
+            }, 1000)
         }
     }, [timeTimerFinished])
 
