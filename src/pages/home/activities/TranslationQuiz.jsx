@@ -39,6 +39,7 @@ const initializeExercises = () => {
     streak = 0;
     time = 0;
     maxCombo = 0;
+    practiceIsCompleteExternal = false;
 
     console.log("Streak reset to: " + streak);
 

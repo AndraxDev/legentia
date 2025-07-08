@@ -28,7 +28,7 @@ function LearnFragment({onNewIntent}) {
                 justifyContent: "center",
                 alignItems: "center",
                 gap: "16px",
-                border: "3px solid #424242",
+                border: "3px solid #323232",
                 borderRadius: "32px",
                 margin: "24px",
                 padding: "20px 16px",

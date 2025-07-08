@@ -107,6 +107,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
 
     const resetButton = (button) => {
         if (button) {
+            button.style.removeProperty("background-color");
             button.style.removeProperty("border-color");
             button.style.removeProperty("color");
             button.style.cursor = "pointer";
@@ -116,6 +117,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
 
     const disableButton = (button) => {
         if (button) {
+            button.style.backgroundColor = "transparent";
             button.style.borderColor = "#444444";
             button.style.color = "#555555";
             button.style.cursor = "default";
@@ -130,6 +132,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
         if (button) {
             button.style.borderColor = "#a6ff5d";
             button.style.color = "#a6ff5d";
+            button.style.backgroundColor = "rgba(166, 255, 93, 0.1)";
             button.style.cursor = "pointer";
         }
     }
@@ -137,6 +140,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
     const markButtonAsIncorrect = (button) => {
         if (button) {
             button.style.borderColor = "#ff5d5d";
+            button.style.backgroundColor = "rgba(255, 93, 93, 0.1)";
             button.style.color = "#ff5d5d";
             button.style.cursor = "pointer";
         }
