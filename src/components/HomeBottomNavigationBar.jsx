@@ -19,16 +19,16 @@ import BottomNavigationBar from "./bottom-navigation/BottomNavigationBar";
 import PropTypes from "prop-types";
 
 const items = [{
-    label: "Home",
+    label: "DOMUS",
     icon: "home",
 }, {
-    label: "Learn",
-    icon: "dictionary",
+    label: "STVDERE",
+    icon: "school",
 }, {
-    label: "Read",
+    label: "LEGERE",
     icon: "book_2",
 }, {
-    label: "Settings",
+    label: "CONFIG",
     icon: "settings",
 }];
 

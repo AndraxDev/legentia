@@ -155,7 +155,7 @@ function SettingsFragment({onNewIntent}) {
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
-            <h2 className={"activity-title"}>Settings</h2>
+            <h2 className={"activity-title"}>CONFIGVRATIONES</h2>
             <div style={{
                 width: "100%",
                 display: "flex",
@@ -177,8 +177,8 @@ function SettingsFragment({onNewIntent}) {
                                     }} alt={userData.user_name} src={userData.profile_photo}/>
                                 </div>
                                 <div className={"profile-text"}>
-                                    <p className={"teslasoft-id-title"}>Teslasoft ID</p>
-                                    <p className={"profile-name"}>Signed in as {userData.first_name} {userData.last_name}</p>
+                                    <p className={"teslasoft-id-title"}>TESLASOFT ID</p>
+                                    <p className={"profile-name"}>INITIVM FECISTI UT <b>{userData.first_name}</b></p>
                                 </div>
                             </div> : <>
                             {
@@ -186,7 +186,7 @@ function SettingsFragment({onNewIntent}) {
                                     <div className={"profile-photo"}></div>
                                     <div className={"profile-text"}>
                                         <p className={"teslasoft-id-title"}>Teslasoft ID</p>
-                                        <p className={"sync-error-text"}>Sync error</p>
+                                        <p className={"sync-error-text"}>SYNC ERROR</p>
                                     </div>
                                 </div> : <div style={{
                                     width: "100%",
@@ -206,8 +206,8 @@ function SettingsFragment({onNewIntent}) {
                         <div className={"profile-info-container"}>
                             <div className={"profile-photo"}></div>
                             <div className={"profile-text"}>
-                                <p className={"teslasoft-id-title"}>Teslasoft ID</p>
-                                <p className={"profile-name"}>Tap to Sign In</p>
+                                <p className={"teslasoft-id-title"}>TESLASOFT ID</p>
+                                <p className={"profile-name"}>TANGE AD INTRANDVM</p>
                             </div>
                         </div>
                     </button>
@@ -223,12 +223,12 @@ function SettingsFragment({onNewIntent}) {
                     }} className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} disabled={!userData} className={"button-in-list-item"} onClick={() => onNewIntent("sync")}>Sync settings between devices</button>
+                        }} disabled={!userData} className={"button-in-list-item"} onClick={() => onNewIntent("sync")}>CONFIGVRATIONES INTER APPARATVS SYNC</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("privacy")}>Data controls</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("privacy")}>DATA POTESTATE</button>
                     </div>
                 </div>
                 <div className={"list-container"} style={{
@@ -241,35 +241,35 @@ function SettingsFragment({onNewIntent}) {
                             margin: "0",
                             userSelect: "none",
                             padding: "16px",
-                        }}>Debug & Experiments</h3>
+                        }}>DEBUG ET EXPERIMENTI</h3>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("openai")}>AI Settings</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("openai")}>CONFIGVRATIONES AI</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("ttsdebug")}>TTS Debug</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("ttsdebug")}>TTS DEBUGER</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => setConfirmTelemetry(true)}>Send Telemetry</button>
+                        }} className={"button-in-list-item"} onClick={() => setConfirmTelemetry(true)}>MITTE TELEMETRIAM</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("setalpha")}>Set alpha probability</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("setalpha")}>SET ALPHA PROBABILITATIS</button>
                     </div>
                 </div>
             </div>
             <div style={{
                 height: "24px",
             }} />
-            <p className={"app-info"}>Legentia version {packageJson.version}</p>
-            <p className={"app-info"}>Developer: <a className={"link"} href={"https://andrax.dev"}>AndraxDev</a></p>
+            <p className={"app-info"}>LEGENTIA VERSIONIS: {packageJson.version}</p>
+            <p className={"app-info"}>EXCVLTOR: <a className={"link"} href={"https://andrax.dev"}>AndraxDev</a></p>
         </div>
     );
 }

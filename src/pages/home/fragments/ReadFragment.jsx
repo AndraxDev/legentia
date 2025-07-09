@@ -44,27 +44,27 @@ function ReadFragment({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Delete this story?"}
+                    {"VISNE HOC FABULAM DELERE?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        Once deleted, it cannot be recovered.
+                        SEMEL DELETA, RESTITVI NON POTEST!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeletionConfirmationOpened(false);
-                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>CASSARE</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeletionConfirmationOpened(false);
                         deleteStory();
                     }}>
-                        Delete
+                        DELERE
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
-            <h2 className={"activity-title"}>Reading list</h2>
+            <h2 className={"activity-title"}>LEGERE</h2>
             <div style={{
                 width: "100%",
                 display: "flex",
@@ -76,7 +76,7 @@ function ReadFragment({onNewIntent}) {
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("addstory");
                 }}>
-                    Add new story
+                    ADDERE FABVLAM NOVAM
                 </button>
             </div>
             {

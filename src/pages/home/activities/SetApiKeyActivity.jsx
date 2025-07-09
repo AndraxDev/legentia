@@ -63,7 +63,7 @@ function SetApiKeyActivity({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>AI Settings</h2>
+                    }} className={"article-title"}>CONFIGVRATIONES</h2>
                 </div>
                 <div style={{
                     paddingBottom: "24px",

@@ -42,7 +42,7 @@ function AddStoryActivity({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Add new word to practice</h2>
+                    }} className={"article-title"}>ADDERE VERMVM AD INDEX PRAXI</h2>
                 </div>
                 <div className={"list-container"} style={{
                     width: "calc(100% - 54px)",
@@ -52,7 +52,7 @@ function AddStoryActivity({onNewIntent}) {
                     <div style={{
                         userSelect: "none"
                     }} className={"list-item translation-item"}>
-                        Existing words will be overridden with new values.
+                        VERBA EXSTANTIA NOVIS VALORIBVS SUBSTITVENTVR.
                     </div>
                 </div>
                 <br/>
@@ -60,7 +60,7 @@ function AddStoryActivity({onNewIntent}) {
                     <div className={"field-container"}>
                         <input value={word} onChange={(e) => {
                             setWord(e.target.value);
-                        }} placeholder={"Word"} className={"input"}/>
+                        }} placeholder={"VERBVM LATINVM"} className={"input"}/>
                     </div>
                     <div style={{
                         flexGrow: 1,
@@ -68,11 +68,11 @@ function AddStoryActivity({onNewIntent}) {
                     }} className={"field-container"}>
                         <input value={translation} onChange={(e) => {
                             setTranslation(e.target.value);
-                        }} placeholder={"Translation"} className={"input"}/>
+                        }} placeholder={"VERBVM INGLASVM"} className={"input"}/>
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>
-                    <button disabled={StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === ""} className={"exercise-button exercise-button-" + ((StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === "") ? "disabled" : "neutral")} onClick={save}>Save</button>
+                    <button disabled={StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === ""} className={"exercise-button exercise-button-" + ((StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === "") ? "disabled" : "neutral")} onClick={save}>SERVE ET EXIRE</button>
                 </div>
             </div>
         </AppScreenFade>

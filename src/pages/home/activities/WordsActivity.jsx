@@ -58,23 +58,23 @@ function WordsActivity({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Delete word from the practice list?"}
+                    {"VISNE HOC VERMVM DELERE EX PRACTICA INDEX?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        Once deleted, it cannot be recovered.
+                        SEMEL DELETA, RESTITVI NON POTEST!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
-                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>CASSARE</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
                         deleteWord();
                     }}>
-                        Delete
+                        DELERE
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -85,7 +85,7 @@ function WordsActivity({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Practice words</h2>
+                    }} className={"article-title"}>PRACTICE VERBA</h2>
                 </div>
                 <div style={{
                     width: "100%",
@@ -98,12 +98,12 @@ function WordsActivity({onNewIntent}) {
                     <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                         onNewIntent("addword");
                     }}>
-                        Add new word
+                        ADDERE VERBUM NOVVM
                     </button>
                     <button disabled={weakWords.length === 0} className={"exercise-button " + ((weakWords.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={() => {
                         onNewIntent("quiz");
                     }}>
-                        Start word quiz
+                        SATUS PENSVM VERBVM
                     </button>
                     {
                         weakWords.length > 0 ? <p style={{
@@ -112,7 +112,7 @@ function WordsActivity({onNewIntent}) {
                             fontSize: "20px",
                             userSelect: "none",
                             paddingTop: "6px"
-                        }}>{weakWords.length} weak word{weakWords.length > 1 ? "s" : ""}</p> : null
+                        }}>{weakWords.length} VERBI IN INDEX PRAXI</p> : null
                     }
                 </div>
                 {
@@ -123,9 +123,9 @@ function WordsActivity({onNewIntent}) {
                                 borderTopLeftRadius: "21px",
                                 borderTopRightRadius: "21px",
                             }} key={-1}>
-                                <span className={"translation-word"}>Latin word</span>
-                                <span className={"translation-meaning"}>Translation</span>
-                                <span className={"translation-learning-index"}>Learning index</span>
+                                <span className={"translation-word"}>VERBVM LATINVM</span>
+                                <span className={"translation-meaning"}>VERBVM INGLASVM</span>
+                                <span className={"translation-learning-index"}>INDEX DISCENDI</span>
                                 <button style={{
                                     cursor: "pointer"
                                 }} className={"delete-word-btn"}>
@@ -153,7 +153,7 @@ function WordsActivity({onNewIntent}) {
                         <div className={"list-item translation-item"} style={{
                             userSelect: "none",
                         }}>
-                            You have not added any words to the practice list yet. You can add words to this list by tapping on them while reading articles or stories.
+                            NVLLA VERBA INDICI EXERCITATIONVM ADHVC ADDIDISTI. VERBA HVIC INDICI ADDERE POTES EA TANGENDO DVM ARTICVLOS VEL FABVLAS LEGIS.
                         </div>
                     </div>
                 }

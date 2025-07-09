@@ -72,7 +72,7 @@ function TtsSandbox({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>TTS Sandbox (debugger)</h2>
+                    }} className={"article-title"}>TTS DEBUGGER</h2>
                 </div>
                 <div className={"list-container"}>
                     <div className={"list-item translation-item"} style={{

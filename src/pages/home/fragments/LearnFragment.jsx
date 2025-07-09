@@ -20,7 +20,7 @@ import PropTypes from "prop-types";
 function LearnFragment({onNewIntent}) {
     return (
         <div className={"fragment"}>
-            <h2 className={"activity-title"}>Learn</h2>
+            <h2 className={"activity-title"}>STVDERE</h2>
             <div style={{
                 width: "calc(100% - 6px - 48px - 32px)",
                 display: "flex",
@@ -35,14 +35,15 @@ function LearnFragment({onNewIntent}) {
             }}>
                 <h3 style={{
                     margin: "0",
+                    fontSize: "16px",
                     userSelect: "none",
-                }}>Demo content (debug)</h3>
+                }}>CONTENTVS EXEMPLARIS (debug)</h3>
                 <button style={{
                     width: "calc(100% - 8px)",
                 }} className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("exercise");
                 }}>
-                    Start demo practice session
+                    SATUS DEMO PRAXI SESSIONIS
                 </button>
             </div>
             <div style={{
@@ -56,12 +57,12 @@ function LearnFragment({onNewIntent}) {
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("practicewords");
                 }}>
-                    Practice words
+                    PRACTICE VERBA
                 </button>
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("vocabulary");
                 }}>
-                    My vocabulary
+                    VOCABVLARIVM MEVM
                 </button>
             </div>
         </div>

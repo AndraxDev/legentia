@@ -154,7 +154,7 @@ function DataControls({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Data Controls</h2>
+                    }} className={"article-title"}>DATA POTESTATE</h2>
                 </div>
                 <div style={{
                     width: "100%",

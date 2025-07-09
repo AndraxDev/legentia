@@ -219,23 +219,23 @@ function TranslationQuiz({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Quit practice session?"}
+                    {"SESSIONEM EXERCITATIONES RELINQVERE VIS?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        All progress in this session will be lost.
+                        OMNIS PROGRESSUS IN HAC SESSIONE PERIBIT!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setExitDialogOpened(false);
-                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>CASSARE</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setExitDialogOpened(false);
                         quitExercise();
                     }}>
-                        Quit
+                        EXIRE
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>

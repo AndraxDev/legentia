@@ -56,7 +56,7 @@ function AlphaProbabilitySettingsActivity({ onNewIntent }) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Alpha probability</h2>
+                    }} className={"article-title"}>SET ALPHA PROBABILITATIS</h2>
                 </div>
                 <div className={"list-container"} style={{
                     margin: "0 24px 24px 24px"

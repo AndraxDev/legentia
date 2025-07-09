@@ -118,14 +118,14 @@ function PracticeCompleted({onNewIntent, flawless, time, mistakesCount, streak})
             opacity: "0",
             transition: "opacity 0.5s"
         }}>
-            <h3 className={"practice-completed-title"}>Practice completed!</h3>
+            <h3 className={"practice-completed-title"}>PENSVM COMPLETVR!</h3>
             <div className={"analytics-box"}>
                 <div style={{
                     transform: "scale(0)",
                     transition: "0.3s ease-in-out",
                 }} id={"box-combo"} className={"stats-box stats-box-streak"}>
                     <div className={"stats-title-container"}>
-                        <p className={"stat-title"}>Max combo</p>
+                        <p className={"stat-title"}>CATENA</p>
                     </div>
                     <div className={"stats-box-content stats-box-content-streak"}>
                         <p className={"stat-metrics"}>{currentCombo}</p>
@@ -136,7 +136,7 @@ function PracticeCompleted({onNewIntent, flawless, time, mistakesCount, streak})
                     transition: "0.3s ease-in-out",
                 }} id={"box-mistakes"} className={"stats-box stats-box-mistakes"}>
                     <div className={"stats-title-container"}>
-                        <p className={"stat-title"}>Mistakes</p>
+                        <p className={"stat-title"}>ERRORES</p>
                     </div>
                     <div className={"stats-box-content stats-box-content-mistakes"}>
                         <p className={"stat-metrics"}>{currentMistakes}</p>
@@ -147,7 +147,7 @@ function PracticeCompleted({onNewIntent, flawless, time, mistakesCount, streak})
                     transition: "0.3s ease-in-out",
                 }} id={"box-time"} className={"stats-box stats-box-time"}>
                     <div className={"stats-title-container"}>
-                        <p className={"stat-title"}>Time</p>
+                        <p className={"stat-title"}>TEMPVS</p>
                     </div>
                     <div className={"stats-box-content stats-box-content-time"}>
                         <p className={"stat-metrics"}>{timeSecondsToString(currentTime)}</p>
@@ -156,12 +156,12 @@ function PracticeCompleted({onNewIntent, flawless, time, mistakesCount, streak})
             </div>
             <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                 onNewIntent("/home/1");
-            }}>Continue</button>
+            }}>PERGERE</button>
             <div style={{
                 opacity: "0",
                 transition: "opacity 0.5s",
             }} id={"box-motivational"} className={"motivational-message"}>
-                {flawless ? "You completed the practice flawlessly! Keep going!" : "You made some mistakes, but that's okay. Keep practicing!"}
+                {flawless ? "PENSVM SINE ULLO ERRORE PERFECISTI! PERGE!" : "ERRORES QVOSDAM FECISTI, SED BENE EST. PERGE EXERCERE!"}
             </div>
         </div>
     );

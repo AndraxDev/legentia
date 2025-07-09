@@ -19,14 +19,15 @@ import PropTypes from "prop-types";
 import InteractivePhrase from "../../../components/interactive-phrase/InteractivePhrase";
 
 const getExerciseTitle = (exerciseType) => {
-    switch (exerciseType) {
-        case "en-lat-translation":
-            return "Translate the following sentence to Latin";
-        case "lat-en-translation":
-            return "Translate the following sentence to English";
-        default:
-            return "Unknown exercise type";
-    }
+    return "INTERPRETO HOC SENTENTIAM";
+    // switch (exerciseType) {
+    //     case "en-lat-translation":
+    //         return "Translate the following sentence to Latin";
+    //     case "lat-en-translation":
+    //         return "Translate the following sentence to English";
+    //     default:
+    //         return "Unknown exercise type";
+    // }
 }
 
 function ExerciseFragment({exercise, fragmentIndex, onExerciseComplete, fallbackEvent, isPreviousMistake}) {
@@ -107,7 +108,7 @@ function ExerciseFragment({exercise, fragmentIndex, onExerciseComplete, fallback
             <h2 className={"exercise-title"}>{getExerciseTitle(createExercise().exerciseType)}</h2>
             {isPreviousMistake ? <div style={{
                 display: "flex",
-            }}><div className={"previous-mistake"}><span className={"material-symbols-outlined"}>close</span><span className={"previous-mistake-label"}>Previous mistake</span></div></div> : null}
+            }}><div className={"previous-mistake"}><span className={"material-symbols-outlined"}>close</span><span className={"previous-mistake-label"}>PRIOR ERROR</span></div></div> : null}
             <div className={"exercise-phrase-box"}>
                 <InteractivePhrase phrase={createExercise().phrase} translation={createExercise().translationsMap} isHardMode={createExercise().isHard} />
             </div>
@@ -142,22 +143,22 @@ function ExerciseFragment({exercise, fragmentIndex, onExerciseComplete, fallback
             <div style={{
                 transform: "translateY(100%)",
             }} id={"correct"} className={"exercise-result-box"}>
-                <h3 className={"exercise-status text-answer-correct"}>Correct!</h3>
+                <h3 className={"exercise-status text-answer-correct"}>RECTE!</h3>
                 <br/>
-                <button className={"exercise-button exercise-button-correct"} onClick={onContinueClicked}>Continue</button>
+                <button className={"exercise-button exercise-button-correct"} onClick={onContinueClicked}>PERGERE</button>
             </div>
             <div style={{
                 transform: "translateY(100%)",
             }} id={"incorrect"} className={"exercise-result-box"}>
-                <h3 className={"exercise-status text-answer-incorrect"}>Incorrect!</h3>
+                <h3 className={"exercise-status text-answer-incorrect"}>FALSUM EST!</h3>
                 <br/>
-                <p className={"exercise-hint text-answer-incorrect"}>Correct answer:</p>
+                <p className={"exercise-hint text-answer-incorrect"}>RESPONSVM CORRECTVM EST:</p>
                 <b className={"exercise-hint text-answer-incorrect"}>{createExercise().translations[0]}</b>
                 <br/>
-                <button className={"exercise-button exercise-button-incorrect"} onClick={onContinueClicked}>Continue</button>
+                <button className={"exercise-button exercise-button-incorrect"} onClick={onContinueClicked}>PERGERE</button>
             </div>
             <div className={"exercise-bottom-bar"}>
-                <button disabled={currentAnswer.length === 0} className={"exercise-button " + ((currentAnswer.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={checkAnswer}>Check</button>
+                <button disabled={currentAnswer.length === 0} className={"exercise-button " + ((currentAnswer.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={checkAnswer}>REPERI</button>
             </div>
         </div>
     );

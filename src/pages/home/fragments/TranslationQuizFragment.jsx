@@ -147,6 +147,17 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
     }
 
     const resetAnswerResult = () => {
+
+        const translationElements = Array.from(document.querySelectorAll('[id^="translation-"]'));
+        translationElements.forEach((element) => {
+            resetButton(element)
+        });
+
+        const wordElements = Array.from(document.querySelectorAll('[id^="word-"]'));
+        wordElements.forEach((element) => {
+            resetButton(element)
+        });
+
         setExerciseWords(Object.keys(exercise).sort(() => Math.random() - 0.5))
         setExerciseTranslations(Object.values(exercise).sort(() => Math.random() - 0.5))
         setCorrectWords([]);
@@ -200,7 +211,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
         <div id={"exercise-fragment-root"} style={{
             opacity: "0"
         }}>
-            <h2 className={"exercise-title"}>Match the word with its correct translation</h2>
+            <h2 className={"exercise-title"}>VERBVM CVM INTERPRETATIONE CORRECTA CONIVGNE</h2>
             <div className={"quiz-gap"}></div>
             <div className={"quiz-content"}>
                 <div className={"quiz-column"}>
@@ -286,12 +297,12 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
             <div style={{
                 transform: "translateY(100%)",
             }} id={"correct"} className={"exercise-result-box"}>
-                <h3 className={"exercise-status text-answer-correct"}>Correct!</h3>
+                <h3 className={"exercise-status text-answer-correct"}>CORRIGE!</h3>
                 <br/>
-                <button className={"exercise-button exercise-button-correct"} onClick={goNext}>Continue</button>
+                <button className={"exercise-button exercise-button-correct"} onClick={goNext}>PERGERE</button>
             </div>
             <div className={"exercise-bottom-bar"}>
-                <button disabled={true} className={"exercise-button exercise-button-disabled"}>Continue</button>
+                <button disabled={true} className={"exercise-button exercise-button-disabled"}>PERGERE</button>
             </div>
         </div>
     );

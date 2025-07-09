@@ -29,4 +29,7 @@ export const MaterialDialog = styled(Dialog) (() => ({
         lineHeight: "1.5",
         userSelect: "none",
     },
+    [`& .${dialogClasses.root}`]: {
+        fontFamily: "'Nunito', sans-serif",
+    }
 }));

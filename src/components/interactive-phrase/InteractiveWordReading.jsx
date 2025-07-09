@@ -121,7 +121,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                severity="success"
                                sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
                                variant="filled">
-                            Word saved for further practice.
+                            VERBVM AD VLTERIOREM EXERCITATIONEM SERVATVM.
                         </Alert>
                     </Snackbar>
                     <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarDeletionIsOpened} autoHideDuration={3000} onClick={() => setSnackbarDeletionIsOpened(false)}>
@@ -129,7 +129,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                severity="success"
                                sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
                                variant="filled">
-                            Word deleted from practice list.
+                            VERBUM EX INDICE EXERCITATIONUM DELETUM EST.
                         </Alert>
                     </Snackbar>
                     <MaterialTooltip
@@ -146,19 +146,19 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                         {
                                             weakWords.includes(StringUtils.clearWord(word)) ? <>
                                                 <div className={"translation-item-weak-word"}>
-                                                    Weak word
+                                                    VERBVM INFIRMVM
                                                 </div>
                                                 <button onClick={() => {
                                                     removeFromWeakWords(word);
                                                     setSnackbarDeletionIsOpened(true);
                                                 }} className={"translation-item add-weak-sentence-button"}>
-                                                    Remove from weak words
+                                                    DELERE VERBVM EX INDEX PRAXI
                                                 </button>
                                             </> : <button onClick={() => {
                                                 addToWeakWords(word, translation);
                                                 setSnackbarIsOpened(true);
                                             }} className={"translation-item add-weak-sentence-button"}>
-                                                Add to weak words
+                                                ADERE VERBVM AD INDEX PRAXI
                                             </button>
                                         }
                                     </>

@@ -46,7 +46,7 @@ function TidRedirect({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Sign In with Teslasoft ID</h2>
+                    }} className={"article-title"}>INTRANDERE CVM TESLASOFT ID</h2>
                 </div>
                 <div className={"list-container"} style={{
                     marginTop: "0",

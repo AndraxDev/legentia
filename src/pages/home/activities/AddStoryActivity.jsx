@@ -55,13 +55,13 @@ function AddStoryActivity({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>{hash === "" ? "Add new story" : "Edit story"}</h2>
+                    }} className={"article-title"}>{hash === "" ? "ADDERE FABVLAM NOVAM" : "RECENSERE FABVLAM"}</h2>
                 </div>
                 <div className={"activity-content-container"}>
                     <div className={"field-container"}>
                         <input value={title} onChange={(e) => {
                             setTitle(e.target.value);
-                        }} placeholder={"Title"} className={"input"}/>
+                        }} placeholder={"TITVLVM"} className={"input"}/>
                     </div>
                     <div style={{
                         flexGrow: 1,
@@ -71,11 +71,11 @@ function AddStoryActivity({onNewIntent}) {
                             setText(e.target.value);
                         }} style={{
                             height: "calc(100% - 48px)"
-                        }} placeholder={"Text"} className={"input"}></textarea>
+                        }} placeholder={"FABULA"} className={"input"}></textarea>
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>
-                    <button disabled={text.trim() === "" || title.trim() === ""} className={"exercise-button exercise-button-" + ((text.trim() === "" || title.trim() === "") ? "disabled" : "neutral")} onClick={save}>Save</button>
+                    <button disabled={text.trim() === "" || title.trim() === ""} className={"exercise-button exercise-button-" + ((text.trim() === "" || title.trim() === "") ? "disabled" : "neutral")} onClick={save}>SERVE ET EXIRE</button>
                 </div>
             </div>
         </AppScreenFade>
