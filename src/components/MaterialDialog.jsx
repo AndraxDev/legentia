@@ -14,7 +14,8 @@
  * limitations under the License.
  * *************************************************************************/
 
-import {Dialog, styled, dialogClasses} from "@mui/material";
+import Dialog, { dialogClasses } from "@mui/material/Dialog";
+import { styled } from "@mui/material/styles";
 
 export const MaterialDialog = styled(Dialog) (() => ({
     [`& .${dialogClasses.paper}`]: {

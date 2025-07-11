@@ -162,3 +162,27 @@ export const setAlpha = (alpha) => {
 export const getAlpha = () => {
     return parseFloat(getString('alphaProbability', '0.1'));
 }
+
+export const setTTSVoice = (voice) => {
+    setString('ttsVoice', voice);
+}
+
+export const getTTSVoice = () => {
+    return getString('ttsVoice', 'male');
+}
+
+export const setPronounceInReaderEnabled = (enabled) => {
+    setString('pronounceInReaderEnabled', enabled ? 'true' : 'false');
+}
+
+export const isPronounceInReaderEnabled = () => {
+    return getString('pronounceInReaderEnabled', 'false') === 'true';
+}
+
+export const setPronounceInWordQuizEnabled = (enabled) => {
+    setString('pronounceInWordQuizEnabled', enabled ? 'true' : 'false');
+}
+
+export const isPronounceInWordQuizEnabled = () => {
+    return getString('pronounceInWordQuizEnabled', 'false') === 'true';
+}

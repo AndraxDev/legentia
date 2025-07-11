@@ -38,11 +38,11 @@ function HowTo({onStepCompleted}) {
             transition: "opacity 0.2s ease-in-out, transform 0.4s ease-out"
         }} className="app-screen-v2" id={"app-screen"}>
             <div className={"container-centered"}>
-                <h1 className={"app-title"}>How it works?</h1>
+                <h1 className={"app-title"}>QUOMODO OPERATVR?</h1>
                 <br/>
-                <p>This app allow you to learn latin words and phrases and start reading. Unlike Duolingo (which has very limited latin course) or similar apps, you can add sources from your books or documents. Additionally, this app uses OpenAI Whisper to pronounce text and contains customizable AI chatbot you can text with.</p>
+                <p>HAEC APPLICATIO TE SINIT VERBA ET LOCVTIONES LATINAS DISCERE ET LEGERE INCIPERE. DISSIMILIS DVOLINGO (QVI CVRSUM LATINVM VALDE LIMITATVM HABET) VEL SIMILIBVS APPLICATIONIBVS, FONTES EX LIBRIS VEL DOCVMENTIS TVIS ADDERE POTES. PRAETEREA, HAEC APPLICATIO OPENAI WHISPER VTITVR AD TEXTVM PRONVNTIANDVM ET CONTINET COLLOQVENDI AUTOMATON ARTIFICIALE CONFIGVRABILE QVO NVNTIOS MITTERE POTES.</p>
                 <br/>
-                <button className={"exercise-button exercise-button-neutral"} onClick={handleNext}>Next</button>
+                <button className={"exercise-button exercise-button-neutral"} onClick={handleNext}>PERGERE</button>
             </div>
         </div>
     );

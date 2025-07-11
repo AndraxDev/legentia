@@ -16,7 +16,7 @@
 
 import React from 'react';
 import PropTypes from "prop-types";
-import {MaterialTooltip} from "../MaterialTooltip";
+import { MaterialTooltip } from "../MaterialTooltip";
 
 /*
 * Learning index defines how well the user knows the word. More times user repeat the word, the highest index will be.

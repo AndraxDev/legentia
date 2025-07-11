@@ -14,7 +14,8 @@
  * limitations under the License.
  * *************************************************************************/
 
-import {CircularProgress, styled} from "@mui/material";
+import CircularProgress from "@mui/material/CircularProgress";
+import { styled } from "@mui/material/styles";
 
 export const MaterialProgressBar = styled(CircularProgress) (() => ({
     color: "#ffb81e",

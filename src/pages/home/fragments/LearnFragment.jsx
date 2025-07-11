@@ -43,7 +43,7 @@ function LearnFragment({onNewIntent}) {
                 }} className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("exercise");
                 }}>
-                    SATUS DEMO PRAXI SESSIONIS
+                    SATVS DEMO PRAXI SESSIONIS
                 </button>
             </div>
             <div style={{

@@ -21,7 +21,12 @@ function BottomNavigationBarItem({label, icon, onClick, isActive}) {
     return (
         <div className={"bottom-navigation-item"}>
             <button className={"bottom-navigation-item-clickable"} onClick={onClick}>
-                <div>
+                <div style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    alignItems: "center",
+                    justifyContent: "center"
+                }}>
                     <div className={"bottom-navigation-item-icon-container-" + (isActive ? "active" : "inactive")}>
                         <span className={"material-symbols-outlined bottom-navigation-icon-" + (isActive ? "active" : "inactive")}>{icon}</span>
                     </div>

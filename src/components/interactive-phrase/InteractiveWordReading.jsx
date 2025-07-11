@@ -20,7 +20,8 @@ import {MaterialTooltip} from "../MaterialTooltip";
 import {MaterialProgressBar} from "../MaterialProgressBar";
 import * as Vocabulary from "../../pages/Vocabulary";
 import * as Settings from "../../Settings";
-import {Alert, Snackbar} from "@mui/material";
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import * as VocabularyCache from "../../pages/VocabularyCache";
 import * as StringUtils from "../../pages/util/StringUtils";
 
@@ -60,6 +61,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
     }, [snackbarDeletionIsOpened]);
 
     const onWordClick = () => {
+        pronounceWord()
         if (untranslatableWords.includes(word)) {
             setCanBeTranslated(false);
             setTranslation(word);
@@ -112,6 +114,12 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
     //
     // }
 
+    const pronounceWord = () => {
+        if (Settings.isPronounceInReaderEnabled()) {
+            responsiveVoice.speak(word, "Latin Male");
+        }
+    }
+
     return (
         <>
             {
@@ -152,13 +160,13 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                                     removeFromWeakWords(word);
                                                     setSnackbarDeletionIsOpened(true);
                                                 }} className={"translation-item add-weak-sentence-button"}>
-                                                    DELERE VERBVM EX INDEX PRAXI
+                                                    DELERE VERBVM EX INDEX PRACTICVM
                                                 </button>
                                             </> : <button onClick={() => {
                                                 addToWeakWords(word, translation);
                                                 setSnackbarIsOpened(true);
                                             }} className={"translation-item add-weak-sentence-button"}>
-                                                ADERE VERBVM AD INDEX PRAXI
+                                                ADDERE VERBVM AD INDEX PRACTICVM
                                             </button>
                                         }
                                     </>
@@ -167,7 +175,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                 {/*<button onClick={() => {*/}
                                 {/*    addToPhrasesList(contextSentence);*/}
                                 {/*}} className={"translation-item add-weak-sentence-button"}>*/}
-                                {/*    Add sentence to learning phrases list*/}
+                                {/*    Add sentence to learning howto list*/}
                                 {/*</button>*/}
                             </> : <div className={"translation-item"}><MaterialProgressBar thickness={4} size={24}/></div> }
                         </div>}>

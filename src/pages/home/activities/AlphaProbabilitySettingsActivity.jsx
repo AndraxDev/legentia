@@ -18,7 +18,8 @@ import React from 'react';
 import PropTypes from "prop-types";
 import AppScreenFade from "../../AppScreenFade";
 import formula from "../../../wordbrob.png";
-import {Alert, Snackbar} from "@mui/material";
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import * as Settings from "../../../Settings";
 
 function AlphaProbabilitySettingsActivity({ onNewIntent }) {

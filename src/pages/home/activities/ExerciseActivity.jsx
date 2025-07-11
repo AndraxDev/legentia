@@ -19,7 +19,10 @@ import PropTypes from "prop-types";
 import ExerciseFragment from "../fragments/ExerciseFragment";
 import AppScreenFade from "../../AppScreenFade";
 import PracticeCompleted from "../fragments/PracticeCompleted";
-import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
 import {MaterialDialog} from "../../../components/MaterialDialog";
 

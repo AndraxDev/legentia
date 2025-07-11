@@ -14,33 +14,9 @@
  * limitations under the License.
  * *************************************************************************/
 
-import React from 'react';
-import BottomNavigationBar from "./bottom-navigation/BottomNavigationBar";
-import PropTypes from "prop-types";
+import { styled } from "@mui/material/styles";
+import Switch from "@mui/material/Switch";
 
-const items = [{
-    label: "DOMVS",
-    icon: "home",
-}, {
-    label: "STVDERE",
-    icon: "school",
-}, {
-    label: "LEGERE",
-    icon: "book_2",
-}, {
-    label: "OPTIONES",
-    icon: "settings",
-}];
+export const MaterialSwitch = styled(Switch)({
 
-function HomeBottomNavigationBar({onClickListenersArray, activeIndex}) {
-    return (
-        <BottomNavigationBar activeIndex={activeIndex} items={items} onClickListenersArray={onClickListenersArray} />
-    );
-}
-
-HomeBottomNavigationBar.propTypes = {
-    onClickListenersArray: PropTypes.arrayOf(PropTypes.func).isRequired,
-    activeIndex: PropTypes.number.isRequired,
-}
-
-export default HomeBottomNavigationBar;
+})

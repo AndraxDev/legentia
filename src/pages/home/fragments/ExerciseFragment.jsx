@@ -150,7 +150,7 @@ function ExerciseFragment({exercise, fragmentIndex, onExerciseComplete, fallback
             <div style={{
                 transform: "translateY(100%)",
             }} id={"incorrect"} className={"exercise-result-box"}>
-                <h3 className={"exercise-status text-answer-incorrect"}>FALSUM EST!</h3>
+                <h3 className={"exercise-status text-answer-incorrect"}>FALSVM EST!</h3>
                 <br/>
                 <p className={"exercise-hint text-answer-incorrect"}>RESPONSVM CORRECTVM EST:</p>
                 <b className={"exercise-hint text-answer-incorrect"}>{createExercise().translations[0]}</b>

@@ -14,7 +14,8 @@
  * limitations under the License.
  * *************************************************************************/
 
-import {styled, Tooltip} from "@mui/material";
+import Tooltip from "@mui/material/Tooltip";
+import { styled } from "@mui/material/styles";
 
 export const MaterialTooltip = styled(Tooltip)(() => ({
     "& .MuiTooltip-tooltip": {

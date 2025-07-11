@@ -17,7 +17,8 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import AppScreenFade from "../../AppScreenFade";
-import {Alert, Snackbar} from "@mui/material";
+import Alert from '@mui/material/Alert';
+import Snackbar from '@mui/material/Snackbar';
 import * as Settings from "../../../Settings";
 
 function SetApiKeyActivity({onNewIntent}) {
@@ -63,7 +64,7 @@ function SetApiKeyActivity({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>CONFIGVRATIONES</h2>
+                    }} className={"article-title"}>OPTIONES NAM AI</h2>
                 </div>
                 <div style={{
                     paddingBottom: "24px",

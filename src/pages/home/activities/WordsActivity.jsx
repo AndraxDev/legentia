@@ -18,7 +18,10 @@ import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 import AppScreenFade from "../../AppScreenFade";
 import * as Settings from "../../../Settings";
-import {DialogActions, DialogContent, DialogContentText, DialogTitle} from "@mui/material";
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
 import {MaterialDialog} from "../../../components/MaterialDialog";
 import * as StringUtil from "../../util/StringUtils";
@@ -58,7 +61,7 @@ function WordsActivity({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"VISNE HOC VERMVM DELERE EX PRACTICA INDEX?"}
+                    {"VISNE HOC VERMVM DELERE EX INDEX PRACTICVM?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
@@ -103,7 +106,7 @@ function WordsActivity({onNewIntent}) {
                     <button disabled={weakWords.length === 0} className={"exercise-button " + ((weakWords.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={() => {
                         onNewIntent("quiz");
                     }}>
-                        SATUS PENSVM VERBVM
+                        SATVS PENSVM VERBVM
                     </button>
                     {
                         weakWords.length > 0 ? <p style={{
@@ -112,7 +115,7 @@ function WordsActivity({onNewIntent}) {
                             fontSize: "20px",
                             userSelect: "none",
                             paddingTop: "6px"
-                        }}>{weakWords.length} VERBI IN INDEX PRAXI</p> : null
+                        }}>{weakWords.length} VERBA IN INDEX PRACTICVM</p> : null
                     }
                 </div>
                 {

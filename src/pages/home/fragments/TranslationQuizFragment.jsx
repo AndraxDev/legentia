@@ -147,7 +147,6 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
     }
 
     const resetAnswerResult = () => {
-
         const translationElements = Array.from(document.querySelectorAll('[id^="translation-"]'));
         translationElements.forEach((element) => {
             resetButton(element)
@@ -207,6 +206,12 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
         }
     }
 
+    const pronounceWord = (word) => {
+        if (Settings.isPronounceInWordQuizEnabled()) {
+            responsiveVoice.speak(word, "Latin Male");
+        }
+    }
+
     return (
         <div id={"exercise-fragment-root"} style={{
             opacity: "0"
@@ -238,6 +243,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
                                         } else {
                                             setSelectedWord(word)
                                             setSelectedWordIndex(index);
+                                            pronounceWord(word);
 
                                             clearAllSelectionsWords()
                                             if (correctWords.filter(v => v === word) >= exerciseWords.filter(v => v === word).length) {

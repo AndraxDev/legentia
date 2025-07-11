@@ -98,8 +98,8 @@ function App() {
                 return <TidRedirect onNewIntent={addActivityToStack} />;
             case "sync":
                 return <SyncActivity onNewIntent={addActivityToStack} />;
-            case "ttsdebug":
-                return <TTSSandbox onNewIntent={addActivityToStack} />;
+            // case "ttsdebug":
+            //     return <TTSSandbox onNewIntent={addActivityToStack} />;
             case "setalpha":
                 return <AlphaProbabilitySettingsActivity onNewIntent={addActivityToStack} />;
             default:

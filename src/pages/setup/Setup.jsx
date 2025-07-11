@@ -16,7 +16,7 @@
 
 import React from 'react';
 import Intro from "./intro/Intro";
-import HowTo from "./phrases/HowTo";
+import HowTo from "./howto/HowTo";
 import * as Settings from "../../Settings";
 import {useNavigate} from "react-router-dom";
 
