@@ -14,7 +14,7 @@
  * limitations under the License.
  * *************************************************************************/
 
-import React, {useEffect} from 'react';
+import React, { useEffect } from 'react';
 import AppScreenFade from "../AppScreenFade";
 import HomeBottomNavigationBar from "../../components/HomeBottomNavigationBar";
 import HomeFragment from "./fragments/HomeFragment";

@@ -127,7 +127,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                     <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarIsOpened} autoHideDuration={3000} onClick={() => setSnackbarIsOpened(false)}>
                         <Alert onClose={() => setSnackbarIsOpened(false)}
                                severity="success"
-                               sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                               sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                                variant="filled">
                             VERBVM AD VLTERIOREM EXERCITATIONEM SERVATVM.
                         </Alert>
@@ -135,7 +135,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                     <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarDeletionIsOpened} autoHideDuration={3000} onClick={() => setSnackbarDeletionIsOpened(false)}>
                         <Alert onClose={() => setSnackbarDeletionIsOpened(false)}
                                severity="success"
-                               sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                               sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                                variant="filled">
                             VERBUM EX INDICE EXERCITATIONUM DELETUM EST.
                         </Alert>

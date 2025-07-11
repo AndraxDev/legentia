@@ -45,7 +45,7 @@ function AlphaProbabilitySettingsActivity({ onNewIntent }) {
             <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarMessage.trim() !== ""} autoHideDuration={3000} onClick={() => setSnackbarMessage("")}>
                 <Alert onClose={() => setSnackbarMessage("")}
                        severity="success"
-                       sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                       sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                        variant="filled">
                     {snackbarMessage}
                 </Alert>

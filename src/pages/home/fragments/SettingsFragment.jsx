@@ -41,9 +41,16 @@ function SettingsFragment({onNewIntent}) {
     const [errorDialogOpen, setErrorDialogOpen] = React.useState(false);
     const [error, setError] = React.useState("");
     const [settingsSavedSnackBarOpened, setSettingsSavedSnackBarOpened] = React.useState(false);
-    const [ttsVoice, setTtsVoice] = React.useState(Settings.getTTSVoice());
     const [pronounceInReaderEnabled, setPronounceInReaderEnabled] = React.useState(Settings.isPronounceInReaderEnabled());
     const [pronounceInWordQuizEnabled, setPronounceInWordQuizEnabled] = React.useState(Settings.isPronounceInWordQuizEnabled());
+
+    useEffect(() => {
+        if (settingsSavedSnackBarOpened) {
+            setTimeout(() => {
+                setSettingsSavedSnackBarOpened(false);
+            }, 3000);
+        }
+    }, [settingsSavedSnackBarOpened])
 
     useEffect(() => {
         if (telemetrySnackBarIsOpen) {
@@ -118,7 +125,7 @@ function SettingsFragment({onNewIntent}) {
             <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={settingsSavedSnackBarOpened} autoHideDuration={3000} onClick={() => setSettingsSavedSnackBarOpened(false)}>
                 <Alert onClose={() => setSettingsSavedSnackBarOpened(false)}
                        severity="success"
-                       sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                       sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                        variant="filled">
                     OMNES OPTIONES SERVATAE!
                 </Alert>
@@ -126,7 +133,7 @@ function SettingsFragment({onNewIntent}) {
             <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={telemetrySnackBarIsOpen} autoHideDuration={3000} onClick={() => setTelemetrySnackBarIsOpen(false)}>
                 <Alert onClose={() => setTelemetrySnackBarIsOpen(false)}
                        severity="success"
-                       sx={{ userSelect: "none", width: '100%', background: "#285c39", borderRadius: "16px", boxShadow: "none", border: "none" }}
+                       sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                        variant="filled">
                     Telemetry sent successfully!
                 </Alert>
@@ -259,9 +266,11 @@ function SettingsFragment({onNewIntent}) {
                     </div>
                     <div className={"list-item"}>
                         <FormControlLabel style={{
+                            userSelect: "none",
                             paddingRight: "16px",
                             paddingTop: "12px",
                             paddingBottom: "12px",
+                            width: "calc(100% - 32px)",
                         }} labelPlacement={"start"} control={
                             <MaterialSwitch checked={pronounceInReaderEnabled} onChange={() => {
                                 Settings.setPronounceInReaderEnabled(!pronounceInReaderEnabled);
@@ -272,9 +281,11 @@ function SettingsFragment({onNewIntent}) {
                     </div>
                     <div className={"list-item"}>
                         <FormControlLabel style={{
+                            userSelect: "none",
                             paddingRight: "16px",
                             paddingTop: "12px",
                             paddingBottom: "12px",
+                            width: "calc(100% - 32px)",
                         }} labelPlacement={"start"} control={
                             <MaterialSwitch checked={pronounceInWordQuizEnabled} onChange={() => {
                                 Settings.setPronounceInWordQuizEnabled(!pronounceInWordQuizEnabled);

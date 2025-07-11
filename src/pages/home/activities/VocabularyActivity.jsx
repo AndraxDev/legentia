@@ -105,7 +105,7 @@ function VocabularyActivity({onNewIntent}) {
                     <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                         onNewIntent("vocabularyadd");
                     }}>
-                        ADDERE VERBUM NOVVM
+                        ADDERE VERBVM NOVVM
                     </button>
                     <input className={"input"} placeholder={"INVENIRE VERBA"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
                     {

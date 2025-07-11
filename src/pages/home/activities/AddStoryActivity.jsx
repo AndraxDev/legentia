@@ -71,7 +71,7 @@ function AddStoryActivity({onNewIntent}) {
                             setText(e.target.value);
                         }} style={{
                             height: "calc(100% - 48px)"
-                        }} placeholder={"FABULA"} className={"input"}></textarea>
+                        }} placeholder={"TEXTVS"} className={"input"}></textarea>
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>

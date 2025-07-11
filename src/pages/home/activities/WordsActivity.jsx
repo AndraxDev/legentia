@@ -101,7 +101,7 @@ function WordsActivity({onNewIntent}) {
                     <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                         onNewIntent("addword");
                     }}>
-                        ADDERE VERBUM NOVVM
+                        ADDERE VERBVM NOVVM
                     </button>
                     <button disabled={weakWords.length === 0} className={"exercise-button " + ((weakWords.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={() => {
                         onNewIntent("quiz");
