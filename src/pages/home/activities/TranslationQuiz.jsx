@@ -174,16 +174,15 @@ function TranslationQuiz({onNewIntent}) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const onExerciseComplete = (fi, isSuccessful, thisExercise, mistakes, localStreak) => {
-        setMistakesCount(mistakesCount + mistakes);
-        setFragmentIndex(fragmentIndex >= exercises.length - 1 ? exercises.length - 1 : fragmentIndex + 1);
-        if (isSuccessful) {
+    const onPreCallback = (isAnswerCorrect) => {
+        if (isAnswerCorrect) {
             setSuccessfulCompletions(successfulCompletions + 1);
-            setProgress(90 / exercises.length * (successfulCompletions + 1));
-        } else if (fragmentIndex < exercises.length) {
-            mistakeIndices.push(fragmentIndex);
+            console.log("Progress: " + ((90 / exercises.length) * (successfulCompletions + 1) + 10));
+            setProgress((90 / exercises.length) * (successfulCompletions + 1) + 10);
         }
+    }
 
+    const onExerciseComplete = (fi, isSuccessful, thisExercise, mistakes, localStreak) => {
         if (mistakes > 0) {
             streak = localStreak;
         } else {
@@ -194,11 +193,15 @@ function TranslationQuiz({onNewIntent}) {
             maxCombo = streak;
         }
 
-        if (isSuccessful && successfulCompletions >= exercises.length - 1) {
+        if (isSuccessful && successfulCompletions >= exercises.length) {
             setProgress(100);
             console.log("Practice completed!");
             showSuccessScreen()
+            return;
         }
+
+        setMistakesCount(mistakesCount + mistakes);
+        setFragmentIndex(fragmentIndex >= exercises.length - 1 ? exercises.length - 1 : fragmentIndex + 1);
 
         setFallbackEvent(fallbackEvent + 1);
         console.log("Current streak: " + streak);
@@ -258,8 +261,18 @@ function TranslationQuiz({onNewIntent}) {
                                 </div>
                             </div>
                         </div>
-                        {exercises.length > 0 ? <TranslationQuizFragment isPreviousMistake={fragmentIndex > exercises.length - 1} fallbackEvent={fallbackEvent} exercise={exercises[fragmentIndex]} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} phraseId={"00000000-0000-0000-0000-000000000000"} /> : null}
-                    </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakesCount === 0} time={time} mistakesCount={mistakesCount} streak={maxCombo} />
+                        {exercises.length > 0 ? <TranslationQuizFragment
+                            fallbackEvent={fallbackEvent}
+                            exercise={exercises[fragmentIndex]}
+                            fragmentIndex={fragmentIndex}
+                            onExerciseComplete={onExerciseComplete}
+                            resultPreCallback={onPreCallback} /> : null}
+                    </> : <PracticeCompleted
+                        onNewIntent={onNewIntent}
+                        flawless={mistakesCount === 0}
+                        time={time}
+                        mistakesCount={mistakesCount}
+                        streak={maxCombo} />
                 }
             </div>
         </AppScreenFade>

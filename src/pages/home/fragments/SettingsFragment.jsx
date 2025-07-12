@@ -269,6 +269,7 @@ function SettingsFragment({onNewIntent}) {
                             userSelect: "none",
                             paddingRight: "16px",
                             paddingTop: "12px",
+                            fontSize: "14px",
                             paddingBottom: "12px",
                             width: "calc(100% - 32px)",
                         }} labelPlacement={"start"} control={
@@ -284,6 +285,7 @@ function SettingsFragment({onNewIntent}) {
                             userSelect: "none",
                             paddingRight: "16px",
                             paddingTop: "12px",
+                            fontSize: "14px",
                             paddingBottom: "12px",
                             width: "calc(100% - 32px)",
                         }} labelPlacement={"start"} control={

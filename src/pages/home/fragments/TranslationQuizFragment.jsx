@@ -23,7 +23,7 @@ const answerStatusAnimationDuration = 500;
 const answerCssTransitionDuration = 300;
 const cssSafeDelay = 50;
 
-function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, phraseId, fallbackEvent, isPreviousMistake}) {
+function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, fallbackEvent, resultPreCallback}) {
 
     const [selectedWord, setSelectedWord] = React.useState(null);
     const [selectedTranslation, setSelectedTranslation] = React.useState(null);
@@ -38,6 +38,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, p
     const checkAsCorrect = () => {
         document.getElementById("correct").style.transform = "translateY(100%)";
         document.getElementById("correct").style.transform = "translateY(0)";
+        resultPreCallback?.(true); // True for correct, false for incorrect. In this quiz we always return true.
     }
 
     useEffect(() => {
@@ -318,9 +319,8 @@ TranslationQuizFragment.propTypes = {
     exercise: PropTypes.object.isRequired,
     fragmentIndex: PropTypes.number.isRequired,
     onExerciseComplete: PropTypes.func.isRequired,
-    phraseId: PropTypes.string.isRequired,
     fallbackEvent: PropTypes.object,
-    isPreviousMistake: PropTypes.bool
+    resultPreCallback: PropTypes.func.isRequired
 }
 
 export default TranslationQuizFragment;

@@ -137,7 +137,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                severity="success"
                                sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                                variant="filled">
-                            VERBUM EX INDICE EXERCITATIONUM DELETUM EST.
+                            VERBVM EX INDICE EXERCITATIONVM DELETVM EST.
                         </Alert>
                     </Snackbar>
                     <MaterialTooltip

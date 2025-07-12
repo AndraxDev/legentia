@@ -30,7 +30,7 @@ const getExerciseTitle = (exerciseType) => {
     // }
 }
 
-function ExerciseFragment({exercise, fragmentIndex, onExerciseComplete, fallbackEvent, isPreviousMistake}) {
+function ExerciseFragment({exercise, fragmentIndex, onExerciseComplete, fallbackEvent, isPreviousMistake, resultPreCallback}) {
 
     const [currentAnswer, setCurrentAnswer] = React.useState([]);
     const [answerStatus, setAnswerStatus] = React.useState("neutral");
@@ -70,6 +70,7 @@ function ExerciseFragment({exercise, fragmentIndex, onExerciseComplete, fallback
         document.getElementById("incorrect").style.transform = "translateY(100%)";
         document.getElementById("correct").style.transform = "translateY(0)";
         setAnswerStatus("correct");
+        resultPreCallback?.(true);
     }
 
     const checkAsIncorrect = () => {
@@ -77,6 +78,7 @@ function ExerciseFragment({exercise, fragmentIndex, onExerciseComplete, fallback
         document.getElementById("incorrect").style.transform = "translateY(100%)";
         document.getElementById("incorrect").style.transform = "translateY(0)";
         setAnswerStatus("incorrect");
+        resultPreCallback?.(false);
     }
 
     const resetAnswerResult = () => {
@@ -169,7 +171,8 @@ ExerciseFragment.propTypes = {
     fragmentIndex: PropTypes.number.isRequired,
     onExerciseComplete: PropTypes.func.isRequired,
     fallbackEvent: PropTypes.number.isRequired,
-    isPreviousMistake: PropTypes.bool
+    isPreviousMistake: PropTypes.bool,
+    resultPreCallback: PropTypes.func.isRequired
 }
 
 export default ExerciseFragment;

@@ -32,6 +32,11 @@
     sans-serif !important;
 }
 
+.MuiFormControlLabel-label {
+    font-size: 14px !important;
+    margin-right: 16px !important;
+}
+
 button {
     -webkit-tap-highlight-color: transparent;
 }
@@ -419,6 +424,10 @@ br {
 
 .list-item:last-child > .delete-word-btn {
     border-bottom-right-radius: 21px;
+}
+
+.list-item:first-child > .delete-word-btn:active {
+    background-color: transparent;
 }
 
 .delete-word-btn:active {

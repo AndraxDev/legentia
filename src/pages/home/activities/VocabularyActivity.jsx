@@ -107,7 +107,7 @@ function VocabularyActivity({onNewIntent}) {
                     }}>
                         ADDERE VERBVM NOVVM
                     </button>
-                    <input className={"input"} placeholder={"INVENIRE VERBA"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
+                    <input className={"input"} placeholder={"QVAERERE VERBA"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
                     {
                         vocabularyWords.length > 0 ? <p style={{
                             width: "calc(100% - 48px)",
@@ -129,14 +129,12 @@ function VocabularyActivity({onNewIntent}) {
                                 <span className={"translation-word"}>VERBVM LATINVM</span>
                                 <span className={"translation-meaning"}>VERBVM INGLASVM</span>
                                 <span className={"translation-learning-index"}>INDEX DISCENDI</span>
-                                <button style={{
-                                    cursor: "pointer"
-                                }} className={"delete-word-btn"}>
+                                <button disabled={true} className={"delete-word-btn"}>
                                     <span className={"material-symbols-outlined"}></span>
                                 </button>
                             </div>
                             {
-                                vocabularyWords.filter(word => searchTerm.includes(word) || word.includes(searchTerm)).map(word => (
+                                vocabularyWords.filter(word => searchTerm.includes(word) || word.includes(searchTerm) || Settings.getWordIndex(StringUtil.clearWord(word)).toString() === searchTerm).map(word => (
                                     <div className={"list-item word-grid"} key={word}>
                                         <span className={"translation-word"}>{StringUtil.clearWord(word || "")}</span>
                                         <span className={"translation-meaning"}>{StringUtil.clearWord(vocabularyWordMap[word] || "")}</span>

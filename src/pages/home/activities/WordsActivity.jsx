@@ -39,6 +39,7 @@ function WordsActivity({onNewIntent}) {
     const [weakWordMap, setWeakWordMap] = React.useState(Settings.getWeakWords());
     const [markedWordForDeletion, setMarkedWordForDeletion] = React.useState("");
     const [deleteConfirmationDialogOpened, setDeleteConfirmationDialogOpened] = React.useState(false);
+    const [searchTerm, setSearchTerm] = React.useState("");
 
     useEffect(() => {
         setWeakWordMap(Settings.getWeakWords());
@@ -108,6 +109,7 @@ function WordsActivity({onNewIntent}) {
                     }}>
                         SATVS PENSVM VERBVM
                     </button>
+                    <input className={"input"} placeholder={"QVAERERE VERBA"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
                     {
                         weakWords.length > 0 ? <p style={{
                             width: "calc(100% - 48px)",
@@ -129,14 +131,12 @@ function WordsActivity({onNewIntent}) {
                                 <span className={"translation-word"}>VERBVM LATINVM</span>
                                 <span className={"translation-meaning"}>VERBVM INGLASVM</span>
                                 <span className={"translation-learning-index"}>INDEX DISCENDI</span>
-                                <button style={{
-                                    cursor: "pointer"
-                                }} className={"delete-word-btn"}>
+                                <button disabled={true} className={"delete-word-btn"}>
                                     <span className={"material-symbols-outlined"}></span>
                                 </button>
                             </div>
                             {
-                                weakWords.map(word => (
+                                weakWords.filter(word => searchTerm.includes(word) || word.includes(searchTerm) || Settings.getWordIndex(StringUtil.clearWord(word)).toString() === searchTerm).map(word => (
                                     <div className={"list-item word-grid"} key={word}>
                                         <span className={"translation-word"}>{StringUtil.clearWord(word)}</span>
                                         <span className={"translation-meaning"}>{StringUtil.clearWord(weakWordMap[word])}</span>

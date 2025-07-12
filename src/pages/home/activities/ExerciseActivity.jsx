@@ -104,6 +104,7 @@ const exerciseDemo3 = {
 let fragmentIndex = 0;
 let mistakeIndex = 0;
 let streak = 0;
+let maxStreak = 0;
 let time = 0;
 let practiceIsCompleteExternal = false;
 const mistakeIndices = [];
@@ -133,15 +134,24 @@ function ExerciseActivity({onNewIntent}) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const onAnswerPreCallback = (isAnswerCorrect) => {
+        if (isAnswerCorrect) {
+            setProgress((90 / exerciseSession.length * (successfulCompletions + 1)) + 10);
+        }
+    }
+
     const onExerciseComplete = (fi, isSuccessful, thisExercise) => {
         if (isSuccessful) {
             setSuccessfulCompletions(successfulCompletions + 1);
-            setProgress(90 / exerciseSession.length * (successfulCompletions + 1));
         } else if (fragmentIndex < exerciseSession.length) {
             mistakeIndices.push(fragmentIndex);
         }
 
         streak = isSuccessful ? streak + 1 : 0;
+
+        if (streak > maxStreak) {
+            maxStreak = streak;
+        }
 
         if (isSuccessful && successfulCompletions >= exerciseSession.length - 1) {
             setProgress(100);
@@ -234,8 +244,19 @@ function ExerciseActivity({onNewIntent}) {
                                 </div>
                             </div>
                         </div>
-                        <ExerciseFragment isPreviousMistake={fragmentIndex > exerciseSession.length - 1} fallbackEvent={fallbackEvent} exercise={currentExercise} fragmentIndex={fragmentIndex} onExerciseComplete={onExerciseComplete} />
-                    </> : <PracticeCompleted onNewIntent={onNewIntent} flawless={mistakeIndices.length === 0} time={time} mistakesCount={mistakeIndices.length} streak={streak} />
+                        <ExerciseFragment
+                            isPreviousMistake={fragmentIndex > exerciseSession.length - 1}
+                            fallbackEvent={fallbackEvent}
+                            exercise={currentExercise}
+                            fragmentIndex={fragmentIndex}
+                            onExerciseComplete={onExerciseComplete}
+                            resultPreCallback={onAnswerPreCallback} />
+                    </> : <PracticeCompleted
+                        onNewIntent={onNewIntent}
+                        flawless={mistakeIndices.length === 0}
+                        time={time}
+                        mistakesCount={mistakeIndices.length}
+                        streak={maxStreak} />
                 }
             </div>
         </AppScreenFade>
