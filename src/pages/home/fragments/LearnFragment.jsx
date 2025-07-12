@@ -37,6 +37,7 @@ function LearnFragment({onNewIntent}) {
                     margin: "0",
                     fontSize: "16px",
                     userSelect: "none",
+                    fontWeight: 600,
                 }}>CONTENTVS EXEMPLARIS (debug)</h3>
                 <button style={{
                     width: "calc(100% - 8px)",

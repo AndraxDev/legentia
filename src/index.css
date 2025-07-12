@@ -624,6 +624,7 @@ br {
 .exercise-button {
     width: calc(100vw - 48px);
     height: 52px;
+    padding-top: 4px;
     border-top: none;
     border-left: none;
     border-right: none;
