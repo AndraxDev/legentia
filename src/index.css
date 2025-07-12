@@ -513,6 +513,7 @@ br {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
+    transition: .2s;
 }
 
 .answer-word-neutral {
@@ -527,6 +528,7 @@ br {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
+    transition: .2s;
 }
 
 .answer-word-neutral:active {
@@ -535,21 +537,22 @@ br {
 }
 
 .answer-word-correct {
-    background-color: transparent;
     color: #a6ff5d;
     border-top: 2px solid #a6ff5d;
     border-bottom: 5px solid #a6ff5d;
     border-left: 2px solid #a6ff5d;
     border-right: 2px solid #a6ff5d;
+    background-color: rgba(166, 255, 93, 0.11);
     padding: 12px 16px;
     border-radius: 16px;
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
+    transition: .2s;
 }
 
 .answer-word-incorrect {
-    background-color: transparent;
+    background-color: rgba(255, 93, 93, 0.11);
     color: #ff5d5d;
     border-top: 2px solid #ff5d5d;
     border-bottom: 5px solid #ff5d5d;
@@ -560,6 +563,7 @@ br {
     font-size: 16px;
     font-weight: 600;
     cursor: pointer;
+    transition: .2s;
 }
 
 .exercise-phrase-box {
@@ -628,13 +632,15 @@ br {
     font-size: 18px;
     color: #121212;
     border-radius: 20px;
-    font-weight: 600;
+    font-weight: 500;
     cursor: pointer;
+    transition: .2s;
 }
 
 .exercise-button-neutral {
     background-color: #ffb81e;
     border-bottom: 4px solid #b8830e;
+    transition: .2s;
 }
 
 .exercise-button-neutral:disabled {
@@ -642,16 +648,19 @@ br {
     height: 48px;
     border: none;
     background-color: #555555;
+    transition: .2s;
 }
 
 .exercise-button-incorrect {
     background-color: #ff5d5d;
     border-bottom: 4px solid #a13636;
+    transition: .2s;
 }
 
 .exercise-button-correct {
     background-color: #a6ff5d;
     border-bottom: 4px solid #72aa44;
+    transition: .2s;
 }
 
 .exercise-button-disabled {
@@ -660,6 +669,7 @@ br {
     margin-top: 4px;
     border: none;
     background-color: #555555;
+    transition: .2s;
 }
 
 .exercise-button-incorrect:disabled {
@@ -668,23 +678,28 @@ br {
     margin-top: 4px;
     border: none;
     background-color: #555555;
+    transition: .2s;
 }
 
 .exercise-button:active {
     height: 48px;
     margin-top: 4px;
+    transition: .2s;
 }
 
 .exercise-button-neutral:active {
     border-bottom: none;
+    transition: .2s;
 }
 
 .exercise-button-incorrect:active {
     border-bottom: none;
+    transition: .2s;
 }
 
 .exercise-button-correct:active {
     border-bottom: none;
+    transition: .2s;
 }
 
 .progress-background {
@@ -1227,6 +1242,7 @@ button {
     background: none;
     padding: 0;
     margin: 0;
+    transition: .2s;
 }
 
 .teslasoft-id-container:active {
@@ -1235,6 +1251,7 @@ button {
     border-left: 3px solid #323232;
     border-right: 3px solid #323232;
     margin-top: 3px;
+    transition: .2s;
 }
 
 .profile-photo {
