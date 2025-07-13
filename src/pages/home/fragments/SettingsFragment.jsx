@@ -212,7 +212,7 @@ function SettingsFragment({onNewIntent}) {
                                 </div>
                                 <div className={"profile-text"}>
                                     <p className={"teslasoft-id-title"}>TESLASOFT ID</p>
-                                    <p className={"profile-name"}>INITIVM FECISTI VT <b>{userData.first_name}</b></p>
+                                    <p className={"profile-name"}>INSCRIPTVS VT <b>{userData.first_name}</b></p>
                                 </div>
                             </div> : <>
                             {
@@ -257,7 +257,7 @@ function SettingsFragment({onNewIntent}) {
                     }} className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} disabled={!userData} className={"button-in-list-item"} onClick={() => onNewIntent("sync")}>OPTIONES INTER APPARATVS SYNC</button>
+                        }} disabled={!userData} className={"button-in-list-item"} onClick={() => onNewIntent("sync")}>OPTIONES INTER APPARATVS TVVS SYNC</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
@@ -336,7 +336,7 @@ function SettingsFragment({onNewIntent}) {
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => setConfirmTelemetry(true)}>MITTE TELEMETRIAM</button>
+                        }} className={"button-in-list-item"} onClick={() => setConfirmTelemetry(true)}>TELEMETRIAM MITTE</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{

@@ -47,7 +47,7 @@ function ReadFragment({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"VISNE HOC FABULAM DELERE?"}
+                    {"VISNE HOC FABVLAM DELERE?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
@@ -57,13 +57,13 @@ function ReadFragment({onNewIntent}) {
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeletionConfirmationOpened(false);
-                    }} autoFocus>CASSARE</MaterialButtonDialogOutlined>
+                    }} autoFocus>OBLITERA</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeletionConfirmationOpened(false);
                         deleteStory();
                     }}>
-                        DELERE
+                        DELE
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -79,7 +79,7 @@ function ReadFragment({onNewIntent}) {
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("addstory");
                 }}>
-                    ADDERE FABVLAM NOVAM
+                    FABVLAM NOVAM ADDE
                 </button>
             </div>
             {

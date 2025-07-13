@@ -304,7 +304,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, f
             <div style={{
                 transform: "translateY(100%)",
             }} id={"correct"} className={"exercise-result-box"}>
-                <h3 className={"exercise-status text-answer-correct"}>CORRIGE!</h3>
+                <h3 className={"exercise-status text-answer-correct"}>RECTE!</h3>
                 <br/>
                 <button className={"exercise-button exercise-button-correct"} onClick={goNext}>PERGERE</button>
             </div>

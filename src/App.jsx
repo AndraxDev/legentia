@@ -30,7 +30,6 @@ import DataControls from "./pages/home/activities/DataControls";
 import AddWordActivity from "./pages/home/activities/AddWordActivity";
 import TidRedirect from "./pages/home/activities/TidRedirect";
 import SyncActivity from "./pages/home/activities/SyncActivity";
-import TTSSandbox from "./pages/home/activities/TTSSandbox";
 import AlphaProbabilitySettingsActivity from "./pages/home/activities/AlphaProbabilitySettingsActivity";
 import VocabularyActivity from "./pages/home/activities/VocabularyActivity";
 import * as VocabularyCache from "./pages/VocabularyCache";

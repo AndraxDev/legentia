@@ -169,10 +169,10 @@ function DataControls({onNewIntent}) {
                 }}>
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearVocabularyConfirmationOpened(true)
-                    }} >DELERE VOCABVLARIVM MEVM</button>
+                    }} >DELE VOCABVLARIVM MEVM</button>
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearWeakWordsConfirmationOpened(true)
-                    }} >DELERE INDEX PRACTICVM VERBORVM</button>
+                    }} >DELE INDICEM PRACTICVM VERBORVM</button>
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearAppDataConfirmationOpened(true)
                     }} >Clear application data</button>

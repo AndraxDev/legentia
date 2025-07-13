@@ -38,13 +38,13 @@ function LearnFragment({onNewIntent}) {
                     fontSize: "16px",
                     userSelect: "none",
                     fontWeight: 600,
-                }}>CONTENTVS EXEMPLARIS (debug)</h3>
+                }}>CONTENTVS EXAMPLARIS (debug)</h3>
                 <button style={{
                     width: "calc(100% - 8px)",
                 }} className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("exercise");
                 }}>
-                    SATVS DEMO PRAXI SESSIONIS
+                    SESSIONEM PRACTICVM INCIPE
                 </button>
             </div>
             <div style={{
@@ -58,7 +58,7 @@ function LearnFragment({onNewIntent}) {
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("practicewords");
                 }}>
-                    PRACTICE VERBA
+                    VERBA PRACTICE
                 </button>
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("vocabulary");

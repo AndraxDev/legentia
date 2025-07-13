@@ -42,7 +42,7 @@ function AddStoryActivity({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>ADDERE VERBVM AD VOCABVLARIVM</h2>
+                    }} className={"article-title"}>VERBVM AD VOCABVLARIVM MEVM ADDE</h2>
                 </div>
                 <div className={"list-container"} style={{
                     width: "calc(100% - 54px)",
@@ -52,7 +52,7 @@ function AddStoryActivity({onNewIntent}) {
                     <div style={{
                         userSelect: "none"
                     }} className={"list-item translation-item"}>
-                        VERBA EXSTANTIA NOVIS VALORIBVS SUBSTITVENTVR.
+                        VERBA EXSTANTIA NOVIS VALORIBVS SVBSTITVENTVR.
                     </div>
                 </div>
                 <br/>
@@ -72,7 +72,7 @@ function AddStoryActivity({onNewIntent}) {
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>
-                    <button disabled={StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === ""} className={"exercise-button exercise-button-" + ((StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === "") ? "disabled" : "neutral")} onClick={save}>SERVE ET EXIRE</button>
+                    <button disabled={StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === ""} className={"exercise-button exercise-button-" + ((StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === "") ? "disabled" : "neutral")} onClick={save}>SERVA EXIQVE</button>
                 </div>
             </div>
         </AppScreenFade>

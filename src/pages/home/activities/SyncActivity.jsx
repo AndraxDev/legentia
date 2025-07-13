@@ -32,7 +32,7 @@ function SyncActivity({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Sync settings</h2>
+                    }} className={"article-title"}>OPTIONES INTER APPARATVS TVVS SYNC</h2>
                 </div>
                 <div className={"list-container"}>
                     <div className={"list-item translation-item"} style={{

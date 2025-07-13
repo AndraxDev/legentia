@@ -161,7 +161,7 @@ function PracticeCompleted({onNewIntent, flawless, time, mistakesCount, streak})
                 opacity: "0",
                 transition: "opacity 0.5s",
             }} id={"box-motivational"} className={"motivational-message"}>
-                {flawless ? "PENSVM SINE ULLO ERRORE PERFECISTI! PERGE!" : "ERRORES QVOSDAM FECISTI, SED BENE EST. PERGE EXERCERE!"}
+                {flawless ? "PENSVM SINE VLLO ERRORE PERFECISTI! PERGE!" : "ERRORES QVOSDAM FECISTI, SED BENE EST. PERGE EXERCERE!"}
             </div>
         </div>
     );

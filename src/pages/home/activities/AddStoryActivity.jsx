@@ -55,7 +55,7 @@ function AddStoryActivity({onNewIntent}) {
                     }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>{hash === "" ? "ADDERE FABVLAM NOVAM" : "RECENSERE FABVLAM"}</h2>
+                    }} className={"article-title"}>{hash === "" ? "FABVLAM NOVAM ADDE" : "FABVLAM RECENSE"}</h2>
                 </div>
                 <div className={"activity-content-container"}>
                     <div className={"field-container"}>
@@ -75,7 +75,7 @@ function AddStoryActivity({onNewIntent}) {
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>
-                    <button disabled={text.trim() === "" || title.trim() === ""} className={"exercise-button exercise-button-" + ((text.trim() === "" || title.trim() === "") ? "disabled" : "neutral")} onClick={save}>SERVE ET EXIRE</button>
+                    <button disabled={text.trim() === "" || title.trim() === ""} className={"exercise-button exercise-button-" + ((text.trim() === "" || title.trim() === "") ? "disabled" : "neutral")} onClick={save}>SERVA EXIQVE</button>
                 </div>
             </div>
         </AppScreenFade>

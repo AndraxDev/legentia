@@ -64,7 +64,7 @@ function VocabularyActivity({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"VISNE HOC VERBUM DELERE EX VOCABVLARIVM TVVM?"}
+                    {"VISNE HOC VERBVM DELERE EX VOCABVLARIVM TVVM?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
@@ -74,13 +74,13 @@ function VocabularyActivity({onNewIntent}) {
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
-                    }} autoFocus>CASSARE</MaterialButtonDialogOutlined>
+                    }} autoFocus>OBLITERA</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
                         deleteWord();
                     }}>
-                        DELERE
+                        DELE
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -105,9 +105,9 @@ function VocabularyActivity({onNewIntent}) {
                     <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                         onNewIntent("vocabularyadd");
                     }}>
-                        ADDERE VERBVM NOVVM
+                        VERBVM NOVVM ADDE
                     </button>
-                    <input className={"input"} placeholder={"QVAERERE VERBA"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
+                    <input className={"input"} placeholder={"VERBA QVAERE"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
                     {
                         vocabularyWords.length > 0 ? <p style={{
                             width: "calc(100% - 48px)",
@@ -115,7 +115,7 @@ function VocabularyActivity({onNewIntent}) {
                             fontSize: "20px",
                             userSelect: "none",
                             paddingTop: "6px"
-                        }}>{vocabularyWords.length} VERBA IN VOCABVLARIVM</p> : null
+                        }}>{vocabularyWords.length} VERBA IN VOCABVLARIVM MEVM SVNT</p> : null
                     }
                 </div>
                 {
@@ -128,7 +128,7 @@ function VocabularyActivity({onNewIntent}) {
                             }} key={-1}>
                                 <span className={"translation-word"}>VERBVM LATINVM</span>
                                 <span className={"translation-meaning"}>VERBVM INGLASVM</span>
-                                <span className={"translation-learning-index"}>INDEX DISCENDI</span>
+                                <span className={"translation-learning-index"}>I.D.</span>
                                 <button disabled={true} className={"delete-word-btn"}>
                                     <span className={"material-symbols-outlined"}></span>
                                 </button>

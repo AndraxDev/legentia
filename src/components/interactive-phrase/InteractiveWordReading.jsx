@@ -160,13 +160,13 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                                     removeFromWeakWords(word);
                                                     setSnackbarDeletionIsOpened(true);
                                                 }} className={"translation-item add-weak-sentence-button"}>
-                                                    DELERE VERBVM EX INDEX PRACTICVM
+                                                    VERBVM EX INDICEM PRACTICVM DELE
                                                 </button>
                                             </> : <button onClick={() => {
                                                 addToWeakWords(word, translation);
                                                 setSnackbarIsOpened(true);
                                             }} className={"translation-item add-weak-sentence-button"}>
-                                                ADDERE VERBVM AD INDEX PRACTICVM
+                                                VERBVM AD INDICEM PRACTICVM ADDE
                                             </button>
                                         }
                                     </>

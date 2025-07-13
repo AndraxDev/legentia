@@ -229,19 +229,19 @@ function TranslationQuiz({onNewIntent}) {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        OMNIS PROGRESSUS IN HAC SESSIONE PERIBIT!
+                        OMNIS PROGRESSVS IN HAC SESSIONE PERIBIT!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setExitDialogOpened(false);
-                    }} autoFocus>CASSARE</MaterialButtonDialogOutlined>
+                    }} autoFocus>OBLITERA</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setExitDialogOpened(false);
                         quitExercise();
                     }}>
-                        EXIRE
+                        EXIQVE
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>

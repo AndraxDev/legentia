@@ -62,7 +62,7 @@ function WordsActivity({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"VISNE HOC VERMVM DELERE EX INDEX PRACTICVM?"}
+                    {"VISNE HOC VERBVM DELERE EX INDICEM PRACTICVM?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
@@ -72,13 +72,13 @@ function WordsActivity({onNewIntent}) {
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
-                    }} autoFocus>CASSARE</MaterialButtonDialogOutlined>
+                    }} autoFocus>OBLITERA</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
                         deleteWord();
                     }}>
-                        DELERE
+                        DELE
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -102,14 +102,14 @@ function WordsActivity({onNewIntent}) {
                     <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                         onNewIntent("addword");
                     }}>
-                        ADDERE VERBVM NOVVM
+                        VERBVM NOVVM ADDE
                     </button>
                     <button disabled={weakWords.length === 0} className={"exercise-button " + ((weakWords.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={() => {
                         onNewIntent("quiz");
                     }}>
-                        SATVS PENSVM VERBVM
+                        PENSVM VERBVM INCIPE
                     </button>
-                    <input className={"input"} placeholder={"QVAERERE VERBA"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
+                    <input className={"input"} placeholder={"VERBA QVAERE"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
                     {
                         weakWords.length > 0 ? <p style={{
                             width: "calc(100% - 48px)",
@@ -117,7 +117,7 @@ function WordsActivity({onNewIntent}) {
                             fontSize: "20px",
                             userSelect: "none",
                             paddingTop: "6px"
-                        }}>{weakWords.length} VERBA IN INDEX PRACTICVM</p> : null
+                        }}>{weakWords.length} VERBA IN INDICEM PRACTICVM SVNT</p> : null
                     }
                 </div>
                 {
@@ -130,7 +130,7 @@ function WordsActivity({onNewIntent}) {
                             }} key={-1}>
                                 <span className={"translation-word"}>VERBVM LATINVM</span>
                                 <span className={"translation-meaning"}>VERBVM INGLASVM</span>
-                                <span className={"translation-learning-index"}>INDEX DISCENDI</span>
+                                <span className={"translation-learning-index"}>I.D.</span>
                                 <button disabled={true} className={"delete-word-btn"}>
                                     <span className={"material-symbols-outlined"}></span>
                                 </button>
