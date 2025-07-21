@@ -109,6 +109,11 @@ function WordsActivity({onNewIntent}) {
                     }}>
                         PENSVM VERBVM INCIPE
                     </button>
+                    <button disabled={weakWords.length === 0} className={"exercise-button " + ((weakWords.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={() => {
+                        onNewIntent("hardquiz");
+                    }}>
+                        PENSVM DVRVM INCIPE
+                    </button>
                     <input className={"input"} placeholder={"VERBA QVAERE"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
                     {
                         weakWords.length > 0 ? <p style={{
@@ -136,7 +141,8 @@ function WordsActivity({onNewIntent}) {
                                 </button>
                             </div>
                             {
-                                weakWords.filter(word => searchTerm.includes(word) || word.includes(searchTerm) || Settings.getWordIndex(StringUtil.clearWord(word)).toString() === searchTerm).map(word => (
+                                weakWords.filter(word => searchTerm.includes(word) || word.includes(searchTerm) || Settings.getWordIndex(StringUtil.clearWord(word)).toString() === searchTerm ||
+                                    searchTerm.includes(weakWordMap[word]) || weakWordMap[word].includes(searchTerm) || Settings.getWordIndex(StringUtil.clearWord(weakWordMap[word])).toString() === searchTerm).map(word => (
                                     <div className={"list-item word-grid"} key={word}>
                                         <span className={"translation-word"}>{StringUtil.clearWord(word)}</span>
                                         <span className={"translation-meaning"}>{StringUtil.clearWord(weakWordMap[word])}</span>

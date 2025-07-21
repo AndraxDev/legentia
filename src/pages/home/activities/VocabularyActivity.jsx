@@ -134,7 +134,8 @@ function VocabularyActivity({onNewIntent}) {
                                 </button>
                             </div>
                             {
-                                vocabularyWords.filter(word => searchTerm.includes(word) || word.includes(searchTerm) || Settings.getWordIndex(StringUtil.clearWord(word)).toString() === searchTerm).map(word => (
+                                vocabularyWords.filter(word => searchTerm.includes(word) || word.includes(searchTerm) || Settings.getWordIndex(StringUtil.clearWord(word)).toString() === searchTerm ||
+                                    searchTerm.includes(vocabularyWordMap[word][0]) || vocabularyWordMap[word][0].includes(searchTerm) || Settings.getWordIndex(StringUtil.clearWord(vocabularyWordMap[word][0])).toString() === searchTerm).map(word => (
                                     <div className={"list-item word-grid"} key={word}>
                                         <span className={"translation-word"}>{StringUtil.clearWord(word || "")}</span>
                                         <span className={"translation-meaning"}>{StringUtil.clearWord(vocabularyWordMap[word] || "")}</span>

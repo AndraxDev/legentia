@@ -14,24 +14,29 @@
  * limitations under the License.
  * *************************************************************************/
 
-import React, {useEffect, useState} from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
-import AppScreenFade from "../../AppScreenFade";
-import PracticeCompleted from "../fragments/PracticeCompleted";
-import DialogActions from '@mui/material/DialogActions';
-import DialogContent from '@mui/material/DialogContent';
-import DialogContentText from '@mui/material/DialogContentText';
-import DialogTitle from '@mui/material/DialogTitle';
-import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
-import {MaterialDialog} from "../../../components/MaterialDialog";
-import TranslationQuizFragment from "../fragments/TranslationQuizFragment";
-import * as Settings from "../../../Settings";
+import {MaterialDialog} from "../../../components/MaterialDialog.jsx";
+import DialogTitle from "@mui/material/DialogTitle";
+import DialogContent from "@mui/material/DialogContent";
+import DialogContentText from "@mui/material/DialogContentText";
+import DialogActions from "@mui/material/DialogActions";
+import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton.jsx";
+import PracticeCompleted from "../fragments/PracticeCompleted.jsx";
+import AppScreenFade from "../../AppScreenFade.jsx";
+import HardTranslationChallengeFragment from "../fragments/HardTranslationChallengeFragment.jsx";
+import * as Settings from "../../../Settings.jsx";
+import {MaterialProgressBar} from "../../../components/MaterialProgressBar.jsx";
 
+let fragmentIndex = 0;
+let mistakeIndex = 0;
 let streak = 0;
+let maxStreak = 0;
 let time = 0;
 let practiceIsCompleteExternal = false;
-let maxCombo = 0;
-let sessionSize = 25; // Number of words in the session
+const mistakeIndices = [];
+
+let sessionSize = 10; // Number of words in the session
 
 const initializeExercises = () => {
     let weakWords = Settings.getWeakWords();
@@ -40,7 +45,6 @@ const initializeExercises = () => {
     // Reset exercise
     streak = 0;
     time = 0;
-    maxCombo = 0;
     practiceIsCompleteExternal = false;
 
     console.log("Streak reset to: " + streak);
@@ -133,31 +137,42 @@ const initializeExercises = () => {
         }
     }
 
-    const entries = Object.entries(pool);
-    const exercises = [];
+    let session = [];
 
-    for (let i = 0; i < entries.length; i += 5) {
-        const chunk = entries.slice(i, i + 5);
-        exercises.push(Object.fromEntries(chunk));
-    }
+    Object.keys(pool).forEach(key => {
+        session.push({
+            english: pool[key],
+            latin: key,
+        });
+    })
 
-    return exercises;
+    console.log("EXERCISE SESSION:")
+    console.log(session);
+
+    return session;
 }
 
-function TranslationQuiz({onNewIntent}) {
+let exerciseSession = [];
 
-    const [exercises, setExercises] = useState([]);
+function WordTranslationChallengeHardActivity({onNewIntent}) {
     const [successfulCompletions, setSuccessfulCompletions] = React.useState(0);
     const [progress, setProgress] = React.useState(10);
     const [fallbackEvent, setFallbackEvent] = React.useState(0);
     const [exitDialogOpened, setExitDialogOpened] = React.useState(false);
     const [practiceIsComplete, setPracticeIsComplete] = React.useState(false);
-    const [mistakesCount, setMistakesCount] = React.useState(0);
-    const [fragmentIndex, setFragmentIndex] = React.useState(0);
+    const [isInitialized, setIsInitialized] = React.useState(false);
+    const [currentExercise, setCurrentExercise] = React.useState(isInitialized ? exerciseSession[0] : {});
 
     useEffect(() => {
-        setExercises(initializeExercises())
+        exerciseSession = initializeExercises();
+        setIsInitialized(true);
     }, []);
+
+    useEffect(() => {
+        if (isInitialized) {
+            setCurrentExercise(exerciseSession[0]);
+        }
+    }, [isInitialized]);
 
     const timer = () => {
         if (!practiceIsCompleteExternal) {
@@ -173,34 +188,57 @@ function TranslationQuiz({onNewIntent}) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    const onPreCallback = (isAnswerCorrect) => {
+    const onAnswerPreCallback = (isAnswerCorrect) => {
         if (isAnswerCorrect) {
-            setSuccessfulCompletions(successfulCompletions + 1);
-            console.log("Progress: " + ((90 / exercises.length) * (successfulCompletions + 1) + 10));
-            setProgress((90 / exercises.length) * (successfulCompletions + 1) + 10);
+            setProgress((90 / exerciseSession.length * (successfulCompletions + 1)) + 10);
         }
     }
 
-    const onExerciseComplete = (fi, isSuccessful, thisExercise, mistakes, localStreak) => {
-        if (mistakes > 0) {
-            streak = localStreak;
-        } else {
-            streak += localStreak;
+    const onExerciseComplete = (fi, isSuccessful, thisExercise) => {
+        if (isSuccessful) {
+            setSuccessfulCompletions(successfulCompletions + 1);
+        } else if (fragmentIndex < exerciseSession.length) {
+            mistakeIndices.push(fragmentIndex);
         }
 
-        if (streak > maxCombo) {
-            maxCombo = streak;
+        streak = isSuccessful ? streak + 1 : 0;
+
+        if (streak > maxStreak) {
+            maxStreak = streak;
         }
 
-        if (isSuccessful && successfulCompletions >= exercises.length) {
+        if (isSuccessful && successfulCompletions >= exerciseSession.length - 1) {
             setProgress(100);
             console.log("Practice completed!");
             showSuccessScreen()
-            return;
-        }
+        } else if (fragmentIndex >= exerciseSession.length - 1) {
+            if (fragmentIndex > exerciseSession.length - 1) {
+                if (isSuccessful) {
+                    mistakeIndex++;
+                }
+                if (mistakeIndex <= mistakeIndices.length - 1) {
+                    setCurrentExercise(exerciseSession[mistakeIndices[mistakeIndex]]);
+                } else {
+                    setCurrentExercise(thisExercise);
+                }
+            } else {
+                if (mistakeIndex <= mistakeIndices.length - 1) {
+                    setCurrentExercise(exerciseSession[mistakeIndices[mistakeIndex]]);
+                } else {
+                    setCurrentExercise(thisExercise);
+                }
 
-        setMistakesCount(mistakesCount + mistakes);
-        setFragmentIndex(fragmentIndex >= exercises.length - 1 ? exercises.length - 1 : fragmentIndex + 1);
+                if (isSuccessful) {
+                    mistakeIndex++;
+                }
+            }
+
+            // Change index to reset exercise state
+            fragmentIndex = fragmentIndex + 1;
+        } else {
+            fragmentIndex = fragmentIndex + 1;
+            setCurrentExercise(exerciseSession[fragmentIndex]);
+        }
 
         setFallbackEvent(fallbackEvent + 1);
         console.log("Current streak: " + streak);
@@ -228,7 +266,7 @@ function TranslationQuiz({onNewIntent}) {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        OMNIS PROGRESSVS IN HAC SESSIONE PERIBIT!
+                        OMNIS PROGRESSVS IN HAC SESSIONE PERIBIT.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
@@ -260,26 +298,29 @@ function TranslationQuiz({onNewIntent}) {
                                 </div>
                             </div>
                         </div>
-                        {exercises.length > 0 ? <TranslationQuizFragment
-                            fallbackEvent={fallbackEvent}
-                            exercise={exercises[fragmentIndex]}
-                            fragmentIndex={fragmentIndex}
-                            onExerciseComplete={onExerciseComplete}
-                            resultPreCallback={onPreCallback} /> : null}
+                        {
+                            isInitialized ? <HardTranslationChallengeFragment
+                                isPreviousMistake={fragmentIndex > exerciseSession.length - 1}
+                                fallbackEvent={fallbackEvent}
+                                exercise={currentExercise}
+                                fragmentIndex={fragmentIndex}
+                                onExerciseComplete={onExerciseComplete}
+                                resultPreCallback={onAnswerPreCallback} /> : <MaterialProgressBar />
+                        }
                     </> : <PracticeCompleted
                         onNewIntent={onNewIntent}
-                        flawless={mistakesCount === 0}
+                        flawless={mistakeIndices.length === 0}
                         time={time}
-                        mistakesCount={mistakesCount}
-                        streak={maxCombo} />
+                        mistakesCount={mistakeIndices.length}
+                        streak={maxStreak} />
                 }
             </div>
         </AppScreenFade>
     );
 }
 
-TranslationQuiz.propTypes = {
+WordTranslationChallengeHardActivity.propTypes = {
     onNewIntent: PropTypes.func.isRequired
 }
 
-export default TranslationQuiz;
+export default WordTranslationChallengeHardActivity;

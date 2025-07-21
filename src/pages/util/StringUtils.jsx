@@ -16,7 +16,7 @@
 
 export const clearWord = (word) => {
     if (word === undefined) return ""
-    return (word || "").toString().toLowerCase()
+    return trimChars((word || "").toString().toLowerCase()
         .replaceAll(",", "")
         .replaceAll(".", "")
         .replaceAll("?", "")
@@ -38,10 +38,17 @@ export const clearWord = (word) => {
         .replaceAll("@", "")
         .replaceAll("#", "")
         .replaceAll("^", "")
-        .trim()
+        .trim(), "-")
 
     // Apostrophes and dashes can be part of the word so they are permitted.
 }
+
+function trimChars(str, chars) {
+    const escaped = chars.replace(/[-[\]/{}()*+?.\\^$|]/g, '\\$&'); // escape special regex chars
+    const regex = new RegExp(`^[${escaped}]+|[${escaped}]+$`, 'g');
+    return str.replace(regex, '');
+}
+
 
 export const reduceNewLinesToOne = (text) => {
     // return text.replaceAll(/\n+/g, "\n").trim();

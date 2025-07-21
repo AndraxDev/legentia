@@ -34,6 +34,7 @@ import AlphaProbabilitySettingsActivity from "./pages/home/activities/AlphaProba
 import VocabularyActivity from "./pages/home/activities/VocabularyActivity";
 import * as VocabularyCache from "./pages/VocabularyCache";
 import AddWordToVocabularyActivity from "./pages/home/activities/AddWordToVocabularyActivity";
+import WordTranslationChallengeHardActivity from "./pages/home/activities/WordTranslationChallengeHardActivity.jsx";
 
 let contextInitialized = false;
 
@@ -97,6 +98,8 @@ function App() {
                 return <TidRedirect onNewIntent={addActivityToStack} />;
             case "sync":
                 return <SyncActivity onNewIntent={addActivityToStack} />;
+            case "hardquiz":
+                return <WordTranslationChallengeHardActivity onNewIntent={addActivityToStack} />;
             // case "ttsdebug":
             //     return <TTSSandbox onNewIntent={addActivityToStack} />;
             case "setalpha":
