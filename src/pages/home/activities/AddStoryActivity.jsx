@@ -18,6 +18,7 @@ import React from 'react';
 import AppScreenFade from "../../AppScreenFade";
 import PropTypes from "prop-types";
 import * as Settings from "../../../Settings";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -52,16 +53,16 @@ function AddStoryActivity({onNewIntent}) {
                 <div className={"exercise-header"}>
                     <button className={"exercise-back"} onClick={() => {
                         onBackPressed()
-                    }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
+                    }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>{hash === "" ? "FABVLAM NOVAM ADDE" : "FABVLAM RECENSE"}</h2>
+                    }} className={"article-title"}>{hash === "" ? "Fabulam novam adde" : "Fabulam recense"}</h2>
                 </div>
                 <div className={"activity-content-container"}>
                     <div className={"field-container"}>
                         <input value={title} onChange={(e) => {
                             setTitle(e.target.value);
-                        }} placeholder={"TITVLVM"} className={"input"}/>
+                        }} placeholder={"Titulum"} className={"input"}/>
                     </div>
                     <div style={{
                         flexGrow: 1,
@@ -71,11 +72,11 @@ function AddStoryActivity({onNewIntent}) {
                             setText(e.target.value);
                         }} style={{
                             height: "calc(100% - 48px)"
-                        }} placeholder={"TEXTVS"} className={"input"}></textarea>
+                        }} placeholder={"Textus"} className={"input"}></textarea>
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>
-                    <button disabled={text.trim() === "" || title.trim() === ""} className={"exercise-button exercise-button-" + ((text.trim() === "" || title.trim() === "") ? "disabled" : "neutral")} onClick={save}>SERVA EXIQVE</button>
+                    <button disabled={text.trim() === "" || title.trim() === ""} className={"exercise-button exercise-button-" + ((text.trim() === "" || title.trim() === "") ? "disabled" : "neutral")} onClick={save}>Serva exique</button>
                 </div>
             </div>
         </AppScreenFade>

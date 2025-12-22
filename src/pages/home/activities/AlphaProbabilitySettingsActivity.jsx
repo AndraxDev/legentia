@@ -21,6 +21,7 @@ import formula from "../../../wordbrob.png";
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import * as Settings from "../../../Settings";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
 function AlphaProbabilitySettingsActivity({ onNewIntent }) {
 
@@ -54,10 +55,10 @@ function AlphaProbabilitySettingsActivity({ onNewIntent }) {
                 <div className={"exercise-header"}>
                     <button className={"exercise-back"} onClick={() => {
                         onBackPressed()
-                    }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
+                    }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>SET ALPHA PROBABILITATIS</h2>
+                    }} className={"article-title"}>Set alpha probabilitatis</h2>
                 </div>
                 <div className={"list-container"} style={{
                     margin: "0 24px 24px 24px"

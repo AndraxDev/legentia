@@ -26,6 +26,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import Snackbar from '@mui/material/Snackbar';
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
 function DataControls({onNewIntent}) {
     const onBackPressed = () => {
@@ -155,10 +156,10 @@ function DataControls({onNewIntent}) {
                 <div className={"exercise-header"}>
                     <button className={"exercise-back"} onClick={() => {
                         onBackPressed()
-                    }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
+                    }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>DATA POTESTATE</h2>
+                    }} className={"article-title"}>Data potestate</h2>
                 </div>
                 <div style={{
                     width: "100%",
@@ -169,10 +170,10 @@ function DataControls({onNewIntent}) {
                 }}>
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearVocabularyConfirmationOpened(true)
-                    }} >DELE VOCABVLARIVM MEVM</button>
+                    }} >Dele vocabularium meum</button>
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearWeakWordsConfirmationOpened(true)
-                    }} >DELE INDICEM PRACTICVM VERBORVM</button>
+                    }} >Dele indicum practicum verborum</button>
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearAppDataConfirmationOpened(true)
                     }} >Clear application data</button>

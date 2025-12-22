@@ -38,11 +38,11 @@ function HowTo({onStepCompleted}) {
             transition: "opacity 0.2s ease-in-out, transform 0.4s ease-out"
         }} className="app-screen-v2" id={"app-screen"}>
             <div className={"container-centered"}>
-                <h1 className={"app-title"}>QVOMODO OPERATVR?</h1>
+                <h1 className={"app-title"}>Quomodo operatur?</h1>
                 <br/>
-                <p>HAEC APPLICATIO TE SINIT VERBA ET LOCVTIONES LATINAS DISCERE ET LEGERE INCIPERE. DISSIMILIS DVOLINGO (QVI CVRSUM LATINVM VALDE LIMITATVM HABET) VEL SIMILIBVS APPLICATIONIBVS, FONTES EX LIBRIS VEL DOCVMENTIS TVIS ADDERE POTES. PRAETEREA, HAEC APPLICATIO OPENAI WHISPER VTITVR AD TEXTVM PRONVNTIANDVM ET CONTINET COLLOQVENDI AVTOMATON ARTIFICIALE CONFIGVRABILE QVO NVNTIOS MITTERE POTES.</p>
+                <p>Haec applicatio te sinit verba et locutiones latinas discere et legere incipere. Dissimilis Duolingo (qui cursum latinum valde limitatum habet) vel similibus applicationibus, fontes ex libris vel documentis tuis addere potes. Praeterea, haec application OpenAI Whisper utitur ad textum pronuntiandum et continet colloquendi automaton artificiale configurabile quo nuntios mittere potes.</p>
                 <br/>
-                <button className={"exercise-button exercise-button-neutral"} onClick={handleNext}>PERGERE</button>
+                <button className={"exercise-button exercise-button-neutral"} onClick={handleNext}>Pergere</button>
             </div>
         </div>
     );

@@ -28,7 +28,11 @@ function BottomNavigationBarItem({label, icon, onClick, isActive}) {
                     justifyContent: "center"
                 }}>
                     <div className={"bottom-navigation-item-icon-container-" + (isActive ? "active" : "inactive")}>
-                        <span className={"material-symbols-outlined bottom-navigation-icon-" + (isActive ? "active" : "inactive")}>{icon}</span>
+                        <div style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                        }} className={"material-symbols-outlined bottom-navigation-icon-" + (isActive ? "active" : "inactive")}>{icon}</div>
                     </div>
                     <p className={isActive ? "bottom-navigation-label-active" : "bottom-navigation-label"}>{label}</p>
                 </div>
@@ -39,7 +43,7 @@ function BottomNavigationBarItem({label, icon, onClick, isActive}) {
 
 BottomNavigationBarItem.propTypes = {
     label: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired,
+    icon: PropTypes.node,
     onClick: PropTypes.func.isRequired,
     isActive: PropTypes.bool.isRequired
 }

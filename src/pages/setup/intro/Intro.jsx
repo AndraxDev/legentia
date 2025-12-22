@@ -35,10 +35,10 @@ function Intro({onStepCompleted}) {
                 <br/>
                 <h1 className={"app-title"}>Legentia</h1>
                 <br/>
-                <p className={"app-intro"}>BENE VENISTI AD LEGENTIA - APPLICATIONEM LINGVAE LATINAE DISCENDAE IMPVLSAM AI</p>
+                <p className={"app-intro"}>Bene venisti ad Legentia - applicationem linguae latinae discendae impulsam AI</p>
                 <br/>
                 <br/>
-                <button className={"exercise-button exercise-button-neutral"} onClick={handleNext}>PERGERE</button>
+                <button className={"exercise-button exercise-button-neutral"} onClick={handleNext}>Pergere</button>
                 <br/>
                 <br/>
                 <br/>

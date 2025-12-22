@@ -14,12 +14,25 @@
  * limitations under the License.
  * *************************************************************************/
 
-import React from 'react';
+import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
 import AppScreenFade from "../../AppScreenFade";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
 function TidRedirect({onNewIntent}) {
     const [userDataKey, setUserDataKey] = React.useState(localStorage.getItem("userDataKey") || "");
+
+    useEffect(() => {
+        if (localStorage.getItem("userDataKey")) {
+            localStorage.removeItem("userDataKey");
+            window.location.replace("/home/3");
+        } else {
+            const baseUrl = "https://account.teslasoft.org/AccountPicker?ftpn=token&next="
+            const currentHost = window.location.origin;
+            const url = `${baseUrl}${currentHost}/id5`;
+            window.location.replace(url);
+        }
+    }, [])
 
     const onBackPressed = () => {
         onNewIntent("/home/3")
@@ -43,10 +56,10 @@ function TidRedirect({onNewIntent}) {
                 <div className={"exercise-header"}>
                     <button className={"exercise-back"} onClick={() => {
                         onBackPressed()
-                    }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
+                    }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>INTRANDERE CVM TESLASOFT ID</h2>
+                    }} className={"article-title"}>Intrandere cum Teslasoft ID</h2>
                 </div>
                 <div className={"list-container"} style={{
                     marginTop: "0",

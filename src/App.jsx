@@ -35,6 +35,7 @@ import VocabularyActivity from "./pages/home/activities/VocabularyActivity";
 import * as VocabularyCache from "./pages/VocabularyCache";
 import AddWordToVocabularyActivity from "./pages/home/activities/AddWordToVocabularyActivity";
 import WordTranslationChallengeHardActivity from "./pages/home/activities/WordTranslationChallengeHardActivity.jsx";
+import TeslasoftIDRedirectActivity from "./pages/home/activities/TeslasoftIDRedirectActivity.jsx";
 
 let contextInitialized = false;
 
@@ -104,6 +105,8 @@ function App() {
             //     return <TTSSandbox onNewIntent={addActivityToStack} />;
             case "setalpha":
                 return <AlphaProbabilitySettingsActivity onNewIntent={addActivityToStack} />;
+            case "id5":
+                return <TeslasoftIDRedirectActivity />;
             default:
                 return <Home onNewIntent={addActivityToStack} />;
         }

@@ -26,6 +26,7 @@ import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../..
 import {MaterialDialog} from "../../../components/MaterialDialog";
 import TranslationQuizFragment from "../fragments/TranslationQuizFragment";
 import * as Settings from "../../../Settings";
+import Close from "@mui/icons-material/Close";
 
 let streak = 0;
 let time = 0;
@@ -224,23 +225,23 @@ function TranslationQuiz({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"SESSIONEM EXERCITATIONES RELINQVERE VIS?"}
+                    {"Sessionem exercitationes relinquere vis?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        OMNIS PROGRESSVS IN HAC SESSIONE PERIBIT!
+                        Omnis progressus in hac sessione peribit!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setExitDialogOpened(false);
-                    }} autoFocus>OBLITERA</MaterialButtonDialogOutlined>
+                    }} autoFocus>Oblitera</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setExitDialogOpened(false);
                         quitExercise();
                     }}>
-                        EXIQVE
+                        Exique
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -251,7 +252,7 @@ function TranslationQuiz({onNewIntent}) {
                         <div className={"exercise-header"}>
                             <button className={"exercise-close"} onClick={() => {
                                 setExitDialogOpened(true);
-                            }}><span className={"material-symbols-outlined"}>close</span></button>
+                            }}><Close /></button>
                             <div className={"progress-background"}>
                                 <div style={{
                                     width: `calc(${progress}% - 12px)`

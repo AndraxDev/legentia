@@ -25,6 +25,7 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
 import {MaterialDialog} from "../../../components/MaterialDialog";
+import Cancel from "@mui/icons-material/Cancel";
 
 // Exercise structure:
 // Translation exercise consists of a phrase and a set of translations.
@@ -212,19 +213,19 @@ function ExerciseActivity({onNewIntent}) {
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        OMNIS PROGRESSVS IN HAC SESSIONE PERIBIT.
+                        Omnis progressus in hac sessione peribit.
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setExitDialogOpened(false);
-                    }} autoFocus>OBLITERA</MaterialButtonDialogOutlined>
+                    }} autoFocus>Oblitera</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setExitDialogOpened(false);
                         quitExercise();
                     }}>
-                        EXIQVE
+                        Exique
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -235,7 +236,7 @@ function ExerciseActivity({onNewIntent}) {
                         <div className={"exercise-header"}>
                             <button className={"exercise-close"} onClick={() => {
                                 setExitDialogOpened(true);
-                            }}><span className={"material-symbols-outlined"}>close</span></button>
+                            }}><Cancel /></button>
                             <div className={"progress-background"}>
                                 <div style={{
                                     width: `calc(${progress}% - 12px)`

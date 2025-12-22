@@ -81,7 +81,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                         setTranslation(word);
                         VocabularyCache.insertWord(word, [word]);
                     } else {
-                        setTranslation("Translation not available right now.");
+                        setTranslation("Translation is not available right now.");
                     }
                 });
         }
@@ -129,7 +129,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                severity="success"
                                sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                                variant="filled">
-                            VERBVM AD VLTERIOREM EXERCITATIONEM SERVATVM.
+                            Verbum ad ulteriorem exercitationem servatum.
                         </Alert>
                     </Snackbar>
                     <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarDeletionIsOpened} autoHideDuration={3000} onClick={() => setSnackbarDeletionIsOpened(false)}>
@@ -137,7 +137,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                severity="success"
                                sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                                variant="filled">
-                            VERBVM EX INDICE EXERCITATIONVM DELETVM EST.
+                            Verbum ex indice excercitationum deletum est.
                         </Alert>
                     </Snackbar>
                     <MaterialTooltip
@@ -154,19 +154,19 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                         {
                                             weakWords.includes(StringUtils.clearWord(word)) ? <>
                                                 <div className={"translation-item-weak-word"}>
-                                                    VERBVM INFIRMVM
+                                                    Verbum infirmum
                                                 </div>
                                                 <button onClick={() => {
                                                     removeFromWeakWords(word);
                                                     setSnackbarDeletionIsOpened(true);
                                                 }} className={"translation-item add-weak-sentence-button"}>
-                                                    VERBVM EX INDICEM PRACTICVM DELE
+                                                    Verbum ex indicem practicum dele
                                                 </button>
                                             </> : <button onClick={() => {
                                                 addToWeakWords(word, translation);
                                                 setSnackbarIsOpened(true);
                                             }} className={"translation-item add-weak-sentence-button"}>
-                                                VERBVM AD INDICEM PRACTICVM ADDE
+                                                Verbum ad indicem practicum adde
                                             </button>
                                         }
                                     </>

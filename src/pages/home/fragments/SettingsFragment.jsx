@@ -127,7 +127,7 @@ function SettingsFragment({onNewIntent}) {
                        severity="success"
                        sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                        variant="filled">
-                    OMNES OPTIONES SERVATAE!
+                    Omnes optiones servatae!
                 </Alert>
             </Snackbar>
             <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={telemetrySnackBarIsOpen} autoHideDuration={3000} onClick={() => setTelemetrySnackBarIsOpen(false)}>
@@ -189,7 +189,7 @@ function SettingsFragment({onNewIntent}) {
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
-            <h2 className={"activity-title"}>OPTIONES</h2>
+            <h2 className={"activity-title"}>Optiones</h2>
             <div style={{
                 width: "100%",
                 display: "flex",
@@ -211,8 +211,8 @@ function SettingsFragment({onNewIntent}) {
                                     }} alt={userData.user_name} src={userData.profile_photo}/>
                                 </div>
                                 <div className={"profile-text"}>
-                                    <p className={"teslasoft-id-title"}>TESLASOFT ID</p>
-                                    <p className={"profile-name"}>INSCRIPTVS VT <b>{userData.first_name}</b></p>
+                                    <p className={"teslasoft-id-title"}>Teslasoft ID</p>
+                                    <p className={"profile-name"}>Inscriptus ut <b>{userData.first_name}</b></p>
                                 </div>
                             </div> : <>
                             {
@@ -220,7 +220,7 @@ function SettingsFragment({onNewIntent}) {
                                     <div className={"profile-photo"}></div>
                                     <div className={"profile-text"}>
                                         <p className={"teslasoft-id-title"}>Teslasoft ID</p>
-                                        <p className={"sync-error-text"}>SYNC ERROR</p>
+                                        <p className={"sync-error-text"}>Sync error</p>
                                     </div>
                                 </div> : <div style={{
                                     width: "100%",
@@ -240,8 +240,8 @@ function SettingsFragment({onNewIntent}) {
                         <div className={"profile-info-container"}>
                             <div className={"profile-photo"}></div>
                             <div className={"profile-text"}>
-                                <p className={"teslasoft-id-title"}>TESLASOFT ID</p>
-                                <p className={"profile-name"}>TANGE AD INTRANDVM</p>
+                                <p className={"teslasoft-id-title"}>Teslasoft ID</p>
+                                <p className={"profile-name"}>Tange ad intrandum</p>
                             </div>
                         </div>
                     </button>
@@ -257,12 +257,12 @@ function SettingsFragment({onNewIntent}) {
                     }} className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} disabled={!userData} className={"button-in-list-item"} onClick={() => onNewIntent("sync")}>OPTIONES INTER APPARATVS TVVS SYNC</button>
+                        }} disabled={!userData} className={"button-in-list-item"} onClick={() => onNewIntent("sync")}>Optiones inter apparatus tuus sync</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("privacy")}>DATA POTESTATE</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("privacy")}>Data potestate</button>
                     </div>
                     <div className={"list-item"}>
                         <FormControlLabel style={{
@@ -270,6 +270,7 @@ function SettingsFragment({onNewIntent}) {
                             paddingRight: "16px",
                             paddingTop: "12px",
                             fontSize: "14px",
+                            justifyContent: "space-between",
                             paddingBottom: "12px",
                             width: "calc(100% - 32px)",
                         }} labelPlacement={"start"} control={
@@ -278,13 +279,14 @@ function SettingsFragment({onNewIntent}) {
                                 setPronounceInReaderEnabled(!pronounceInReaderEnabled);
                                 setSettingsSavedSnackBarOpened(true);
                             }} />
-                        } label={"VERBA IN LECTORE PRONVNTIA SEMEL CLICCATA"}/>
+                        } label={"Verba in lectore pronuntia semel cliccata"}/>
                     </div>
                     <div className={"list-item"}>
                         <FormControlLabel style={{
                             userSelect: "none",
                             paddingRight: "16px",
                             paddingTop: "12px",
+                            justifyContent: "space-between",
                             fontSize: "14px",
                             paddingBottom: "12px",
                             width: "calc(100% - 32px)",
@@ -294,7 +296,7 @@ function SettingsFragment({onNewIntent}) {
                                 setPronounceInWordQuizEnabled(!pronounceInWordQuizEnabled);
                                 setSettingsSavedSnackBarOpened(true);
                             }} />
-                        } label={"VERBA IN PENSVM VERBORVM PRONVNTIA SEMEL CLICCATA"}/>
+                        } label={"Verba in pensum verborum pronuntia semel cliccata"}/>
                     </div>
                     <div className={"list-item"}>
                         {/* Comply with free license for TS used. An attribution must be given. */}
@@ -305,9 +307,9 @@ function SettingsFragment({onNewIntent}) {
                         }}><span>
                             TTS EX&nbsp;<b style={{
                                 color: "#ffb81e",
-                        }}>ResponsiveVoice</b>&nbsp;LICENTIATVS SVB&nbsp;<b style={{
+                        }}>ResponsiveVoice</b>&nbsp;Licentiatus sub&nbsp;<b style={{
                             color: "#ffb81e",
-                        }}>CC BY-NC-ND 4.0</b>&nbsp;(VSVS NON COMMERCIALIS PERMITITVR EST)
+                        }}>CC BY-NC-ND 4.0</b>&nbsp;(Usus non commercialis permititum est)
                         </span></button>
                     </div>
                 </div>
@@ -321,12 +323,12 @@ function SettingsFragment({onNewIntent}) {
                             margin: "0",
                             userSelect: "none",
                             padding: "16px",
-                        }}>DEBUG ET EXPERIMENTI</h3>
+                        }}>Debug et experimenti</h3>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("openai")}>OPTIONES NAM AI</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("openai")}>Optiones nam AI</button>
                     </div>
                     {/*<div className={"list-item"}>*/}
                     {/*    <button style={{*/}
@@ -336,12 +338,12 @@ function SettingsFragment({onNewIntent}) {
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => setConfirmTelemetry(true)}>TELEMETRIAM MITTE</button>
+                        }} className={"button-in-list-item"} onClick={() => setConfirmTelemetry(true)}>Telemetriam mitte</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("setalpha")}>SET ALPHA PROBABILITATIS</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("setalpha")}>Set alpha probabilitatis</button>
                     </div>
                 </div>
             </div>
@@ -356,8 +358,8 @@ function SettingsFragment({onNewIntent}) {
             {/*        stopSample();*/}
             {/*    }}>Stop speaking sample</button>*/}
             {/*</div>*/}
-            <p className={"app-info"}>LEGENTIA VERSIONIS: {packageJson.version}</p>
-            <p className={"app-info"}>EXCVLTOR: <a className={"link"} href={"https://andrax.dev"}>AndraxDev</a></p>
+            <p className={"app-info"}>Legentia versionis: {packageJson.version}</p>
+            <p className={"app-info"}>Excultor: <a className={"link"} href={"https://andrax.dev"}>AndraxDev</a></p>
             <p className={"app-info"}>&nbsp;</p>
         </div>
     );

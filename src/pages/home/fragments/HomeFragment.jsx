@@ -20,7 +20,7 @@ import PropTypes from "prop-types";
 function HomeFragment({onNewIntent}) {
     return (
         <div className={"fragment"}>
-            <h2 className={"activity-title"}>LEGENTIA</h2>
+            <h2 className={"activity-title"}>Legentia</h2>
         </div>
     );
 }

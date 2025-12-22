@@ -20,6 +20,7 @@ import AppScreenFade from "../../AppScreenFade";
 import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import * as Settings from "../../../Settings";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
 function SetApiKeyActivity({onNewIntent}) {
 
@@ -61,10 +62,10 @@ function SetApiKeyActivity({onNewIntent}) {
                 <div className={"exercise-header"}>
                     <button className={"exercise-back"} onClick={() => {
                         onBackPressed()
-                    }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
+                    }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>OPTIONES NAM AI</h2>
+                    }} className={"article-title"}>Optiones nam ai</h2>
                 </div>
                 <div style={{
                     paddingBottom: "24px",

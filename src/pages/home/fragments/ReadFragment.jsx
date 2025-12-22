@@ -24,6 +24,8 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
 import {MaterialDialog} from "../../../components/MaterialDialog";
+import Delete from "@mui/icons-material/Delete";
+import Edit from "@mui/icons-material/Edit";
 
 function ReadFragment({onNewIntent}) {
     const navigate = useNavigate();
@@ -47,27 +49,27 @@ function ReadFragment({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"VISNE HOC FABVLAM DELERE?"}
+                    {"Visne hoc fabulum delere?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        SEMEL DELETA, RESTITVI NON POTEST!
+                        Semel deleta, restitui non potest!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeletionConfirmationOpened(false);
-                    }} autoFocus>OBLITERA</MaterialButtonDialogOutlined>
+                    }} autoFocus>Oblitera</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeletionConfirmationOpened(false);
                         deleteStory();
                     }}>
-                        DELE
+                        Dele
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
-            <h2 className={"activity-title"}>LEGERE</h2>
+            <h2 className={"activity-title"}>Legere</h2>
             <div style={{
                 width: "100%",
                 display: "flex",
@@ -79,7 +81,7 @@ function ReadFragment({onNewIntent}) {
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("addstory");
                 }}>
-                    FABVLAM NOVAM ADDE
+                    Fabulam novam adde
                 </button>
             </div>
             {
@@ -97,9 +99,9 @@ function ReadFragment({onNewIntent}) {
                             <button style={{
                                 cursor: "pointer",
                                 padding: "16px 8px",
-                            }} className={"button-in-list-item"}><span className={"material-symbols-outlined"} onClick={() => {
+                            }} className={"button-in-list-item"}onClick={() => {
                                 navigate("/addstory#" + storyId);
-                            }}>edit</span></button>
+                            }}><Edit /></button>
                             <button onClick={() => {
                                 setMarkedForDeletion(storyId);
                                 setDeletionConfirmationOpened(true);
@@ -107,7 +109,7 @@ function ReadFragment({onNewIntent}) {
                                 cursor: "pointer",
                                 paddingLeft: "8px",
                                 paddingRight: "16px",
-                            }} className={"button-in-list-item"}><span className={"material-symbols-outlined"}>delete</span></button>
+                            }} className={"button-in-list-item"}><Delete /></button>
                         </div>))
                     }
                 </div> : null

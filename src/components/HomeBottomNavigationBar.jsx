@@ -17,19 +17,23 @@
 import React from 'react';
 import BottomNavigationBar from "./bottom-navigation/BottomNavigationBar";
 import PropTypes from "prop-types";
+import Home from "@mui/icons-material/Home"
+import School from "@mui/icons-material/School";
+import Book from "@mui/icons-material/Book";
+import Settings from "@mui/icons-material/Settings";
 
 const items = [{
-    label: "DOMVS",
-    icon: "home",
+    label: "Domus",
+    icon: <Home />,
 }, {
-    label: "STVDERE",
-    icon: "school",
+    label: "Studere",
+    icon: <School />,
 }, {
-    label: "LEGERE",
-    icon: "book_2",
+    label: "Legere",
+    icon: <Book />,
 }, {
-    label: "OPTIONES",
-    icon: "settings",
+    label: "Optiones",
+    icon: <Settings />,
 }];
 
 function HomeBottomNavigationBar({onClickListenersArray, activeIndex}) {

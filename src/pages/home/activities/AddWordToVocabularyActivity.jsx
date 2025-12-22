@@ -19,6 +19,7 @@ import AppScreenFade from "../../AppScreenFade";
 import PropTypes from "prop-types";
 import * as StringUtil from "../../util/StringUtils";
 import * as Vocabulary from "../../VocabularyCache";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
 function AddStoryActivity({onNewIntent}) {
     const [word, setWord] = React.useState("");
@@ -39,10 +40,10 @@ function AddStoryActivity({onNewIntent}) {
                 <div className={"exercise-header"}>
                     <button className={"exercise-back"} onClick={() => {
                         onBackPressed()
-                    }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
+                    }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>VERBVM AD VOCABVLARIVM MEVM ADDE</h2>
+                    }} className={"article-title"}>Verbum ad vocabularium meum adde</h2>
                 </div>
                 <div className={"list-container"} style={{
                     width: "calc(100% - 54px)",
@@ -52,7 +53,7 @@ function AddStoryActivity({onNewIntent}) {
                     <div style={{
                         userSelect: "none"
                     }} className={"list-item translation-item"}>
-                        VERBA EXSTANTIA NOVIS VALORIBVS SVBSTITVENTVR.
+                        Verba exstantia novis valoribus substituentur.
                     </div>
                 </div>
                 <br/>
@@ -60,7 +61,7 @@ function AddStoryActivity({onNewIntent}) {
                     <div className={"field-container"}>
                         <input value={word} onChange={(e) => {
                             setWord(e.target.value);
-                        }} placeholder={"VERBVM LATINVM"} className={"input"}/>
+                        }} placeholder={"Verbum latinum"} className={"input"}/>
                     </div>
                     <div style={{
                         flexGrow: 1,
@@ -68,11 +69,11 @@ function AddStoryActivity({onNewIntent}) {
                     }} className={"field-container"}>
                         <input value={translation} onChange={(e) => {
                             setTranslation(e.target.value);
-                        }} placeholder={"VERBVM INGLASVM"} className={"input"}/>
+                        }} placeholder={"English word"} className={"input"}/>
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>
-                    <button disabled={StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === ""} className={"exercise-button exercise-button-" + ((StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === "") ? "disabled" : "neutral")} onClick={save}>SERVA EXIQVE</button>
+                    <button disabled={StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === ""} className={"exercise-button exercise-button-" + ((StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === "") ? "disabled" : "neutral")} onClick={save}>Serva exique</button>
                 </div>
             </div>
         </AppScreenFade>

@@ -17,6 +17,7 @@
 import React from 'react';
 import PropTypes from "prop-types";
 import AppScreenFade from "../../AppScreenFade";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
 function SyncActivity({onNewIntent}) {
     const onBackPressed = () => {
@@ -29,10 +30,10 @@ function SyncActivity({onNewIntent}) {
                 <div className={"exercise-header"}>
                     <button className={"exercise-back"} onClick={() => {
                         onBackPressed()
-                    }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
+                    }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>OPTIONES INTER APPARATVS TVVS SYNC</h2>
+                    }} className={"article-title"}>Optiones inter apparatus tuus sync</h2>
                 </div>
                 <div className={"list-container"}>
                     <div className={"list-item translation-item"} style={{

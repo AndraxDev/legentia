@@ -27,6 +27,8 @@ import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../..
 import AppScreenFade from "../../AppScreenFade";
 import * as StringUtil from "../../util/StringUtils";
 import * as Settings from "../../../Settings";
+import ArrowBack from "@mui/icons-material/ArrowBack";
+import Delete from "@mui/icons-material/Delete";
 
 WordsActivity.propTypes = {
     onNewIntent: PropTypes.func.isRequired
@@ -64,23 +66,23 @@ function VocabularyActivity({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"VISNE HOC VERBVM DELERE EX VOCABVLARIVM TVVM?"}
+                    {"Visne hoc verbum delere ex vocabularium tuum?"}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        SEMEL DELETA, RESTITVI NON POTEST!
+                        Semel deleta, restitui non potest!
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
-                    }} autoFocus>OBLITERA</MaterialButtonDialogOutlined>
+                    }} autoFocus>Oblitera</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
                         deleteWord();
                     }}>
-                        DELE
+                        Dele
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -88,10 +90,10 @@ function VocabularyActivity({onNewIntent}) {
                 <div className={"exercise-header"}>
                     <button className={"exercise-back"} onClick={() => {
                         onBackPressed()
-                    }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
+                    }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>VOCABVLARIVM MEVM</h2>
+                    }} className={"article-title"}>Vocabularium meum</h2>
                 </div>
 
                 <div style={{
@@ -105,9 +107,9 @@ function VocabularyActivity({onNewIntent}) {
                     <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                         onNewIntent("vocabularyadd");
                     }}>
-                        VERBVM NOVVM ADDE
+                        Verbum novum adde
                     </button>
-                    <input className={"input"} placeholder={"VERBA QVAERE"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
+                    <input className={"input"} placeholder={"Verba quaere"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
                     {
                         vocabularyWords.length > 0 ? <p style={{
                             width: "calc(100% - 48px)",
@@ -115,7 +117,7 @@ function VocabularyActivity({onNewIntent}) {
                             fontSize: "20px",
                             userSelect: "none",
                             paddingTop: "6px"
-                        }}>{vocabularyWords.length} VERBA IN VOCABVLARIVM MEVM SVNT</p> : null
+                        }}>{vocabularyWords.length} verba in vocabularium meum sunt</p> : null
                     }
                 </div>
                 {
@@ -126,8 +128,8 @@ function VocabularyActivity({onNewIntent}) {
                                 borderTopLeftRadius: "21px",
                                 borderTopRightRadius: "21px",
                             }} key={-1}>
-                                <span className={"translation-word"}>VERBVM LATINVM</span>
-                                <span className={"translation-meaning"}>VERBVM INGLASVM</span>
+                                <span className={"translation-word"}>Verbum latinum</span>
+                                <span className={"translation-meaning"}>English word</span>
                                 <span className={"translation-learning-index"}>I.D.</span>
                                 <button disabled={true} className={"delete-word-btn"}>
                                     <span className={"material-symbols-outlined"}></span>
@@ -146,7 +148,7 @@ function VocabularyActivity({onNewIntent}) {
                                             setMarkedWordForDeletion(word);
                                             setDeleteConfirmationDialogOpened(true);
                                         }} className={"delete-word-btn"}>
-                                            <span className={"material-symbols-outlined"}>delete</span>
+                                            <Delete />
                                         </button>
                                     </div>))
                             }
@@ -155,7 +157,7 @@ function VocabularyActivity({onNewIntent}) {
                         <div className={"list-item translation-item"} style={{
                             userSelect: "none",
                         }}>
-                            NVLLA VERBA IN VOCABVLARIVM TVVM EST.
+                            Nulla verba in vocabularium tuum est.
                         </div>
                     </div>
                 }

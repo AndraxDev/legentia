@@ -20,6 +20,7 @@ import PropTypes from "prop-types";
 import ReadingText from "../../../components/interactive-phrase/ReadingText";
 import * as Settings from "../../../Settings";
 import * as StringUtils from "../../util/StringUtils";
+import ArrowBack from "@mui/icons-material/ArrowBack";
 
 function ArticleActivity({onNewIntent}) {
 
@@ -35,7 +36,7 @@ function ArticleActivity({onNewIntent}) {
                 <div className={"exercise-header"}>
                     <button className={"exercise-back"} onClick={() => {
                         quitReading()
-                    }}><span className={"material-symbols-outlined"}>arrow_back</span></button>
+                    }}><ArrowBack /></button>
                 </div>
                 <h2 style={{
                     width: "calc(100% - 8px)",
