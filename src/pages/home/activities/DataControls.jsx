@@ -1,5 +1,5 @@
 /***************************************************************************
- * Copyright (c) 2025 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2025-2026 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -27,6 +27,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Snackbar from '@mui/material/Snackbar';
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 function DataControls({onNewIntent}) {
     const onBackPressed = () => {
@@ -68,7 +69,7 @@ function DataControls({onNewIntent}) {
                        severity="success"
                        sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                        variant="filled">
-                    Operation completed successfully.
+                    {getLocalizedString("noteOperationCompleted")}
                 </Alert>
             </Snackbar>
             <MaterialDialog
@@ -78,23 +79,23 @@ function DataControls({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Clear word practice list?"}
+                    {getLocalizedString("btnClearWordPracticeList")}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        This action is irreversible and will remove all words from your practice list. You will need to add words again to practice them.
+                        {getLocalizedString("noteClearWordPracticeListWarning")}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setClearWeakWordsConfirmationOpened(false);
-                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>{getLocalizedString("btnCancel")}</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setClearWeakWordsConfirmationOpened(false);
                         clearWeakWords();
                     }}>
-                        Clear
+                        {getLocalizedString("btnClear")}
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -105,23 +106,23 @@ function DataControls({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Clear local vocabulary?"}
+                    {getLocalizedString("btnClearVocabulary")}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        Clearing local vocabulary will removed all cached translations and will require Internet connection next time you tap the word to translate it. Additionally, uncached words will use AI models which may incur additional charges. Clear local vocabulary if you see incorrect or unusual translations.
+                        {getLocalizedString("noteClearVocabularyWarning")}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setClearVocabularyConfirmationOpened(false);
-                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>{getLocalizedString("btnCancel")}</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setClearVocabularyConfirmationOpened(false);
                         clearVocabulary();
                     }}>
-                        Clear
+                        {getLocalizedString("btnClear")}
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -132,23 +133,23 @@ function DataControls({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Clear app data?"}
+                    {getLocalizedString("btnClearAppData")}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        Clearing app data will remove all local data, including lesson progresses, streak, local vocabulary, learned words, saved articles, etc.
+                        {getLocalizedString("noteClearAppDataWarning")}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setClearAppDataConfirmationOpened(false);
-                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>{getLocalizedString("btnCancel")}</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setClearAppDataConfirmationOpened(false);
                         clearAppData();
                     }}>
-                        Clear
+                        getLocalizedString("btnClear")
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -159,7 +160,7 @@ function DataControls({onNewIntent}) {
                     }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Data potestate</h2>
+                    }} className={"article-title"}>{getLocalizedString("titleDataControls")}</h2>
                 </div>
                 <div style={{
                     width: "100%",
@@ -170,25 +171,13 @@ function DataControls({onNewIntent}) {
                 }}>
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearVocabularyConfirmationOpened(true)
-                    }} >Dele vocabularium meum</button>
+                    }}>{getLocalizedString("clearVocabulary")}</button>
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearWeakWordsConfirmationOpened(true)
-                    }} >Dele indicum practicum verborum</button>
+                    }}>{getLocalizedString("clearWordPracticeList")}</button>
                     <button className={"exercise-button exercise-button-incorrect"} onClick={() => {
                         setClearAppDataConfirmationOpened(true)
-                    }} >Clear application data</button>
-                    {/*<button className={"exercise-button exercise-button-neutral"} onClick={() => {*/}
-                    {/*    VocabularyCache.convertVocabulary(true)*/}
-                    {/*}} >Migrate vocabulary</button>*/}
-                    {/*<div className={"list-container"} style={{*/}
-                    {/*    marginTop: "0"*/}
-                    {/*}}>*/}
-                    {/*    <div className={"list-item translation-item"} style={{*/}
-                    {/*        userSelect: "none",*/}
-                    {/*    }}>*/}
-                    {/*        If app is not working as expected after the last update or translations are slow, you can try to migrate your vocabulary to the new format. It is more optimized and uses less storage.*/}
-                    {/*    </div>*/}
-                    {/*</div>*/}
+                    }}>{getLocalizedString("clearAppData")}</button>
                 </div>
             </div>
         </AppScreenFade>

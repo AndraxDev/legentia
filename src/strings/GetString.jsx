@@ -14,19 +14,21 @@
  * limitations under the License.
  * *************************************************************************/
 
-import React from 'react';
-import PropTypes from "prop-types";
+import {enUS} from "./String-EN-US.jsx";
 
-function HomeFragment({onNewIntent}) {
-    return (
-        <div className={"fragment"}>
-            <h2 className={"activity-title"}>Legentia</h2>
-        </div>
-    );
+export const getString = (lang, id) => {
+    if (lang === 'en-US') {
+        return enUS[id];
+    } else {
+        return enUS[id];
+    }
 }
 
-HomeFragment.propTypes = {
-    onNewIntent: PropTypes.func.isRequired
+export const getLocalizedString = (id) => {
+    const lang = getLanguage();
+    return getString(lang, id);
 }
 
-export default HomeFragment;
+export const getLanguage = () => {
+    return 'en-US';
+}

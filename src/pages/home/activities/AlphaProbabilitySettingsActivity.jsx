@@ -1,5 +1,5 @@
 /***************************************************************************
- * Copyright (c) 2025 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2025-2026 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -22,6 +22,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import * as Settings from "../../../Settings";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 function AlphaProbabilitySettingsActivity({ onNewIntent }) {
 
@@ -33,12 +34,12 @@ function AlphaProbabilitySettingsActivity({ onNewIntent }) {
 
     const setAlphaToZero = () => {
         Settings.setAlpha(0.0);
-        setSnackbarMessage("Alpha set to zero (0.0).");
+        setSnackbarMessage(getLocalizedString("infoAlphaSetToZero"));
     }
 
     const setAlphaToLow = () => {
         Settings.setAlpha(0.1);
-        setSnackbarMessage("Alpha set to low (0.1).");
+        setSnackbarMessage(getLocalizedString("infoAlphaSetToZeroDotOne"));
     }
 
     return (
@@ -58,7 +59,7 @@ function AlphaProbabilitySettingsActivity({ onNewIntent }) {
                     }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Set alpha probabilitatis</h2>
+                    }} className={"article-title"}>{getLocalizedString("titleSetAlphaProbability")}</h2>
                 </div>
                 <div className={"list-container"} style={{
                     margin: "0 24px 24px 24px"
@@ -66,7 +67,7 @@ function AlphaProbabilitySettingsActivity({ onNewIntent }) {
                     <div className={"list-item translation-item"} style={{
                         userSelect: "none",
                     }}>
-                        Alpha defines how exercise algorithm will select words for practising. By default words selection algorithm prioritizes words that have the less learning index (have been practised less times). Alpha parameter adds some chance to select words with the maximum learning index. If alpha is set to zero, then words with the maximum learning index will appear only when the whole words list has been practised.
+                        {getLocalizedString("textAlphaProbabilityInfo")}
                     </div>
                     <div className={"list-item translation-item"} style={{
                         userSelect: "none",
@@ -74,7 +75,7 @@ function AlphaProbabilitySettingsActivity({ onNewIntent }) {
                         flexDirection: "column",
                         gap: "16px",
                     }}>
-                        <span>The probability of selecting the word in the current exercise is:</span>
+                        <span>{getLocalizedString("textCurrentAlphaProbability")}</span>
                         <img style={{
                             width: "100%",
                             height: "auto",
@@ -92,14 +93,14 @@ function AlphaProbabilitySettingsActivity({ onNewIntent }) {
                             width: "100%",
                             color: "#ffc65c",
                             textAlign: "start"
-                        }} className={"button-in-list-item"} onClick={() => setAlphaToLow()}>Click to set alpha to low (0.1) (better for large word practice lists, words with max learning index will have small chance of appearing in the exercises to prevent user from forgetting it)</button>
+                        }} className={"button-in-list-item"} onClick={() => setAlphaToLow()}>{getLocalizedString("btnSetAlphaToZero")}</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
                             color: "#ffc65c",
                             textAlign: "start"
-                        }} className={"button-in-list-item"} onClick={() => setAlphaToZero()}>Click to set alpha to zero (0.0) (better for small word practice lists, all words must be practised until it will repeat)</button>
+                        }} className={"button-in-list-item"} onClick={() => setAlphaToZero()}>{getLocalizedString("btnSetAlphaToZeroDotOne")}</button>
                     </div>
                 </div>
             </div>

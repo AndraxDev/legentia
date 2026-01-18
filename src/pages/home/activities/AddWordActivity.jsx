@@ -1,5 +1,5 @@
 /***************************************************************************
- * Copyright (c) 2025 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2025-2026 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,6 +20,7 @@ import PropTypes from "prop-types";
 import * as Settings from "../../../Settings";
 import * as StringUtil from "../../util/StringUtils";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 function AddStoryActivity({onNewIntent}) {
     const [word, setWord] = React.useState("");
@@ -43,7 +44,7 @@ function AddStoryActivity({onNewIntent}) {
                     }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Verbum ad indicem practicum adde</h2>
+                    }} className={"article-title"}>{getLocalizedString("btnAddToPracticeList")}</h2>
                 </div>
                 <div className={"list-container"} style={{
                     width: "calc(100% - 54px)",
@@ -53,7 +54,7 @@ function AddStoryActivity({onNewIntent}) {
                     <div style={{
                         userSelect: "none"
                     }} className={"list-item translation-item"}>
-                        Verba exstantia novis valoribus substituentur.
+                        {getLocalizedString("overrideWordWarning")}
                     </div>
                 </div>
                 <br/>
@@ -61,7 +62,7 @@ function AddStoryActivity({onNewIntent}) {
                     <div className={"field-container"}>
                         <input value={word} onChange={(e) => {
                             setWord(e.target.value);
-                        }} placeholder={"Verbum latinum"} className={"input"}/>
+                        }} placeholder={getLocalizedString("textOriginalWord")} className={"input"}/>
                     </div>
                     <div style={{
                         flexGrow: 1,
@@ -69,11 +70,11 @@ function AddStoryActivity({onNewIntent}) {
                     }} className={"field-container"}>
                         <input value={translation} onChange={(e) => {
                             setTranslation(e.target.value);
-                        }} placeholder={"English word"} className={"input"}/>
+                        }} placeholder={getLocalizedString("textEnglishWord")} className={"input"}/>
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>
-                    <button disabled={StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === ""} className={"exercise-button exercise-button-" + ((StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === "") ? "disabled" : "neutral")} onClick={save}>Serva exique</button>
+                    <button disabled={StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === ""} className={"exercise-button exercise-button-" + ((StringUtil.clearWord(word) === "" || StringUtil.clearWord(translation) === "") ? "disabled" : "neutral")} onClick={save}>{getLocalizedString("btnSaveAndExit")}</button>
                 </div>
             </div>
         </AppScreenFade>

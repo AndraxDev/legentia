@@ -1,5 +1,5 @@
 /***************************************************************************
- * Copyright (c) 2025 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2025-2026 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -21,18 +21,19 @@ import Home from "@mui/icons-material/Home"
 import School from "@mui/icons-material/School";
 import Book from "@mui/icons-material/Book";
 import Settings from "@mui/icons-material/Settings";
+import {getLocalizedString} from "../strings/GetString.jsx";
 
 const items = [{
-    label: "Domus",
+    label: getLocalizedString("bottomMenuHome"),
     icon: <Home />,
 }, {
-    label: "Studere",
+    label: getLocalizedString("bottomMenuStudy"),
     icon: <School />,
 }, {
-    label: "Legere",
+    label: getLocalizedString("bottomMenuRead"),
     icon: <Book />,
 }, {
-    label: "Optiones",
+    label: getLocalizedString("bottomMenuSettings"),
     icon: <Settings />,
 }];
 

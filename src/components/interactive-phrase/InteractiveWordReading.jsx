@@ -1,5 +1,5 @@
 /***************************************************************************
- * Copyright (c) 2025 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2025-2026 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -24,6 +24,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import * as VocabularyCache from "../../pages/VocabularyCache";
 import * as StringUtils from "../../pages/util/StringUtils";
+import {getLocalizedString} from "../../strings/GetString.jsx";
 
 /*
 * Learning index defines how well the user knows the word. More times user repeat the word, the highest index will be.
@@ -75,13 +76,13 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                     setCanBeTranslated(false);
                     console.error("Error fetching translation:", error);
                     if (error.message.toLowerCase().includes("ai_unavailable")) {
-                        setTranslation("AI features are disabled. Please set an API key first.");
+                        setTranslation(getLocalizedString("errorAIFeaturesDisabled"));
                     }
                     if (error.message.toLowerCase().includes("word_unknown")) {
                         setTranslation(word);
                         VocabularyCache.insertWord(word, [word]);
                     } else {
-                        setTranslation("Translation is not available right now.");
+                        setTranslation(getLocalizedString("errorTranslationNotAvailable"));
                     }
                 });
         }
@@ -116,7 +117,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
 
     const pronounceWord = () => {
         if (Settings.isPronounceInReaderEnabled()) {
-            responsiveVoice.speak(word, "Latin Male");
+            responsiveVoice.speak(word, getLocalizedString("voiceModelName"));
         }
     }
 
@@ -129,7 +130,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                severity="success"
                                sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                                variant="filled">
-                            Verbum ad ulteriorem exercitationem servatum.
+                            {getLocalizedString("infoWordAddedToPracticeList")}
                         </Alert>
                     </Snackbar>
                     <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={snackbarDeletionIsOpened} autoHideDuration={3000} onClick={() => setSnackbarDeletionIsOpened(false)}>
@@ -137,7 +138,7 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                severity="success"
                                sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                                variant="filled">
-                            Verbum ex indice excercitationum deletum est.
+                            {getLocalizedString("infoWordRemovedFromPracticeList")}
                         </Alert>
                     </Snackbar>
                     <MaterialTooltip
@@ -154,19 +155,19 @@ function InteractiveWord({word, learningIndex, contextSentence, weakWords, propa
                                         {
                                             weakWords.includes(StringUtils.clearWord(word)) ? <>
                                                 <div className={"translation-item-weak-word"}>
-                                                    Verbum infirmum
+                                                    {getLocalizedString("textWeakWord")}
                                                 </div>
                                                 <button onClick={() => {
                                                     removeFromWeakWords(word);
                                                     setSnackbarDeletionIsOpened(true);
                                                 }} className={"translation-item add-weak-sentence-button"}>
-                                                    Verbum ex indicem practicum dele
+                                                    {getLocalizedString("btnDeleteFromPracticeList")}
                                                 </button>
                                             </> : <button onClick={() => {
                                                 addToWeakWords(word, translation);
                                                 setSnackbarIsOpened(true);
                                             }} className={"translation-item add-weak-sentence-button"}>
-                                                Verbum ad indicem practicum adde
+                                                {getLocalizedString("btnAddToPracticeList")}
                                             </button>
                                         }
                                     </>

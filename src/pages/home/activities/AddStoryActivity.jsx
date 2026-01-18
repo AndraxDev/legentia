@@ -1,5 +1,5 @@
 /***************************************************************************
- * Copyright (c) 2025 Dmytro Ostapenko. All rights reserved.
+ * Copyright (c) 2025-2026 Dmytro Ostapenko. All rights reserved.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -19,6 +19,7 @@ import AppScreenFade from "../../AppScreenFade";
 import PropTypes from "prop-types";
 import * as Settings from "../../../Settings";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 function uuidv4() {
     return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
@@ -56,13 +57,13 @@ function AddStoryActivity({onNewIntent}) {
                     }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>{hash === "" ? "Fabulam novam adde" : "Fabulam recense"}</h2>
+                    }} className={"article-title"}>{hash === "" ? getLocalizedString("btnAddStory") : getLocalizedString("btnEditStory")}</h2>
                 </div>
                 <div className={"activity-content-container"}>
                     <div className={"field-container"}>
                         <input value={title} onChange={(e) => {
                             setTitle(e.target.value);
-                        }} placeholder={"Titulum"} className={"input"}/>
+                        }} placeholder={getLocalizedString("textTitle")} className={"input"}/>
                     </div>
                     <div style={{
                         flexGrow: 1,
@@ -72,11 +73,11 @@ function AddStoryActivity({onNewIntent}) {
                             setText(e.target.value);
                         }} style={{
                             height: "calc(100% - 48px)"
-                        }} placeholder={"Textus"} className={"input"}></textarea>
+                        }} placeholder={getLocalizedString("textStoryContent")} className={"input"}></textarea>
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>
-                    <button disabled={text.trim() === "" || title.trim() === ""} className={"exercise-button exercise-button-" + ((text.trim() === "" || title.trim() === "") ? "disabled" : "neutral")} onClick={save}>Serva exique</button>
+                    <button disabled={text.trim() === "" || title.trim() === ""} className={"exercise-button exercise-button-" + ((text.trim() === "" || title.trim() === "") ? "disabled" : "neutral")} onClick={save}>{getLocalizedString("btnSaveAndExit")}</button>
                 </div>
             </div>
         </AppScreenFade>
