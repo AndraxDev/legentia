@@ -137,7 +137,7 @@ function WordsActivity({onNewIntent}) {
                                 borderTopRightRadius: "21px",
                             }} key={-1}>
                                 <span className={"translation-word"}>{getLocalizedString("textOriginalWord")}</span>
-                                <span className={"translation-meaning"}>{getLocalizedString("textEnglishWord")}</span>
+                                <span className={"translation-meaning"}>{getLocalizedString("textTranslatedWord")}</span>
                                 <span className={"translation-learning-index"}>{getLocalizedString("learningIndex")}</span>
                                 <button disabled={true} className={"delete-word-btn"}>
                                     <span className={"material-symbols-outlined"}></span>

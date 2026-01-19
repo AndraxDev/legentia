@@ -70,7 +70,7 @@ function AddStoryActivity({onNewIntent}) {
                     }} className={"field-container"}>
                         <input value={translation} onChange={(e) => {
                             setTranslation(e.target.value);
-                        }} placeholder={getLocalizedString("textEnglishWord")} className={"input"}/>
+                        }} placeholder={getLocalizedString("textTranslatedWord")} className={"input"}/>
                     </div>
                 </div>
                 <div className={"exercise-bottom-bar"}>

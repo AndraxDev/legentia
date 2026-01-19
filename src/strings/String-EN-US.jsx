@@ -36,7 +36,7 @@ export const enUS = {
     btnSaveAndExit: "Save and exit",
     overrideWordWarning: "Existing word entry will be overridden.",
     textOriginalWord: "Original word",
-    textEnglishWord: "English word",
+    textTranslatedWord: "Translated word",
     infoAlphaSetToZero: "Alpha set to zero (0.0).",
     infoAlphaSetToZeroDotOne: "Alpha set to low (0.1).",
     titleSetAlphaProbability: "Set alpha probability",

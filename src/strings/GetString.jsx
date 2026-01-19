@@ -29,6 +29,29 @@ export const getLocalizedString = (id) => {
     return getString(lang, id);
 }
 
+// The current language of the app UI (ISO format)
 export const getLanguage = () => {
     return 'en-US';
+}
+
+// the language user learns (semantic format)
+export const getLearningLanguage = () => {
+    return "latin";
+}
+
+// the language user speaks natively (semantic format)
+export const getNativeLanguage = () => {
+    return "english";
+}
+
+export const supportedLearningLanguages = {
+    latin: "Latin (Lingua Latina)",
+}
+
+export const supportedNativeLanguages = {
+    english: "English",
+}
+
+export const supportedLanguages = {
+    'en-US': 'English (US)',
 }

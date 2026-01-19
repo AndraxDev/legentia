@@ -18,9 +18,10 @@ import * as VocabularyCache from "./VocabularyCache";
 import OpenAI from 'openai';
 import * as StringUtils from "./util/StringUtils";
 import * as Settings from "../Settings";
+import {getLearningLanguage, getNativeLanguage} from "../strings/GetString.jsx";
 
 const prompt = `
-Act a latin-to-english word translator. Use will input a single latin word, and you will output a single english word in a correct form according to the context sentence provided and considering the writing style used in the sentence provided (artistic, scientific, etc.) (all letters are lowercase) and nothing else. If user provides an unknown word, try to answer the nearest correct english word. If user enters absolutely random sequence of character, the answer "word_unknown" and nothing else. Try to use most appropriate word. If user input is empty or it contains only punctuation marks or quotes, answer "word_unknown" and nothing else. Context sentence is: 
+Act a ` + getLearningLanguage() + `-to-` + getNativeLanguage() + ` word translator. Use will input a single ` + getLearningLanguage() + ` word, and you will output a single ` + getNativeLanguage() + ` word in a correct form according to the context sentence provided and considering the writing style used in the sentence provided (artistic, scientific, etc.) (all letters are lowercase) and nothing else. If user provides an unknown word, try to answer the nearest correct ` + getNativeLanguage() + ` word. If user enters absolutely random sequence of character, the answer "word_unknown" and nothing else. Try to use most appropriate word. If user input is empty or it contains only punctuation marks or quotes, answer "word_unknown" and nothing else. Context sentence is: 
 `
 
 const runAI = async (latinWord, apiKey, context) => {
