@@ -16,6 +16,7 @@
 
 import React, {useEffect} from 'react';
 import PropTypes from "prop-types";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 function HowTo({onStepCompleted}) {
     useEffect(() => {
@@ -38,11 +39,11 @@ function HowTo({onStepCompleted}) {
             transition: "opacity 0.2s ease-in-out, transform 0.4s ease-out"
         }} className="app-screen-v2" id={"app-screen"}>
             <div className={"container-centered"}>
-                <h1 className={"app-title"}>Quomodo operatur?</h1>
+                <h1 className={"app-title"}>{getLocalizedString("titleHowItWorks")}</h1>
                 <br/>
-                <p>Haec applicatio te sinit verba et locutiones latinas discere et legere incipere. Dissimilis Duolingo (qui cursum latinum valde limitatum habet) vel similibus applicationibus, fontes ex libris vel documentis tuis addere potes. Praeterea, haec application OpenAI Whisper utitur ad textum pronuntiandum et continet colloquendi automaton artificiale configurabile quo nuntios mittere potes.</p>
+                <p>{getLocalizedString("textHowItWorks")}</p>
                 <br/>
-                <button className={"exercise-button exercise-button-neutral"} onClick={handleNext}>Pergere</button>
+                <button className={"exercise-button exercise-button-neutral"} onClick={handleNext}>{getLocalizedString("btnContinue")}</button>
             </div>
         </div>
     );

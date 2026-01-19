@@ -27,6 +27,7 @@ import {MaterialDialog} from "../../../components/MaterialDialog";
 import TranslationQuizFragment from "../fragments/TranslationQuizFragment";
 import * as Settings from "../../../Settings";
 import Close from "@mui/icons-material/Close";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 let streak = 0;
 let time = 0;
@@ -225,23 +226,23 @@ function TranslationQuiz({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Sessionem exercitationes relinquere vis?"}
+                    {getLocalizedString("exitPracticeSessionAlertTitle")}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        Omnis progressus in hac sessione peribit!
+                        {getLocalizedString("exitPracticeSessionAlertContents")}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setExitDialogOpened(false);
-                    }} autoFocus>Oblitera</MaterialButtonDialogOutlined>
+                    }} autoFocus>{getLocalizedString("btnCancel")}</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setExitDialogOpened(false);
                         quitExercise();
                     }}>
-                        Exique
+                        {getLocalizedString("btnExit")}
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>

@@ -27,6 +27,7 @@ import {MaterialDialog} from "../../../components/MaterialDialog";
 import * as StringUtil from "../../util/StringUtils";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import Delete from "@mui/icons-material/Delete";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 WordsActivity.propTypes = {
     onNewIntent: PropTypes.func.isRequired
@@ -64,23 +65,23 @@ function WordsActivity({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"VISNE HOC VERBVM DELERE EX INDICEM PRACTICVM?"}
+                    {getLocalizedString("practiceDeleteWordTitle")}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        Semel deleta, restitui non potest!
+                        {getLocalizedString("actionIrreversible")}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
-                    }} autoFocus>Oblitera</MaterialButtonDialogOutlined>
+                    }} autoFocus>{getLocalizedString("btnCancel")}</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
                         deleteWord();
                     }}>
-                        Dele
+                        {getLocalizedString("btnDelete")}
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -91,7 +92,7 @@ function WordsActivity({onNewIntent}) {
                     }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Practice verba</h2>
+                    }} className={"article-title"}>{getLocalizedString("practiceWordsTitle")}</h2>
                 </div>
                 <div style={{
                     width: "100%",
@@ -104,19 +105,19 @@ function WordsActivity({onNewIntent}) {
                     <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                         onNewIntent("addword");
                     }}>
-                        Verbum novum adde
+                        {getLocalizedString("btnAddWord")}
                     </button>
-                    <button disabled={weakWords.length === 0} className={"exercise-button " + ((weakWords.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={() => {
+                    <button disabled={weakWords.length < 3} className={"exercise-button " + ((weakWords.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={() => {
                         onNewIntent("quiz");
                     }}>
-                        Pensum verbum incipe
+                        {getLocalizedString("startWordPractice")}
                     </button>
                     <button disabled={weakWords.length === 0} className={"exercise-button " + ((weakWords.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={() => {
                         onNewIntent("hardquiz");
                     }}>
-                        Pensum durum incipe
+                        {getLocalizedString("startWordHardPractice")}
                     </button>
-                    <input className={"input"} placeholder={"Verba quaere"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
+                    <input className={"input"} placeholder={getLocalizedString("hintSearchWords")} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
                     {
                         weakWords.length > 0 ? <p style={{
                             width: "calc(100% - 48px)",
@@ -124,7 +125,7 @@ function WordsActivity({onNewIntent}) {
                             fontSize: "20px",
                             userSelect: "none",
                             paddingTop: "6px"
-                        }}>{weakWords.length} verba in indicem practicum sunt</p> : null
+                        }}>{weakWords.length} {getLocalizedString("wordsInPracticeListCount")}</p> : null
                     }
                 </div>
                 {
@@ -135,9 +136,9 @@ function WordsActivity({onNewIntent}) {
                                 borderTopLeftRadius: "21px",
                                 borderTopRightRadius: "21px",
                             }} key={-1}>
-                                <span className={"translation-word"}>Verbum latinum</span>
-                                <span className={"translation-meaning"}>English word</span>
-                                <span className={"translation-learning-index"}>I.D.</span>
+                                <span className={"translation-word"}>{getLocalizedString("textOriginalWord")}</span>
+                                <span className={"translation-meaning"}>{getLocalizedString("textEnglishWord")}</span>
+                                <span className={"translation-learning-index"}>{getLocalizedString("learningIndex")}</span>
                                 <button disabled={true} className={"delete-word-btn"}>
                                     <span className={"material-symbols-outlined"}></span>
                                 </button>
@@ -164,7 +165,7 @@ function WordsActivity({onNewIntent}) {
                         <div className={"list-item translation-item"} style={{
                             userSelect: "none",
                         }}>
-                            Nulla verba indici excercitationem adhuc addidisti. Verba huic indici addere potes ea tangendo dum articulos vel fabulas legis.
+                            {getLocalizedString("emptyPracticeList")}
                         </div>
                     </div>
                 }

@@ -26,6 +26,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
 import {MaterialDialog} from "../../../components/MaterialDialog";
 import Cancel from "@mui/icons-material/Cancel";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 // Exercise structure:
 // Translation exercise consists of a phrase and a set of translations.
@@ -209,23 +210,23 @@ function ExerciseActivity({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"SESSIONEM EXERCITATIONES RELINQVERE VIS?"}
+                    {getLocalizedString("exitPracticeSessionAlertTitle")}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        Omnis progressus in hac sessione peribit.
+                        {getLocalizedString("exitPracticeSessionAlertContents")}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setExitDialogOpened(false);
-                    }} autoFocus>Oblitera</MaterialButtonDialogOutlined>
+                    }} autoFocus>{getLocalizedString("btnCancel")}</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setExitDialogOpened(false);
                         quitExercise();
                     }}>
-                        Exique
+                        {getLocalizedString("btnExit")}
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>

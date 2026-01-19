@@ -29,6 +29,7 @@ import * as StringUtil from "../../util/StringUtils";
 import * as Settings from "../../../Settings";
 import ArrowBack from "@mui/icons-material/ArrowBack";
 import Delete from "@mui/icons-material/Delete";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 WordsActivity.propTypes = {
     onNewIntent: PropTypes.func.isRequired
@@ -66,23 +67,23 @@ function VocabularyActivity({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Visne hoc verbum delere ex vocabularium tuum?"}
+                    {getLocalizedString("vocabularyDeleteWordTitle")}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        Semel deleta, restitui non potest!
+                        {getLocalizedString("actionIrreversible")}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
-                    }} autoFocus>Oblitera</MaterialButtonDialogOutlined>
+                    }} autoFocus>{getLocalizedString("btnCancel")}</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeleteConfirmationDialogOpened(false);
                         deleteWord();
                     }}>
-                        Dele
+                        {getLocalizedString("btnDelete")}
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -93,7 +94,7 @@ function VocabularyActivity({onNewIntent}) {
                     }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Vocabularium meum</h2>
+                    }} className={"article-title"}>{getLocalizedString("vocabularyTitle")}</h2>
                 </div>
 
                 <div style={{
@@ -107,9 +108,9 @@ function VocabularyActivity({onNewIntent}) {
                     <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                         onNewIntent("vocabularyadd");
                     }}>
-                        Verbum novum adde
+                        {getLocalizedString("btnAddWord")}
                     </button>
-                    <input className={"input"} placeholder={"Verba quaere"} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
+                    <input className={"input"} placeholder={getLocalizedString("hintSearchWords")} onChange={(e) => setSearchTerm(e.target.value)} value={searchTerm} />
                     {
                         vocabularyWords.length > 0 ? <p style={{
                             width: "calc(100% - 48px)",
@@ -117,7 +118,7 @@ function VocabularyActivity({onNewIntent}) {
                             fontSize: "20px",
                             userSelect: "none",
                             paddingTop: "6px"
-                        }}>{vocabularyWords.length} verba in vocabularium meum sunt</p> : null
+                        }}>{vocabularyWords.length} {getLocalizedString("wordsInVocabularyCount")}</p> : null
                     }
                 </div>
                 {
@@ -128,9 +129,9 @@ function VocabularyActivity({onNewIntent}) {
                                 borderTopLeftRadius: "21px",
                                 borderTopRightRadius: "21px",
                             }} key={-1}>
-                                <span className={"translation-word"}>Verbum latinum</span>
-                                <span className={"translation-meaning"}>English word</span>
-                                <span className={"translation-learning-index"}>I.D.</span>
+                                <span className={"translation-word"}>{getLocalizedString("textOriginalWord")}</span>
+                                <span className={"translation-meaning"}>{getLocalizedString("textEnglishWord")}</span>
+                                <span className={"translation-learning-index"}>{getLocalizedString("learningIndex")}</span>
                                 <button disabled={true} className={"delete-word-btn"}>
                                     <span className={"material-symbols-outlined"}></span>
                                 </button>
@@ -157,7 +158,7 @@ function VocabularyActivity({onNewIntent}) {
                         <div className={"list-item translation-item"} style={{
                             userSelect: "none",
                         }}>
-                            Nulla verba in vocabularium tuum est.
+                            {getLocalizedString("emptyVocabulary")}
                         </div>
                     </div>
                 }

@@ -16,11 +16,12 @@
 
 import React from 'react';
 import PropTypes from "prop-types";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 function HomeFragment({onNewIntent}) {
     return (
         <div className={"fragment"}>
-            <h2 className={"activity-title"}>Legentia</h2>
+            <h2 className={"activity-title"}>{getLocalizedString("appTitle")}</h2>
         </div>
     );
 }

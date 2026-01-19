@@ -17,6 +17,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import logo from './../../../logo.png'
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 function Intro({onStepCompleted}) {
 
@@ -33,12 +34,12 @@ function Intro({onStepCompleted}) {
                 <br/>
                 <br/>
                 <br/>
-                <h1 className={"app-title"}>Legentia</h1>
+                <h1 className={"app-title"}>{getLocalizedString("appTitle")}</h1>
                 <br/>
-                <p className={"app-intro"}>Bene venisti ad Legentia - applicationem linguae latinae discendae impulsam AI</p>
+                <p className={"app-intro"}>{getLocalizedString("textIntro")}</p>
                 <br/>
                 <br/>
-                <button className={"exercise-button exercise-button-neutral"} onClick={handleNext}>Pergere</button>
+                <button className={"exercise-button exercise-button-neutral"} onClick={handleNext}>{getLocalizedString("btnContinue")}</button>
                 <br/>
                 <br/>
                 <br/>

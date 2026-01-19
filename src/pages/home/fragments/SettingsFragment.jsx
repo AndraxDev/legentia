@@ -29,6 +29,7 @@ import Snackbar from "@mui/material/Snackbar";
 import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../../components/MaterialButton";
 import {MaterialDialog} from "../../../components/MaterialDialog";
 import {MaterialSwitch} from "../../../components/MaterialSwitch.jsx";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 // onNewIntent is analog to android.content.Context.java in Android OS. It is passed hierarchically through all
 // components that need to access base application to handle activity launching.
@@ -97,13 +98,13 @@ function SettingsFragment({onNewIntent}) {
                         setTelemetrySnackBarIsOpen(true);
                     } else {
                         console.error("Failed to send telemetry data: " + json.message);
-                        setError("Failed to send telemetry data: " + json.message);
+                        setError(getLocalizedString("telemetrySendError") + json.message);
                         setErrorDialogOpen(true);
                     }
                 })
                 .catch(err => {
                     console.error("Error sending telemetry data: ", err);
-                    setError("Failed to send telemetry data: " + err.message);
+                    setError(getLocalizedString("telemetrySendError") + err.message);
                     setErrorDialogOpen(true);
                 });
         } catch (error) {
@@ -127,7 +128,7 @@ function SettingsFragment({onNewIntent}) {
                        severity="success"
                        sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                        variant="filled">
-                    Omnes optiones servatae!
+                    {getLocalizedString("allSettingsSaved")}
                 </Alert>
             </Snackbar>
             <Snackbar anchorOrigin={{vertical: "top", horizontal: "center"}} open={telemetrySnackBarIsOpen} autoHideDuration={3000} onClick={() => setTelemetrySnackBarIsOpen(false)}>
@@ -135,7 +136,7 @@ function SettingsFragment({onNewIntent}) {
                        severity="success"
                        sx={{ userSelect: "none", width: '100%', background: "#285c4e", borderRadius: "16px", boxShadow: "none", border: "none" }}
                        variant="filled">
-                    Telemetry sent successfully!
+                    {getLocalizedString("telemetrySent")}
                 </Alert>
             </Snackbar>
             <MaterialDialog
@@ -145,7 +146,7 @@ function SettingsFragment({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Error"}
+                    {getLocalizedString("titleError")}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText sx={{
@@ -158,7 +159,7 @@ function SettingsFragment({onNewIntent}) {
                     <MaterialButtonDialogFilled onClick={() => {
                         setErrorDialogOpen(false);
                     }} autoFocus>
-                        Ok
+                        {getLocalizedString("btnOk")}
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
@@ -169,27 +170,27 @@ function SettingsFragment({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Would you like to send telemetry data?"}
+                    {getLocalizedString("telemetrySendPrompt")}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        Telemetry data includes your vocabulary cache, application version, and other non-personal information. By sending telemetry data, you will help to build global cache to increase translation speed and accuracy and reduce costs related to the usage of AI.
+                        {getLocalizedString("telemetrySendDescription")}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setConfirmTelemetry(false);
-                    }} autoFocus>Cancel</MaterialButtonDialogOutlined>
+                    }} autoFocus>{getLocalizedString("btnCancel")}</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setConfirmTelemetry(false);
                         sendTelemetry();
                     }}>
-                        Send
+                        {getLocalizedString("btnSend")}
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
-            <h2 className={"activity-title"}>Optiones</h2>
+            <h2 className={"activity-title"}>{getLocalizedString("bottomMenuSettings")}</h2>
             <div style={{
                 width: "100%",
                 display: "flex",
@@ -211,16 +212,16 @@ function SettingsFragment({onNewIntent}) {
                                     }} alt={userData.user_name} src={userData.profile_photo}/>
                                 </div>
                                 <div className={"profile-text"}>
-                                    <p className={"teslasoft-id-title"}>Teslasoft ID</p>
-                                    <p className={"profile-name"}>Inscriptus ut <b>{userData.first_name}</b></p>
+                                    <p className={"teslasoft-id-title"}>{getLocalizedString("teslasoftIDSignedInAs")} <b>{userData.first_name}</b></p>
+                                    <p className={"profile-name"}>{getLocalizedString("teslasoftIDTapToSignOut")}</p>
                                 </div>
                             </div> : <>
                             {
                                 errorAccount ? <div className={"profile-info-container"}>
                                     <div className={"profile-photo"}></div>
                                     <div className={"profile-text"}>
-                                        <p className={"teslasoft-id-title"}>Teslasoft ID</p>
-                                        <p className={"sync-error-text"}>Sync error</p>
+                                        <p className={"teslasoft-id-title"}>{getLocalizedString("teslasoftID")}</p>
+                                        <p className={"sync-error-text"}>{getLocalizedString("teslasoftIDSyncError")}</p>
                                     </div>
                                 </div> : <div style={{
                                     width: "100%",
@@ -240,8 +241,8 @@ function SettingsFragment({onNewIntent}) {
                         <div className={"profile-info-container"}>
                             <div className={"profile-photo"}></div>
                             <div className={"profile-text"}>
-                                <p className={"teslasoft-id-title"}>Teslasoft ID</p>
-                                <p className={"profile-name"}>Tange ad intrandum</p>
+                                <p className={"teslasoft-id-title"}>{getLocalizedString("teslasoftID")}</p>
+                                <p className={"profile-name"}>{getLocalizedString("teslasoftIDTapToSignIn")}</p>
                             </div>
                         </div>
                     </button>
@@ -257,12 +258,12 @@ function SettingsFragment({onNewIntent}) {
                     }} className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} disabled={!userData} className={"button-in-list-item"} onClick={() => onNewIntent("sync")}>Optiones inter apparatus tuus sync</button>
+                        }} disabled={!userData} className={"button-in-list-item"} onClick={() => onNewIntent("sync")}>{getLocalizedString("syncOptionsTitle")}</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("privacy")}>Data potestate</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("privacy")}>{getLocalizedString("titleDataControls")}</button>
                     </div>
                     <div className={"list-item"}>
                         <FormControlLabel style={{
@@ -279,7 +280,7 @@ function SettingsFragment({onNewIntent}) {
                                 setPronounceInReaderEnabled(!pronounceInReaderEnabled);
                                 setSettingsSavedSnackBarOpened(true);
                             }} />
-                        } label={"Verba in lectore pronuntia semel cliccata"}/>
+                        } label={getLocalizedString("pronounceWordsInReaderWhenClicked")}/>
                     </div>
                     <div className={"list-item"}>
                         <FormControlLabel style={{
@@ -296,7 +297,7 @@ function SettingsFragment({onNewIntent}) {
                                 setPronounceInWordQuizEnabled(!pronounceInWordQuizEnabled);
                                 setSettingsSavedSnackBarOpened(true);
                             }} />
-                        } label={"Verba in pensum verborum pronuntia semel cliccata"}/>
+                        } label={getLocalizedString("pronounceWordsInExerciseWhenClicked")}/>
                     </div>
                     <div className={"list-item"}>
                         {/* Comply with free license for TS used. An attribution must be given. */}
@@ -305,11 +306,11 @@ function SettingsFragment({onNewIntent}) {
                         }} className={"button-in-list-item"} onClick={() => {
                             window.open("https://responsivevoice.org/", "_blank");
                         }}><span>
-                            TTS EX&nbsp;<b style={{
+                            {getLocalizedString("usedTTSEngine")}&nbsp;<b style={{
                                 color: "#ffb81e",
-                        }}>ResponsiveVoice</b>&nbsp;Licentiatus sub&nbsp;<b style={{
+                        }}>ResponsiveVoice</b>&nbsp;{getLocalizedString("licensedUnder")}&nbsp;<b style={{
                             color: "#ffb81e",
-                        }}>CC BY-NC-ND 4.0</b>&nbsp;(Usus non commercialis permititum est)
+                        }}>CC BY-NC-ND 4.0</b>. {getLocalizedString("nonCommercialUsageIsPermitted")}
                         </span></button>
                     </div>
                 </div>
@@ -323,12 +324,12 @@ function SettingsFragment({onNewIntent}) {
                             margin: "0",
                             userSelect: "none",
                             padding: "16px",
-                        }}>Debug et experimenti</h3>
+                        }}>{getLocalizedString("sectionDebugAndExperimental")}</h3>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("openai")}>Optiones nam AI</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("openai")}>{getLocalizedString("titleAISettings")}</button>
                     </div>
                     {/*<div className={"list-item"}>*/}
                     {/*    <button style={{*/}
@@ -338,12 +339,12 @@ function SettingsFragment({onNewIntent}) {
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => setConfirmTelemetry(true)}>Telemetriam mitte</button>
+                        }} className={"button-in-list-item"} onClick={() => setConfirmTelemetry(true)}>{getLocalizedString("btnSendTelemetry")}</button>
                     </div>
                     <div className={"list-item"}>
                         <button style={{
                             width: "100%",
-                        }} className={"button-in-list-item"} onClick={() => onNewIntent("setalpha")}>Set alpha probabilitatis</button>
+                        }} className={"button-in-list-item"} onClick={() => onNewIntent("setalpha")}>{getLocalizedString("titleSetAlphaProbability")}</button>
                     </div>
                 </div>
             </div>
@@ -358,8 +359,8 @@ function SettingsFragment({onNewIntent}) {
             {/*        stopSample();*/}
             {/*    }}>Stop speaking sample</button>*/}
             {/*</div>*/}
-            <p className={"app-info"}>Legentia versionis: {packageJson.version}</p>
-            <p className={"app-info"}>Excultor: <a className={"link"} href={"https://andrax.dev"}>AndraxDev</a></p>
+            <p className={"app-info"}>{getLocalizedString("appVersion")} {packageJson.version}</p>
+            <p className={"app-info"}>{getLocalizedString("appDeveloper")} <a className={"link"} href={"https://andrax.dev"}>AndraxDev</a></p>
             <p className={"app-info"}>&nbsp;</p>
         </div>
     );

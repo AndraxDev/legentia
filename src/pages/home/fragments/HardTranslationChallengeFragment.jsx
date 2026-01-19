@@ -20,6 +20,7 @@ import PropTypes from "prop-types";
 import * as StringUtils from "../../util/StringUtils.jsx";
 import Close from "@mui/icons-material/Close";
 import Info from "@mui/icons-material/Info";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 function HardTranslationChallengeFragment({exercise, fragmentIndex, onExerciseComplete, fallbackEvent, isPreviousMistake, resultPreCallback}) {
     const [currentAnswer, setCurrentAnswer] = React.useState("");
@@ -86,12 +87,12 @@ function HardTranslationChallengeFragment({exercise, fragmentIndex, onExerciseCo
         <div id={"exercise-fragment-root"} style={{
             opacity: "0"
         }}>
-            <h2 className={"exercise-title"}>Interpreto hoc verbum</h2>
+            <h2 className={"exercise-title"}>{getLocalizedString("taskTranslateWord")}</h2>
             {isPreviousMistake ? <div style={{
                 display: "flex",
-            }}><div className={"previous-mistake"}><Close /><span className={"previous-mistake-label"}>Prior error</span></div></div> : <div style={{
+            }}><div className={"previous-mistake"}><Close /><span className={"previous-mistake-label"}>{getLocalizedString("labelPreviousMistake")}</span></div></div> : <div style={{
                 display: "flex",
-            }}><div className={"previous-mistake"}><Info /><span className={"previous-mistake-label"}>Pensum durum</span></div></div>}
+            }}><div className={"previous-mistake"}><Info /><span className={"previous-mistake-label"}>{getLocalizedString("labelHardExercise")}</span></div></div>}
             <div className={"exercise-phrase-box"}>
                 <InteractiveWordHard word={exercise.english}/>
             </div>
@@ -108,22 +109,22 @@ function HardTranslationChallengeFragment({exercise, fragmentIndex, onExerciseCo
             <div style={{
                 transform: "translateY(100%)",
             }} id={"correct"} className={"exercise-result-box"}>
-                <h3 className={"exercise-status text-answer-correct"}>Recte!</h3>
+                <h3 className={"exercise-status text-answer-correct"}>{getLocalizedString("answerCorrect")}</h3>
                 <br/>
-                <button className={"exercise-button exercise-button-correct"} onClick={onContinueClicked}>Pergere</button>
+                <button className={"exercise-button exercise-button-correct"} onClick={onContinueClicked}>{getLocalizedString("btnContinue")}</button>
             </div>
             <div style={{
                 transform: "translateY(100%)",
             }} id={"incorrect"} className={"exercise-result-box"}>
-                <h3 className={"exercise-status text-answer-incorrect"}>Falsum est!</h3>
+                <h3 className={"exercise-status text-answer-incorrect"}>{getLocalizedString("answerIncorrect")}</h3>
                 <br/>
-                <p className={"exercise-hint text-answer-incorrect"}>Responsum correctum est:</p>
+                <p className={"exercise-hint text-answer-incorrect"}>{getLocalizedString("answerIncorrectCorrectText")}</p>
                 <b className={"exercise-hint text-answer-incorrect"}>{exercise.latin}</b>
                 <br/>
-                <button className={"exercise-button exercise-button-incorrect"} onClick={onContinueClicked}>Pergere</button>
+                <button className={"exercise-button exercise-button-incorrect"} onClick={onContinueClicked}>{getLocalizedString("btnContinue")}</button>
             </div>
             <div className={"exercise-bottom-bar"}>
-                <button disabled={currentAnswer.length === 0} className={"exercise-button " + ((currentAnswer.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={checkAnswer}>Reperi</button>
+                <button disabled={currentAnswer.length === 0} className={"exercise-button " + ((currentAnswer.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={checkAnswer}>{getLocalizedString("btnCheck")}</button>
             </div>
         </div>
     );

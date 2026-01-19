@@ -15,32 +15,38 @@
  * *************************************************************************/
 
 import React from 'react';
-import PropTypes from "prop-types";
-import AppScreenFade from "../../AppScreenFade";
-import ArrowBack from "@mui/icons-material/ArrowBack";
 import {getLocalizedString} from "../../../strings/GetString.jsx";
+import logo from "../../../logo.png";
+import {MaterialProgressBar} from "../../../components/MaterialProgressBar.jsx";
+import AppScreenFade from "../../AppScreenFade.jsx";
 
-function SyncActivity({onNewIntent}) {
-    const onBackPressed = () => {
-        onNewIntent("/home/3")
-    }
-
+function SignInGate() {
     return (
         <AppScreenFade>
             <div className={"activity-fullscreen"}>
                 <div className={"exercise-header"}>
-                    <button className={"exercise-back"} onClick={() => {
-                        onBackPressed()
-                    }}><ArrowBack /></button>
+                    <button className={"exercise-back"}><img alt={getLocalizedString("appTitle")} style={{
+                        width: "24px",
+                        height: "24px",
+                    }} src={logo} /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>{getLocalizedString("syncOptionsTitle")}</h2>
+                    }} className={"article-title"}>{getLocalizedString("pleaseWait")}</h2>
                 </div>
                 <div className={"list-container"}>
                     <div className={"list-item translation-item"} style={{
                         userSelect: "none",
+                        display: "flex",
+                        flexDirection: "row",
+                        alignItems: "center",
+                        justifyContent: "start",
+                        gap: "16px",
                     }}>
-                        {getLocalizedString("syncOptionsNotImplemented")}
+                        <MaterialProgressBar />
+                        <p style={{
+                            padding: "0",
+                            margin: "0",
+                        }}>{getLocalizedString("pleaseWaitSignIn")}</p>
                     </div>
                 </div>
             </div>
@@ -48,8 +54,4 @@ function SyncActivity({onNewIntent}) {
     );
 }
 
-SyncActivity.propTypes = {
-    onNewIntent: PropTypes.func.isRequired
-}
-
-export default SyncActivity;
+export default SignInGate;

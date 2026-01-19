@@ -16,11 +16,12 @@
 
 import React from 'react';
 import PropTypes from "prop-types";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 function LearnFragment({onNewIntent}) {
     return (
         <div className={"fragment"}>
-            <h2 className={"activity-title"}>Studere</h2>
+            <h2 className={"activity-title"}>{getLocalizedString("bottomMenuStudy")}</h2>
             <div style={{
                 width: "calc(100% - 6px - 48px - 32px)",
                 display: "flex",
@@ -38,13 +39,13 @@ function LearnFragment({onNewIntent}) {
                     fontSize: "16px",
                     userSelect: "none",
                     fontWeight: 600,
-                }}>Contentus examplaris (debug)</h3>
+                }}>{getLocalizedString("demoContentTitle")}</h3>
                 <button style={{
                     width: "calc(100% - 8px)",
                 }} className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("exercise");
                 }}>
-                    Sessionem practicum incipe
+                    {getLocalizedString("demoStartPracticeSession")}
                 </button>
             </div>
             <div style={{
@@ -58,12 +59,12 @@ function LearnFragment({onNewIntent}) {
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("practicewords");
                 }}>
-                    Verba practice
+                    {getLocalizedString("practiceWordsTitle")}
                 </button>
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("vocabulary");
                 }}>
-                    Vocabularium meum
+                    {getLocalizedString("vocabularyTitle")}
                 </button>
             </div>
         </div>

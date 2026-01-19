@@ -28,6 +28,7 @@ import HardTranslationChallengeFragment from "../fragments/HardTranslationChalle
 import * as Settings from "../../../Settings.jsx";
 import {MaterialProgressBar} from "../../../components/MaterialProgressBar.jsx";
 import Close from "@mui/icons-material/Close";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 let fragmentIndex = 0;
 let mistakeIndex = 0;
@@ -263,23 +264,23 @@ function WordTranslationChallengeHardActivity({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Sessionem Excercitationes relinquere vis?"}
+                    {getLocalizedString("exitPracticeSessionAlertTitle")}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        Omnis progressus in hac sessione peribit.
+                        {getLocalizedString("exitPracticeSessionAlertContents")}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setExitDialogOpened(false);
-                    }} autoFocus>Oblitera</MaterialButtonDialogOutlined>
+                    }} autoFocus>{getLocalizedString("btnCancel")}</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setExitDialogOpened(false);
                         quitExercise();
                     }}>
-                        Exique
+                        {getLocalizedString("btnExit")}
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>

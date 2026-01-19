@@ -26,6 +26,7 @@ import {MaterialButtonDialogFilled, MaterialButtonDialogOutlined} from "../../..
 import {MaterialDialog} from "../../../components/MaterialDialog";
 import Delete from "@mui/icons-material/Delete";
 import Edit from "@mui/icons-material/Edit";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 function ReadFragment({onNewIntent}) {
     const navigate = useNavigate();
@@ -49,27 +50,27 @@ function ReadFragment({onNewIntent}) {
                 aria-describedby="alert-dialog-description"
             >
                 <DialogTitle id="alert-dialog-title">
-                    {"Visne hoc fabulum delere?"}
+                    {getLocalizedString("deleteStoryTitle")}
                 </DialogTitle>
                 <DialogContent>
                     <DialogContentText id="alert-dialog-description" style={{ color: "#fff" }}>
-                        Semel deleta, restitui non potest!
+                        {getLocalizedString("actionIrreversible")}
                     </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                     <MaterialButtonDialogOutlined onClick={() => {
                         setDeletionConfirmationOpened(false);
-                    }} autoFocus>Oblitera</MaterialButtonDialogOutlined>
+                    }} autoFocus>{getLocalizedString("btnCancel")}</MaterialButtonDialogOutlined>
                     <div/>
                     <MaterialButtonDialogFilled onClick={() => {
                         setDeletionConfirmationOpened(false);
                         deleteStory();
                     }}>
-                        Dele
+                        {getLocalizedString("btnDelete")}
                     </MaterialButtonDialogFilled>
                 </DialogActions>
             </MaterialDialog>
-            <h2 className={"activity-title"}>Legere</h2>
+            <h2 className={"activity-title"}>{getLocalizedString("bottomMenuRead")}</h2>
             <div style={{
                 width: "100%",
                 display: "flex",
@@ -81,7 +82,7 @@ function ReadFragment({onNewIntent}) {
                 <button className={"exercise-button exercise-button-neutral"} onClick={() => {
                     onNewIntent("addstory");
                 }}>
-                    Fabulam novam adde
+                    {getLocalizedString("btnAddStory")}
                 </button>
             </div>
             {
@@ -99,7 +100,7 @@ function ReadFragment({onNewIntent}) {
                             <button style={{
                                 cursor: "pointer",
                                 padding: "16px 8px",
-                            }} className={"button-in-list-item"}onClick={() => {
+                            }} className={"button-in-list-item"} onClick={() => {
                                 navigate("/addstory#" + storyId);
                             }}><Edit /></button>
                             <button onClick={() => {

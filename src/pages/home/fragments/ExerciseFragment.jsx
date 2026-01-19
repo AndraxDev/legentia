@@ -18,9 +18,10 @@ import React, {useEffect, useState} from 'react';
 import PropTypes from "prop-types";
 import InteractivePhrase from "../../../components/interactive-phrase/InteractivePhrase";
 import Cancel from "@mui/icons-material/Cancel";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 const getExerciseTitle = (exerciseType) => {
-    return "Interpreto hoc sententiam";
+    return getLocalizedString("taskTranslateSentence");
     // switch (exerciseType) {
     //     case "en-lat-translation":
     //         return "Translate the following sentence to Latin";
@@ -111,7 +112,7 @@ function ExerciseFragment({exercise, fragmentIndex, onExerciseComplete, fallback
             <h2 className={"exercise-title"}>{getExerciseTitle(createExercise().exerciseType)}</h2>
             {isPreviousMistake ? <div style={{
                 display: "flex",
-            }}><div className={"previous-mistake"}><Cancel /><span className={"previous-mistake-label"}>Prior error</span></div></div> : null}
+            }}><div className={"previous-mistake"}><Cancel /><span className={"previous-mistake-label"}>{getLocalizedString("labelPreviousMistake")}</span></div></div> : null}
             <div className={"exercise-phrase-box"}>
                 <InteractivePhrase phrase={createExercise().phrase} translation={createExercise().translationsMap} isHardMode={createExercise().isHard} />
             </div>
@@ -146,22 +147,22 @@ function ExerciseFragment({exercise, fragmentIndex, onExerciseComplete, fallback
             <div style={{
                 transform: "translateY(100%)",
             }} id={"correct"} className={"exercise-result-box"}>
-                <h3 className={"exercise-status text-answer-correct"}>Recte!</h3>
+                <h3 className={"exercise-status text-answer-correct"}>{getLocalizedString("answerCorrect")}</h3>
                 <br/>
-                <button className={"exercise-button exercise-button-correct"} onClick={onContinueClicked}>Pergere</button>
+                <button className={"exercise-button exercise-button-correct"} onClick={onContinueClicked}>{getLocalizedString("btnContinue")}</button>
             </div>
             <div style={{
                 transform: "translateY(100%)",
             }} id={"incorrect"} className={"exercise-result-box"}>
-                <h3 className={"exercise-status text-answer-incorrect"}>Falsum est!</h3>
+                <h3 className={"exercise-status text-answer-incorrect"}>{getLocalizedString("answerIncorrect")}</h3>
                 <br/>
-                <p className={"exercise-hint text-answer-incorrect"}>Responsum correctum est:</p>
+                <p className={"exercise-hint text-answer-incorrect"}>{getLocalizedString("answerIncorrectCorrectText")}</p>
                 <b className={"exercise-hint text-answer-incorrect"}>{createExercise().translations[0]}</b>
                 <br/>
-                <button className={"exercise-button exercise-button-incorrect"} onClick={onContinueClicked}>Pergere</button>
+                <button className={"exercise-button exercise-button-incorrect"} onClick={onContinueClicked}>{getLocalizedString("btnContinue")}</button>
             </div>
             <div className={"exercise-bottom-bar"}>
-                <button disabled={currentAnswer.length === 0} className={"exercise-button " + ((currentAnswer.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={checkAnswer}>Reperi</button>
+                <button disabled={currentAnswer.length === 0} className={"exercise-button " + ((currentAnswer.length === 0) ? "exercise-button-disabled" : "exercise-button-neutral")} onClick={checkAnswer}>{getLocalizedString("btnCheck")}</button>
             </div>
         </div>
     );

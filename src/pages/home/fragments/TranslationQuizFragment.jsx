@@ -18,6 +18,7 @@ import React, {useEffect, useState} from 'react';
 import PropTypes from "prop-types";
 import * as StringUtil from "../../util/StringUtils";
 import * as Settings from "../../../Settings";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 const answerStatusAnimationDuration = 500;
 const answerCssTransitionDuration = 300;
@@ -209,7 +210,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, f
 
     const pronounceWord = (word) => {
         if (Settings.isPronounceInWordQuizEnabled()) {
-            responsiveVoice.speak(word, "Latin Male");
+            responsiveVoice.speak(word, getLocalizedString("voiceModelName"));
         }
     }
 
@@ -217,7 +218,7 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, f
         <div id={"exercise-fragment-root"} style={{
             opacity: "0"
         }}>
-            <h2 className={"exercise-title"}>Verbum cum interpretatione correcta coniugne</h2>
+            <h2 className={"exercise-title"}>{getLocalizedString("matchWordWithTranslation")}</h2>
             <div className={"quiz-gap"}></div>
             <div className={"quiz-content"}>
                 <div className={"quiz-column"}>
@@ -304,12 +305,12 @@ function TranslationQuizFragment({exercise, fragmentIndex, onExerciseComplete, f
             <div style={{
                 transform: "translateY(100%)",
             }} id={"correct"} className={"exercise-result-box"}>
-                <h3 className={"exercise-status text-answer-correct"}>Recte!</h3>
+                <h3 className={"exercise-status text-answer-correct"}>{getLocalizedString("answerCorrect")}</h3>
                 <br/>
-                <button className={"exercise-button exercise-button-correct"} onClick={goNext}>Pergere</button>
+                <button className={"exercise-button exercise-button-correct"} onClick={goNext}>{getLocalizedString("btnContinue")}</button>
             </div>
             <div className={"exercise-bottom-bar"}>
-                <button disabled={true} className={"exercise-button exercise-button-disabled"}>Pergere</button>
+                <button disabled={true} className={"exercise-button exercise-button-disabled"}>{getLocalizedString("btnContinue")}</button>
             </div>
         </div>
     );

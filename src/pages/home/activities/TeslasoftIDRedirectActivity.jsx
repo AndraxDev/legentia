@@ -15,6 +15,7 @@
  * *************************************************************************/
 
 import React, {useEffect} from 'react';
+import SignInGate from "../fragments/SignInGate.jsx";
 
 function TeslasoftIdRedirectActivity() {
     const queryParams = new URLSearchParams(window.location.search);
@@ -25,7 +26,7 @@ function TeslasoftIdRedirectActivity() {
         window.location.replace("/home/3");
     }, [])
     return (
-        <div>Please, wait...</div>
+        <SignInGate />
     );
 }
 

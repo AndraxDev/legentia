@@ -21,6 +21,7 @@ import Alert from '@mui/material/Alert';
 import Snackbar from '@mui/material/Snackbar';
 import * as Settings from "../../../Settings";
 import ArrowBack from "@mui/icons-material/ArrowBack";
+import {getLocalizedString} from "../../../strings/GetString.jsx";
 
 function SetApiKeyActivity({onNewIntent}) {
 
@@ -32,10 +33,10 @@ function SetApiKeyActivity({onNewIntent}) {
 
         if (apiKey) {
             localStorage.setItem("openai", apiKey);
-            setSnackbarMessage("API key set successfully!");
+            setSnackbarMessage(getLocalizedString("debugApiKeySet"));
         } else {
             localStorage.removeItem("openai");
-            setSnackbarMessage("API key unset successfully!");
+            setSnackbarMessage(getLocalizedString("debugApiKeyUnset"));
         }
     }
 
@@ -45,7 +46,7 @@ function SetApiKeyActivity({onNewIntent}) {
 
     const setModel = (model) => {
         Settings.setModel(model);
-        setSnackbarMessage(`Model set to ${model} successfully!`);
+        setSnackbarMessage(getLocalizedString("modelSetTo") + model);
     }
 
     return (
@@ -65,7 +66,7 @@ function SetApiKeyActivity({onNewIntent}) {
                     }}><ArrowBack /></button>
                     <h2 style={{
                         textAlign: "start"
-                    }} className={"article-title"}>Optiones nam ai</h2>
+                    }} className={"article-title"}>{getLocalizedString("titleAISettings")}</h2>
                 </div>
                 <div style={{
                     paddingBottom: "24px",
@@ -73,19 +74,19 @@ function SetApiKeyActivity({onNewIntent}) {
                     paddingRight: "24px"
                 }}>
                     <div className={"container-debug"}>
-                        <p className={"debug-text"}>Debug zone</p>
+                        <p className={"debug-text"}>{getLocalizedString("debugZone")}</p>
                         <div className={"debug-space"}></div>
-                        <p className={"debug-text"}>Set API key if you want to enable AI features. Leave blank to unset an API key.</p>
+                        <p className={"debug-text"}>{getLocalizedString("debugZoneInstruction")}</p>
                         <div className={"debug-space"}></div>
-                        <input className={"debug-field"} value={apiKey} onChange={(e) => setApiKey(e.target.value)} id={"ai-api-key"} placeholder={"OpenAI API key"}/>
+                        <input className={"debug-field"} value={apiKey} onChange={(e) => setApiKey(e.target.value)} id={"ai-api-key"} placeholder={getLocalizedString("debugZoneAPIKey")}/>
                         <div className={"debug-space"}></div>
-                        <button className={"debug-button"} onClick={saveApiKey}>Set debug API key</button>
+                        <button className={"debug-button"} onClick={saveApiKey}>{getLocalizedString("debugZoneSetKey")}</button>
                     </div>
                     <div className={"debug-space"}></div>
                     <div className={"container-debug"}>
-                        <p className={"debug-text"}>Select translation model</p>
+                        <p className={"debug-text"}>{getLocalizedString("debugZoneTranslationModelSelectorTitle")}</p>
                         <div className={"debug-space"}></div>
-                        <p className={"debug-text"}>Default model is o4-mini. Comparing to the models o1-mini and o3-mini it has the same price, translation process takes appropriately the same amount of time, but the accuracy id much better. gpt-4o is more expensive, less accurate, but is the faster than other models.</p>
+                        <p className={"debug-text"}>{getLocalizedString("debugZoneTranslationModelSelectorRemark")}</p>
                         <div className={"debug-space"}></div>
                         <button className={"debug-button"} onClick={() => setModel("gpt-4o")}>gpt-4o</button>
                         <div className={"debug-space"}></div>
@@ -94,6 +95,10 @@ function SetApiKeyActivity({onNewIntent}) {
                         <button className={"debug-button"} onClick={() => setModel("o3-mini")}>o3-mini</button>
                         <div className={"debug-space"}></div>
                         <button className={"debug-button"} onClick={() => setModel("o4-mini")}>o4-mini</button>
+                        <div className={"debug-space"}></div>
+                        <button className={"debug-button"} onClick={() => setModel("gpt-5.1")}>gpt-5.1</button>
+                        <div className={"debug-space"}></div>
+                        <button className={"debug-button"} onClick={() => setModel("gpt-5.2")}>gpt-5.2</button>
                     </div>
                 </div>
             </div>
