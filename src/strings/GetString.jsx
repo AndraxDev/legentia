@@ -15,10 +15,16 @@
  * *************************************************************************/
 
 import {enUS} from "./String-EN-US.jsx";
+import {deDE} from "./String-DE-DE.jsx";
+import {lat} from "./String-LAT.jsx";
 
 export const getString = (lang, id) => {
     if (lang === 'en-US') {
         return enUS[id];
+    } else if (lang === 'de-DE') {
+        return deDE[id];
+    } else if (lang === 'lat') {
+        return lat[id];
     } else {
         return enUS[id];
     }
@@ -31,7 +37,15 @@ export const getLocalizedString = (id) => {
 
 // The current language of the app UI (ISO format)
 export const getLanguage = () => {
-    return 'en-US';
+    return localStorage.getItem("uiLanguage") || 'en-US';
+}
+
+export const setLanguage = (lang) => {
+    if (Object.keys(supportedLanguages).includes(lang)) {
+        localStorage.setItem("uiLanguage", lang);
+    } else {
+        console.error("This language is not supported: " + lang);
+    }
 }
 
 // the language user learns (semantic format)
@@ -54,4 +68,6 @@ export const supportedNativeLanguages = {
 
 export const supportedLanguages = {
     'en-US': 'English (US)',
+    'de-DE': 'English (Deutsch)',
+    'lat': 'Latin (Lingua latina)',
 }

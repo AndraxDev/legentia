@@ -19,6 +19,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import App from './App';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
+import {setLanguage} from "./strings/GetString.jsx";
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -28,3 +29,8 @@ root.render(
         </Routes>
     </BrowserRouter>
 );
+
+window.setDebugLanguage = function(langCode) {
+    setLanguage(langCode);
+    window.location.reload();
+}
